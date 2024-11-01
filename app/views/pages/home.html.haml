@@ -1,0 +1,209 @@
+%section#actions
+  %section#action_one.action.tab(data-ref="#action_one_content" data-group="action-content" data-highlight="true")
+    %h1
+      Discover
+      %span Local Businesses
+    %aside
+      %img{:alt => "", :src => "/images/icon_discover.png"}/
+      = @territory.discovery_text.html_safe if @territory && @territory.discovery_text
+    / end action_one section
+  %section#action_two.action.tab(data-ref="#action_two_content" data-group="action-content" data-highlight="true")
+    %h1
+      Save
+      %span Time And Money
+    %aside
+      %img{:alt => "", :src => "/images/icon_save.png"}/
+      = @territory.save_text.html_safe if @territory && @territory.save_text
+    / end action_two section
+  %section#action_three.action.tab(data-ref="#action_three_content" data-group="action-content" data-highlight="true")
+    %h1
+      Connect
+      %span With The Community
+    %aside
+      %img{:alt => "", :src => "/images/icon_connect.png"}/
+      = @territory.connect_text.html_safe if @territory && @territory.connect_text
+    / end action_three section
+  / end actions section
+%section#action_content
+  / First action content section, Discover, 2 col
+  %section#action_one_content
+
+    %section#featured_members.main
+      %h1
+        Featured Members
+        %span{ :style => "font-size: 12px;" }
+          &nbsp;
+      - if @featured_listings
+        - @featured_listings.each do |bl|
+          = render "/business_listings/listing", :listing => bl
+      / end featured_members
+
+    %section#recent_additions.main
+      %h1
+        Recent Additions
+        = link_to territory_categories_path(@territory) do
+          %span{ :style => "font-size: 12px;" }
+            view all
+      - if @recent_listings
+        - @recent_listings.each do |bl|
+          = render "/business_listings/listing", :listing => bl
+      / end recent_additions
+
+    %footer
+      %h4
+        = link_to "View All", territory_categories_path(@territory)
+      = render "common/business_icon_legend"
+      / end First action content footer
+    / end First action content section, Discover, action_one_content
+  / Second action content section, Connect, 1 col
+  %section#action_two_content
+    %aside.title
+      %h1
+        Recently Added
+        %span Coupons
+      %ul
+        %li.back
+          %a{:href => "#"} Back
+        %li.forward
+          %a{:href => "#"} Forward
+      -# if @territory.rewards_enabled
+        .links
+          = link_to "Check out more RelyLocal Rewards", territory_rewards_path( @territory )
+
+    #coupons
+      %ul
+        - if @daily_deal
+          %li.coupon-container
+            %aside.coupon
+              %figure.inner.daily_deal
+                .coupon-area
+                  %a(href="#{territory_business_listing_path(@territory, @daily_deal.business_listing)}#deal_of_the_day")
+                    - dim = @daily_deal.deal_image.dimensions(:normal)
+                    = image_tag @daily_deal.deal_image.url(:normal), :width => dim[:width], :height => dim[:height]
+                %h1= @daily_deal.title
+                %p
+                  %a{:href => "#{territory_business_listing_path(@territory, @daily_deal.business_listing)}#deal_of_the_day"}
+                    = truncate(@daily_deal.description, :length => coupon_truncation(@daily_deal), :seperator => "...")
+                %p.expires
+                  Expires #{@daily_deal.expiration_date.strftime("%m/%d/%Y") if @daily_deal.expiration_date }
+
+        - unless @coupons.blank?
+          - @coupons.each do |coupon|
+            %li.coupon-container
+              %aside.coupon
+                %figure.inner
+                  .coupon-area
+                    %a(href="#{territory_business_listing_path(@territory, coupon.business_listing)}#coupon#{coupon.id}")
+                      - dim = coupon.coupon_image.dimensions(:normal)
+                      = image_tag coupon.coupon_image.url(:normal), :width => dim[:width], :height => dim[:height]
+                  %h1= coupon.title
+                  %p
+                    %a{:href => "#{territory_business_listing_path(@territory, coupon.business_listing)}#coupon#{coupon.id}"}
+                      = truncate(coupon.description, :length => coupon_truncation(coupon), :seperator => "...")
+                  %p.expires
+                    Expires #{coupon.expiration_date.strftime("%m/%d/%Y")}
+    %h4.view_all
+      %br
+      = link_to "View All", territory_coupons_path(@territory)
+
+    - if @territory && @territory.rewards_enabled
+      %section.rewards
+        %aside.title
+          %h1
+            Recently Added
+            %span Rewards
+          .links
+            = link_to "What are rewards?", territory_rewards_path( @territory )
+        .rewards_list
+          %ul
+            - @rewards.each do |reward|
+              %li
+                %aside.reward
+                  %figure.inner
+                    .reward-area
+                      %a(href="#{territory_business_listing_path(@territory, reward.business_listing)}#reward#{reward.id}")
+                        = image_tag reward.business_listing.logo.url(:normal)
+                    %h1
+                      = reward.business_listing.name
+                    %p
+                      %a{:href => "#{territory_business_listing_path(@territory, reward.business_listing)}#reward#{reward.id}"}
+                        = truncate(reward.description, :length => coupon_truncation(reward), :seperator => "...")
+                    - unless reward.never_expires
+                      %p.expires
+                        Expires #{reward.expiration_date.strftime("%m/%d/%Y")}
+        %h4.view_all
+          %br
+          = link_to "View All", territory_rewards_path( @territory )
+
+    / end Second action content section, Discover, action_two_content
+  / Third action content section, Connect, 3 col
+  %section#action_three_content
+    %aside.one
+      %h2
+        %span Stay
+        Up-To-Date
+      %p
+        One of the best ways to help the community grow is to get more people involved! Whether in the "real world" at a local event, or online via one our of social media outlets - we invite you to join the conversation!
+      / end first aside of action_three_content
+    %aside.two
+      %h2 Get Connected
+      = render "common/local_links"
+      / end second aside of action_three_content
+    %aside.three
+      %h2 Stay Connected
+      %ul.social
+        - if @territory
+          - @territory.links.each do |link|
+            - if @territory
+              = social_link(link)
+
+      / end third aside of action_three_content
+    / end Third action content section, Connect, action_three_content
+  %footer
+  / end actions_content
+
+%section#lower_content
+  %section.content
+    %section.pullout
+      = @territory.can_rely_text.html_safe if @territory && @territory.can_rely_text
+      %p
+        %br
+        = link_to "more ...", @territory && @territory.featured_link.blank? ? territory_what_is_relylocal_path(@territory) : (@territory.featured_link if @territory), :style => "float:right;"
+
+    %section.left.lists
+      = render "common/links"
+
+    %section.right.lists
+      = render "common/popular_categories"
+
+  = render "common/promos"
+  %footer
+/ end lower_content div
+
+- content_for :javascript_tags do
+  = javascript_include_tag "jcarousellite_1.3.1.min.js", "jquery.easing.1.1.js", :cache => "rl-js-home"
+
+- content_for :javascript do
+  :javascript
+    $( function() {
+      if ( window.location.href.indexOf('show_save=true') >= 0 ) {
+        setTimeout( '$("#action_two").click()', 1000 );
+      }
+    } );
+
+  - if !@coupons.blank?
+    :javascript
+      $( function() {
+        $("#action_two_content").css("display","block");
+
+        $("#coupons").jCarouselLite({
+            btnNext : ".forward",
+            btnPrev : ".back",
+            easing  : "easein",
+            visible : 3,
+            scroll  : 3,
+            circular: false
+        });
+
+        $("#action_two_content").css("display","none");
+      } );

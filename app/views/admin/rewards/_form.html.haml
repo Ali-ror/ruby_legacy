@@ -1,0 +1,48 @@
+= simple_form_for [ :admin, @territory, @business_listing, @reward ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a RelyLocal Reward
+      - else
+        Edit RelyLocal Reward
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        Reward.
+
+      %p
+        Please completely describe the reward being offered by your client when the RelyLocal Rewards Card is presented.
+        Avoid confusion between your clients and their customers by providing as many details as possible. For example,
+        "Bob's Donuts offers a buy-one-get-one free deal to RelyLocal Rewards members. Offer valid before 10am, Mon-Fri."
+                
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :business_listing_id
+
+  .fieldset
+    %h3 RelyLocal Reward Information
+    = f.input :description, :as => :text, :input_html => { :rows => 3, :cols => 60 }, :label => "Describe Reward", :hint => "Up to 255 characters, plain text."
+    = f.input :expiration_date, :as => :string, :input_html => { :class => "datepicker", :size => 10 }
+    = f.input :never_expires
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+
+:javascript
+  $( function() {
+    $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );

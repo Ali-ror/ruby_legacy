@@ -1,0 +1,45 @@
+= simple_form_for [ :admin, @territory, @sub_page ] do |f|
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Custom Page
+      - else
+        Edit Custom Page
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        custom page.
+
+      %p
+        Custom pages are a great way to add local relevant content to your site. Not only will they provide content for your customers, but will also help the search engines to differentiate your site from other RelyLocal territories.
+
+      %p
+        The header, footer, and sidebars for this page will match the default
+        RelyLocal theme. The body text will be placed below the header and
+        navigation bars.
+
+      %p
+        Custom pages will automatically appear as new menu options throughout your site.
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :territory_id
+
+  .fieldset
+    %h3 Page Title and Meta Data
+    = f.input :page_title, :hint => "The title which appears in the browser next to RelyLocal (Maximum 30 characters)"
+    = f.input :meta_content_description, :as => :text, :input_html => { :rows => 3, :cols => 60 }, :hint => "The description used for Search Engine Optimization. This is not displayed on the browser"
+    = f.input :meta_tags, :as => :text, :input_html => { :rows => 3, :cols => 60 }, :hint => "The tags used for Search Engine Optimization. This is not displayed on the browser"
+
+    %h3 Page Body
+    = f.input :body_text, :input_html => { :class => "wysiwyg" }, :hint => "The contents of the page which will be shown in the browser. Please keep in mind the colors and font used for RelyLocal. Any font or color changes made here will be shown AS IS on the user's browser. Elegance does sell."
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )

@@ -1,0 +1,9 @@
+.fields
+  .input.string
+    - field_id = SecureRandom.uuid
+    = label_tag field_id, "Business Listing", :class => "string"
+    = text_field_tag field_id, listing.nil? ? "" : listing.name, :size => "50", :class => "string, listing_autocomplete"
+    %span.hint
+      Type in an existing Business Listing for a list of matching listings from which to choose.
+  = hidden_field_tag "listings[ids][]", listing.nil? ? "" : listing.id
+  = remove_link "Remove Listing", "listing"

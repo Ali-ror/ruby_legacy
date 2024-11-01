@@ -1,0 +1,161 @@
+form.simple_form {
+
+  .fieldset {
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+    padding: 10px 10px 4px 10px;
+    margin: 15px auto;
+    width: 600px;
+  }
+
+  label {
+    color: #666666;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .hint {
+    clear: left;
+    font-size: 93%;
+    color: #a1a1a1;
+    display: block;
+    font-style: italic;
+    a {
+      font-size: 85%;
+      color: #a1a1a1;
+      font-style: italic;
+    }
+  }
+
+  .boolean label, label.collection_radio {
+    display: inline;
+    padding-left: 3px;
+  }
+
+  abbr[title='required'] {
+    color: #790e11;
+    font-weight: bold;
+    font-size: 123.1%;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 123.1%;
+    margin-bottom: 15px;
+  }
+
+  .input {
+    margin-bottom: 15px;
+  }
+
+  input, select {
+    padding: 3px;
+  }
+
+  .submit {
+    background-color: #dddddd;
+    overflow: auto;
+
+    .buttons {
+      margin: 15px auto;
+      width: 600px;
+
+      input[type='submit'] {
+        background-color: #09215f;
+        color: #ffffff;
+        height: 27px;
+        border: 0 none;
+        padding: 0 12px;
+      }
+    }
+
+  }
+
+  a.add_nested_fields {
+    color: #102765;
+    background: transparent url("/images/add-icon.png") no-repeat;
+    padding-left: 20px;
+    text-decoration: none;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  a.remove_nested_fields {
+    color: #102765;
+    background: transparent url("/images/remove-icon.png") no-repeat;
+    padding-left: 20px;
+    text-decoration: none;
+    /*margin-bottom: 15px;*/
+    display: block;
+    /*position: absolute;
+    right: 50px;
+    bottom: 0;*/
+  }
+
+  .fields {
+    background-color: #eae7e7;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .error_explanation {
+    background-color: #ffe5e6;
+    color: #790e11;
+
+    h2 {
+      padding: 20px 0 0 15px;
+      font-weight: bold;
+      font-size: 123.1%;
+      margin: 0 auto;
+      width: 620px;
+    }
+
+    ul {
+      margin: 0 auto;
+      padding-left: 5px;
+      width: 620px;
+      padding-bottom: 20px;
+    }
+
+  }
+
+  .error {
+    background: transparent url("/images/error-icon.png") no-repeat 5px 1px;
+    padding: 1px 1px 1px 25px;
+    clear: left;
+    color: #790e11;
+    display: block;
+    background-color: #790e11;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 3px;
+  }
+
+  .title {
+    margin: 15px auto;
+    width: 610px;
+
+    .tip {
+      color: #a1a1a1;
+      //font-size: 93%;
+      width: 90%;
+      p {
+        margin-bottom: 10px;
+      }
+      a {
+        color: #a1a1a1;
+      }
+    }
+    abbr[title='required'] {
+      color: #790e11;
+      font-weight: bold;
+      font-size: 123.1%;
+    }
+  }
+
+}

@@ -1,0 +1,65 @@
+= simple_nested_form_for [ @territory, @business_listing ], :html => { :multipart => true, :novalidate => "" } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    .tip
+      %p
+        Please fill out the following form completely to submit your business
+        to be considered for RelyLocal.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  .fieldset
+    %h3 Listing Details / Information
+    = f.input :name, :hint => "Be sure to include descriptive/relevant subtitles - 'Bob\'s Bakery and Cafe' instead of just 'Bob\'s (255 character limit)"
+    = f.input :short_description, :as => :text, :input_html =>  { :rows => 3, :cols => 50 }, :hint => "Will appear in search results and homepage lists. Be sure to include relevant SEO keyphrases (255 character limit)"
+    = f.input :long_description, :input_html =>  { :rows => 6, :cols => 50 }, :hint => "Please tell users much more about your products, services, and time in the community. (Plain text only, we'll handle the HTML later.)"
+    = f.input :tag_list, :label => "Keyword Tags", :hint => "Please let us know the top four keywords that describe your business, products, or services. (Separated by a comma)"
+
+  .fieldset
+    %h3
+      Location Information
+
+    = f.simple_fields_for :address do |f_address|
+      = render "admin/common/address", :f => f_address, :validate => !f_address.object.skip_validations
+    = f.input :hide_address
+    = f.input :hide_map, :hint => "Some business may be home-based or without a public location and wish to be 'hidden'"
+
+  .fieldset
+    %h3 Other Information
+    = f.input :operating_hours, :as => :text, :input_html =>  { :rows => 3, :cols => 50 }
+    = f.input :phone, :hint => "Please use the following format (212) 555-1234"
+    = f.input :fax
+    = f.input :email
+
+  - you_tube_type = LinkType.find_by_name "YouTube"
+  .fieldset
+    %h3 Social Media/Web Links
+    = f.simple_fields_for :non_you_tube_links do |f_links|
+      = f_links.input :url
+      = f_links.association :link_type, :collection => ( LinkType.all - [ you_tube_type ] ), :include_blank => false
+      = f_links.link_to_remove "Remove Link"
+    = f.link_to_add "Add Link", :non_you_tube_links
+
+  .fieldset
+    %h3 Logo
+    - if !f.object.new_record? && !f.object.logo.url(:normal).nil?
+      = image_tag f.object.logo.url(:normal)
+    = f.input :logo, :as => :file, :hint => "Logos must be of reasonable size and will be automatically re-sized for various display through the site. Acceptable file types: .jpg, .gif, and, .png"
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+  = stylesheet_link_tag "compiled/form.css"
+
+- content_for :javascript do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+  = javascript_include_tag "jquery.initAutoComplete"
+  = javascript_include_tag "nested_form"
+

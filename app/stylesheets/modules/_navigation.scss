@@ -1,0 +1,140 @@
+.admin-navigation {
+  background: transparent url("/images/admin-header-background.png") repeat-x;
+  height: 80px;
+
+  .content {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+  
+    ul {
+      margin-left: 170px;
+      li {
+        display: inline;
+        position: relative;
+      }
+      
+      li:hover ul {
+        position: absolute;
+        left: 0;
+        top: 15px;
+        display: block;
+        background: #373533;
+        border: 1px solid #A1A1A1;
+        border-top: 0;
+        width: 200px;
+        z-index: 100;
+
+        li {
+          border-top: 1px solid #A1A1A1;
+          display: block;
+          a {
+            display: block;
+            border: none;
+            height: 40px;
+          }
+        }
+      }
+      
+      ul {
+        display: none;
+        margin: 0;
+      }
+      
+    }
+
+    .main {
+      a {
+        color: #FFFFFF;
+        text-decoration: none;
+        border-left: 1px solid #FFFFFF;
+        padding: 0 6px 0 8px;
+        font-weight: bold;
+        height: 15px;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      line-height: 40px;
+      height: 40px;
+      .first a {
+        border-left: 0 none;
+        padding: 0 8px 0 0;
+      }
+    }
+
+    .quick-links {
+      font-size: 85%;
+      li.label {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      a {
+        color: #000000;
+        text-decoration: none;
+        border-left: 1px solid #000000;
+        padding: 0 6px 0 8px;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      line-height: 40px;
+      height: 40px;
+      .first a {
+        border-left: 0 none;
+      }
+    }
+
+    .logo {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+  }
+}
+
+.where-are-we {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+
+ .content {
+    position: absolute;
+    width: 140px;
+    top: 80px;
+    left: 10px;
+    font-size: 93%;
+    text-align: left;
+    ul {
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.global-admin {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+
+ .content {
+    text-align: left;
+    position: absolute;
+    width: 140px;
+    top: 185px;
+    left: 10px;
+    font-size: 93%;
+    font-weight: bold;
+    a {
+      color: #102765;
+      text-decoration: none;
+      font-weight: normal;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+

@@ -1,0 +1,30 @@
+<div class="custom-content">
+  <h1>Show Your Support - Get Involved!</h1> 
+  <p>Don't just sit on the sidelines - show your support for <%=@territory.blank? ? "your area" : @territory.name%> businesses and the RelyLocal campaign! We are the new &quot;kid&quot; on the block and need your  help to  connect more of our neighbors with local businesses!</p> 
+  <blockquote><em>&quot;It takes a community to raise a child.&quot; - African Proverb</em></blockquote> 
+  <p> Our passion is to  build a stronger community  (online and off) and here are just a few of the  ways you can show your support for our grass  roots campaign to rebuild our local economy, (while shamelessly reminding  businesses  and customers to rely on one another).</p> 
+  <h3>Around Town - Flash your RelyLocal Bling! </h3> 
+  <p><img src="http://www.relylocal.com/rely_images/CafePress.jpg" hspace="5" vspace="5" align="right" />Show your support by throwing a RelyLocal bumper sticker on your car,             a  window cling in your shop window, a decal on your laptop, or even sporting some  hip RelyLocal            clothing. You can find bumper stickers at a number of  local businesses around town, or by <a href="contact-us">contacting             us</a>. Because we don't have a storefront in town, we have limited supply of shirts and hats - but let us know if you are interested! <em>(Be sure to let us know if you'd be interested in selling any RelyLocal campaign gear in your store...)</em></p> 
+
+  <h3>Join The Online Community</h3> 
+  <p>Stay in the loop and join the conversation  by clicking on any of our Social Networking links in the upper right corner. Not only can you interact with other loyal locals, but we'll keep  you in  the loop on everything from special events and promotions to  history and information  about local businesses. We will even run  regular contests, giving friends and  followers fun (and valuable) gifts  from local businesses. <a href="../#connect">Get connected!</a></p> 
+  <h3>Link To RelyLocal! - Grab an Online Badge!</h3> 
+  <p>One of the best ways to support the RelyLocal campaign is by linking to us with an official RelyLocal badge on your website. Below are several options  to show  your support. <em>Please copy the supplied HTML from the boxes on the right  and paste into your web site's code in the desired location.</em></p> 
+  <table align="center"> 
+    <tr> 
+      <td width="154" style="padding-left:40px"><div align="center"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_logo.png" alt="RelyLocal - Supporting Local Business" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal" /></a></div></td> 
+      <td width="273"><textarea name="RL_Logo" cols="30" rows="5" id="RL_Logo"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_logo.png" alt="RelyLocal - Supporting Local Business" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal" /></a></textarea></td> 
+    </tr> 
+    <tr> 
+      <td style="padding-left:40px"><div align="center"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_member.png" alt="Proud Member of RelyLocal" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal2" /></a></div></td> 
+      <td><textarea name="RL_Logo2" cols="30" rows="5" id="RL_Logo2"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_member.png" alt="Proud Member of RelyLocal" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal2" /></a></textarea></td> 
+
+    </tr> 
+    <tr> 
+      <td style="padding-left:40px"><div align="center"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_supporter.png" alt="Proud Supporter of RelyLocal" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal3" /></a></div></td> 
+      <td><textarea name="RL_Logo3" cols="30" rows="5" id="RL_Logo3"><a href="http://www.relylocal.com" target="_blank"><img src="http://www.relylocal.com/rely_images/badges/relylocal_supporter.png" alt="Proud Supporter of RelyLocal" name="RelyLocal" width="100" height="105" hspace="3" vspace="3" border="0" id="RelyLocal3" /></a></textarea></td> 
+    </tr> 
+  </table> 
+  <h3>Promoting Your Business </h3> 
+  <p>If you own or manage a local business, there is no better way to get  involved than to become a RelyLocal member. Help new customers find you  more easily, while getting more for your advertising dollars. <a href="<%=@territory.blank? ? '/page/promote-your-business' : territory_promote_your_business_path(@territory) %>">Learn more</a> or <a href="<%=@territory.blank? ? '/page/advertise-with-us' : territory_advertise_with_us_path(@territory) %>">apply today</a>!</p>
+</div>

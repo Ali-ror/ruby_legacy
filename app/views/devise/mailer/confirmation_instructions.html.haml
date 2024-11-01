@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+  %body
+    %p
+      Thank you registering a new account with
+      = link_to "RelyLocal.", "http://www.RelyLocal.com"
+      Your account has been registered using
+      = @resource.email
+      and is awaiting final confirmation.
+
+    %p
+      To proceed with the final step, you may simply click the the confirmation link below, or, copy and paste the
+      following link:
+      = confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+
+    %p
+      = link_to 'Confirm My Account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
+
+    %p
+      Thank you for your support!
+      The RelyLocal Team

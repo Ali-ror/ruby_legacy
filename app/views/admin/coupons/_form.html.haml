@@ -1,0 +1,50 @@
+= simple_form_for [ :admin, @territory, @business_listing, @coupon ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Coupon
+      - else
+        Edit Coupon
+    - if !f.object.new_record?
+      %h2
+        = f.object.title
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        coupon.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :business_listing_id
+
+  .fieldset
+    %h3 Coupon Information
+    = f.input :title
+    - if !f.object.new_record? && !f.object.coupon_image.url.nil?
+      = image_tag f.object.coupon_image.url(:normal)
+    = f.input :coupon_image, :as => :file
+    = f.input :description
+    = f.input :restrictions
+    = f.input :expiration_date, :as => :string, :input_html => { :class => "datepicker", :size => 10 }
+    = f.input :active_in_mobile_apps, :hint => "If you do not wish your coupons to be available/honored via the RelyLocal Mobile Applications, de-select this field."
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+
+:javascript
+  $( function() {
+    $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );

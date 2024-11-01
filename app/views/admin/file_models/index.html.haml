@@ -1,0 +1,57 @@
+.index-page
+  .title
+    %h1
+      Manage Files
+    %h2
+      - if @business_listing
+        = link_to( @business_listing.name,
+                   admin_territory_business_listings_path( @business_listing.territory,
+                                                           :specifically => @business_listing.id ) )
+      - else
+        = @territory.description
+    .tip
+      %p
+        You can easily manage your files here. Just use the add file,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+
+  .link-bar
+    %ul
+      %li
+        = link_to "Add File", new_admin_territory_business_listing_file_model_path( @territory, @business_listing ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @file_models ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          File
+        %th.last
+          Actions
+        -#%th.last
+          Select
+    %tbody
+      - @file_models.each do |fm|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            = link_to fm.title, fm.file_attachment.url
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_business_listing_file_model_path( @territory, @business_listing, fm )
+              %li= link_to "Delete", admin_territory_business_listing_file_model_path( @territory, @business_listing, fm ), :confirm => 'Are you sure you wish to delete this File?', :method => :delete
+          -#%td.last
+            = check_box_tag dom_id( fm )
+
+  .pagination
+    Page
+    = will_paginate( @file_models ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Comments", "", :class => "delete-link"

@@ -1,0 +1,7 @@
+- unless @sub_page.blank?
+  .custom-content
+    = @sub_page.body_text.html_safe
+  
+  - content_for :custom_meta do
+    %meta(name="description" content="#{@sub_page.meta_content_description}")
+    %meta(name="tags" content="#{@sub_page.meta_tags}")

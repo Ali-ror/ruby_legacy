@@ -1,0 +1,42 @@
+- label = PrivateLabel.instance
+
+%aside
+  .logo_vote
+    %a(href="#{territory_business_listing_path(@territory, listing)}")
+      - if listing.non_member_listing?
+        = image_tag label.default_logo
+      - else
+        - alt = ""
+        - if ( @search && !params[:search][:name_or_long_description_or_short_description_contains].blank? )
+          - alt << params[:search][:name_or_long_description_or_short_description_contains]
+          - alt << " - "
+        - alt << listing.name
+        - if listing.address
+          - alt << " - " if listing.address.city
+          - alt << listing.address.city if listing.address.city
+          - alt << ", " if listing.address.city
+          - alt << listing.address.state if listing.address.state
+        = image_tag listing.logo.url(:normal), :alt => alt
+    %ol
+      - unless listing.average_rating.blank?
+        - listing.average_rating.times do |i|
+          %li.star
+            %a(href="#" title="#{i}") 1
+
+  - if listing.non_member_listing?
+    %h3
+      %a(href="#{territory_business_listing_path(@territory, listing)}")= listing.name
+      = @title == "home" || @title == "Business Listings" ? display_franchise(listing) : display_franchise_text(listing)
+  - else
+    %h2
+      %a(href="#{territory_business_listing_path(@territory, listing)}")= listing.name
+      = @title == "home" || @title == "Business Listings" ? display_franchise(listing) : display_franchise_text(listing)
+
+  %p= listing.short_description.html_safe
+
+  - if !listing.coupons.active.blank? && listing.paid_listing?
+    %h4.coupon
+      = link_to "coupons", "#{territory_business_listing_path(@territory, listing)}#coupons", :class => "with-icon"
+  - if !listing.rewards.active.blank? && listing.paid_listing?
+    %h4.reward
+      = link_to "rewards", "#{territory_business_listing_path(@territory, listing)}#rewards"

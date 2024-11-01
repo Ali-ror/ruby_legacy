@@ -1,0 +1,466 @@
+# NOTE: All of these fields *are* named correctly to match the
+# database field names. IF you decide to "fix" a field name, you will break
+# the default code.
+
+common: &COMMON
+  what_is_relylocal: &what_is_relylocal "<h1>What is RelyLocal?</h1>
+    <p>A healthy community depends on a healthy economy, and both completely depend on the local businesses in (territory_name)! There are a number of <a href='http://www.relylocal.com/blog/category/studies/' target='_new'>great studies</a> out there that illustrate how shopping locally will stimulate the (territory_name) economy. </p>
+    <p>Simply put, more money spent with local businesses stays here (about 68%), where much less money spent with national chains stays in the area (only about 14%), and  money spent online... well... simply leaves. Forever.</p>
+    <blockquote><em>&quot;It's about the economy, stupid!&quot; - James Carville</em></blockquote>
+    <p>To us, supporting local businesses doesn't stop with the economy - It is all about creating a stable and vibrant community! (territory_name) businesses create jobs (tax revenue for schools, parks, roads) while offering  diversity in the marketplace, with unique products and services not found in big-box stores or chain restaurants. Not to mention - these local business are owned by the very people who sponsor our little leagues, donate to our local charities, and volunteer for our community events - giving back to the community in countless ways. You rely on them, but can they rely on you?</p>
+    <h3>RelyLocal is a Community Campaign</h3>
+    <p>There are plenty of &quot;local&quot; online directories and various &quot;buy local&quot; movements sprouting up across the country. Unfortunately, most of the other websites simply buy (or steal) their data from giant databases full of national chains, while selling advertising to the highest bidder (the national chains).  Only RelyLocal is locally owned and operated by your neighbors who really understand what (territory_name) businesses are up against. RelyLocal isn't just a website - it is a community campaign to rebuild our local economy and strengthen our community! </p>
+    <blockquote> <strong><a href='/business_listings'>Discover (territory_name) Businesses</a></strong> - No Big-Box! <a href='#walmart'>*</a><br />
+      You'd be amazed how many local businesses  are out there - offering exactly what you are looking for. Usually, the trouble is just finding them! We are partnering with amazing local businesses and will help you understand how supporting them will support your community.
+      </p>
+      <p><strong><a href='/coupons'>Print (territory_name) Coupons</a></strong> - On Demand!<br />
+        Saving money doesn't have to cost you! And, you no longer have to weed through the coupon books that fill your mail box. We'll bring you the latest special offers from local businesses that you can print whenever you need them. Just print and save!</p>
+      <p><strong><a href='/jobs'>Find Jobs in (territory_name)</a></strong> - Now Hiring!<br />
+        There are so many different online job boards and newspapers out there featuring a just a few jobs here and there, it is hard to know where to search. Luckily, we have combined them all to provide you with the most local jobs in the (territory_name) area!</p>
+      <p><strong><a href='NEW_show_your_support_page'>Get Connected</a></strong> - Online and Off!<br />
+        We want you to be an active partner in our campaign to re-build the (territory_name) economy! Get <a href='../#connect'>connected</a>, share your reviews of local businesses, and <a href='NEW_show_your_support_page'>show your support</a> around town or online. Don't just site on the sidelines - become an advocate!</p>
+    </blockquote>
+    <h3>Getting Involved With RelyLocal
+    </h3>
+    <p>If you are a local business owner who would like to partner with RelyLocal in our campaigns to support local businesses, you can learn more about our <a href='NEW_promote_your_business_page'>strategies and services</a> or just <a href='/contact-us'>get in touch</a>. We'd love to see how we can help your business!</p>
+    <p>Otherwise, if you are  an excited loyal local that wants to spread the word, you can <a href='../#connect'>get connected</a> with other like-minded locals and <a href='NEW_show_your_support_page'>show your support</a> around town...</p>
+    <a name='walmart' id='walmart'></a>
+    <p><em>Note: We aren't anti-WalMart, HomeDepot, or Olive Garden at all. We are simply fans of  the economic and social effects of supporting local business in (territory_name)! </em></p>"
+
+  private_what_is_relylocal: "<h1>What is (brand_name)?</h1>
+    <p>
+      A healthy community depends on a healthy economy, and both completely depend on the local businesses in the (territory_name) area! There are a number of <a href='http://www.relylocal.com/blog/category/studies/' target='_new'>great studies</a> out there that illustrate how shopping locally will stimulate the (territory_name) economy.</p>
+    <p>
+      Simply put, more money spent with local businesses stays here (about 68%), where much less money spent with national chains stays in the area (only about 14%), and money spent online... well... simply leaves. Forever.</p>
+    <p>
+      To us, supporting local businesses doesn&#39;t stop with the economy - It is all about creating a stable and vibrant community! (territory_name) businesses create jobs (tax revenue for schools, parks, roads) while offering diversity in the marketplace, with unique products and services. Not to mention - these business are owned and managed by the very people who sponsor our little leagues, donate to our local charities, and volunteer for our community events - giving back to the community in countless ways. You rely on them, but can they rely on you?</p>
+    <h3>
+      (brand_name) is a Community Campaign</h3>
+    <p>
+      (brand_name) is locally owned and operated by your neighbors who really understand what (territory_name) businesses are up against. (brand_name) isn&#39;t just a website - it is a community campaign to rebuild our local economy and strengthen our community!</p>
+    <blockquote>
+      <strong><a href='/business_listings'>Discover (territory_name) Businesses</a></strong><br />
+      You&#39;d be amazed how many local businesses are out there - offering exactly what you are looking for. Usually, the trouble is just finding them! We are partnering with amazing local businesses and will help you understand how supporting them will support your community.
+      <p>
+          <strong><a href='/coupons'>Print (territory_name) Coupons</a></strong> - On Demand!<br />
+          Saving money doesn&#39;t have to cost you! And, you no longer have to weed through the coupon books that fill your mail box. We&#39;ll bring you the latest special offers from local businesses that you can print whenever you need them. Just print and save!</p>
+      <p>
+          <strong><a href='/jobs'>Find Jobs in (territory_name)</a></strong> - Now Hiring!<br />
+          There are so many different online job boards and newspapers out there featuring a just a few jobs here and there, it is hard to know where to search. Luckily, we have combined them all to provide you with the most local jobs in the (territory_name) area!</p>
+      <p>
+          <strong><a href='NEW_show_your_support_page'>Get Connected</a></strong> - Online and Off!<br />
+          We want you to be an active partner in the &quot;(brand_name)&quot; campaign to re-build the (territory_name) economy! Get <a href='../#connect'>connected</a>, share your reviews of local businesses, and <a href='NEW_show_your_support_page'>show your support</a> around town or online. Don&#39;t just site on the sidelines - become an advocate!</p>
+    </blockquote>
+    <h3>
+      Getting Involved With (brand_name)</h3>
+    <p>
+      If you are a local business owner who would like to partner with (brand_name) in our campaign to support local businesses, you can learn more about our <a href='NEW_promote_your_business_page'>strategies and services</a> or just <a href='/contact-us'>get in touch</a>. We&#39;d love to see how we can help your business!</p>
+    <p>
+      Otherwise, if you are an excited loyal local that wants to spread the word, you can <a href='../#connect'>get connected</a> with other like-minded locals and <a href='NEW_show_your_support_page'>show your support</a> around town.</p>"
+
+  list_your_businesses: &list_your_businesses "<h1>Promoting Local Businesses</h1>
+    <p>The main reason we launched RelyLocal in (territory_name) was to help the &quot;little guys&quot; (and gals) compete! With national chains and web-based replacements spending as much as $2 million in marketing <em><strong>every day</strong></em>, it is no wonder that many of our local companies are having trouble connecting with new customers through all of the noise. Especially in this economy, we began  to see more and more established businesses slowly disappear while many new local businesses didn't know how to get started and get their name in front of new customers. Budgets are tight and many businesses think that the first cut should always be in advertising.. They are wrong! But, don't just take <em>our</em> word for it...</p>
+    <blockquote><em>&quot;Stopping advertising to save money is like stopping a clock to save  time.&quot; - <a href='http://www.relylocal.com/blog/quote/henry-ford-genius/' target='_new'>Henry Ford</a></em></blockquote>
+    <h3>Advertising Incubator and Community Campaigns</h3>
+    <p>RelyLocal isn't meant to be a full replacement for all of your other marketing efforts, or memberships with business groups like the Chamber of Commerce. <em>(Heck, be reasonable - have you seen our <a href='#cost'>minimal fees</a>?)</em> We like to think of ourselves as an advertising incubator, the one thing that every local business needs to be a part of to help drive their other advertising efforts - online and off. Use RelyLocal as a starter, and work your way into other (more expensive) advertising options. Here are a few of the details on what we offer our members...</p>
+    <blockquote> <strong><img src='http://www.relylocal.com/rely_images/badges/relylocal_logo.png' alt='' hspace='5' vspace='5' border='0' align='right' />RelyLocal.com</strong><br />
+      Our web site is a small but integral piece of our entire local marketing         solution. You simply choose a category (or multiple) in which to  feature        your business listing and we'll take care of entering  all of your information;        company description, logo, location,  hours of operation, web address, email        - even, photos,  banner ads and links to your Blog, Facebook, or        Twitter pages!  Our first goal is to drive traffic to your business - online        or  off. As a result, some customers will find what they need about your         business directly on our site, while other customers will continue  on to        your site to get even more information.
+      </p>
+      <p><strong><img src='http://www.relylocal.com/rely_images/online.jpg' hspace='5' border='0' align='right' />Search Engine Results (Organic)</strong><br />
+        While our #1 goal isn't necessarily to get your business on &quot;page one&quot; at Google <em>(please consider our minimal costs)</em> -  it DOES happen all the time! In addition to the new customers you will gain directly from  RelyLocal.com,        you will also begin to see increased traffic and  exposure on many other        search engines and directories. With  things like meta keywords and even        the content on your page  becoming less relevant to search engines (because        it can be  manipulated), your site being featured on trusted sites like  RelyLocal.com        will help to increase your search engine rankings.  We will also consult        with you to make sure you are getting the  most out of your listings on sites        like Google Maps and MSN  Local.</p>
+      <p><strong>Social Media Ambassadors</strong><br />
+      <strong><img src='http://www.relylocal.com/rely_images/facebook.jpg' alt='' hspace='5' vspace='3' border='0' align='right' /></strong><strong><img src='http://www.relylocal.com/rely_images/twitter.jpg' alt='' hspace='5' vspace='3' border='0' align='right' /></strong>Let us be your online ambassador - connecting you with our ever-growing  network of &quot;Loyal Locals&quot; on Facebook and Twitter. Imagine - the next time  you  are holding a special event or offering a special promotion, you  can reach hundreds  (if not thousands) of qualified local customers with your message every time we make a post on your behalf...  Instantly! <em>(Try that with legacy marketing methods!</em>) Plus, we keep things fun - with quizzes, contests, and giveaways designed to increase our fan base, while generating new exposure for your business in new markets!</p>
+      <p><strong>Co-Op Local Advertising</strong><br />
+        If you have been in business long, you realize that without advertising,  you'll          never survive. You also realize that most advertising  is extremely expensive          and difficult to justify on your bottom  line. Let us compliment your current          advertising plans and  reach new audiences that you never thought you could          afford. We  pool the funds of active members in order to advertise with           newspapers, billboards, television, and radio - even sponsoring local           events. As an example, for a typical 60-second tv or radio spot,  we will          spend 30 seconds explaining what the RelyLocal campaign is all about, and  how customers can          support local business. The second half  of the ad will           feature specific  RelyLocal members who helped to underwrite the ads.          Each newspaper ad will  feature the latest new members. Each billboard          will play up  the grass-roots community feel while highlighting several           members! All for a fraction of the cost of &quot;going it alone&quot;...</p>
+      <p><strong><img src='http://www.relylocal.com/rely_images/organizer/oregon/bend/coupon.jpg' alt='' hspace='5' vspace='5' border='0' align='right' />Local Coupon Marketing</strong><br />
+        Coupons mailings can be very effective, but are also very expensive  considering the ROI. While they do hit a lot of households, not everyone  needs a muffler or likes Chinese food. As part of your normal  membership, you may feature up to three coupons each month (you choose the expiration dates) for  customers to  print and use at your location. As we continue to grow, we will  also insert &quot;highlight coupons&quot; in  the major  mailings in the area to showcase all of the coupons available  at RelyLocal.com. This is a great incentive to entice new customers.  Best of all, it's all included as part of your <a href='#cost'>regular membership</a>! </p>
+      <p><strong><img src='http://www.relylocal.com/rely_images/CafePress.jpg' alt='' width='120' height='166' hspace='5' vspace='5' border='0' align='right' />(territory_name) Community Campaign</strong><br />
+        While we provide businesses and loyal locals with window decals, bumper  stickers, and t-shirts - it is about much more than just that  &quot;warm-and-fuzzy&quot; feeling. These tools are a small but very deliberate  part of building an effective grass-roots campaign to support local  business. It is our way of making RelyLocal the new &quot;Good Housekeeping  Seal of Approval&quot; for local businesses in the (territory_name) area. </p>
+      <p><strong>Your Role - Our Partner!</strong><br />
+      RelyLocal isn't just about what we can do for you, it's about what you can do for your community. At least 90% of your membership dues stay in the area to help grow our community campaign to reunite local customers with their local businesses. We don't view our business members and web users as clients and customers, we view them as partners! Get involved, make a minimal investment in (territory_name), and you'll receive a lot more in return than just more clicks to your web site. We are here to help!</p>
+    </blockquote>
+    <h3>The Most Cost-Effective Marketing in (territory_name)</h3>
+    <table border='0' cellspacing='10' cellpadding='5' width='80%' align='center'>
+      <tbody>
+        <tr>
+          <td width='19%' align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Yellow Pages</strong></td>
+          <td width='81%' valign='middle' bgcolor='#e6e3e3'>From <strong>$500-$25,000</strong> per year, per publisher <br />
+            <em>depending on type of ad</em></td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Billboards</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'>Typical minimum investment of <strong>$4,350</strong> <br />
+            <em>production, minimum 3 months</em></td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Newspaper</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'>An average of <strong>$380 </strong>for a one-time, 1/4 page ad</td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Coupon Mailings</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'>Between <strong>$200-$900</strong> per month <br />
+            <em>Coupon Saver, ValuPak, FamilySaver</em></td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Television Ads</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'><strong>$350-$400</strong> for one 30-second spot during prime time <br />
+            <em>not including production cost</em></td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>Radio Ads</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'><strong>$50-$150</strong> for one 30-second spot during drive time</td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#e6e3e3'><strong>eMarketing</strong></td>
+          <td valign='middle' bgcolor='#e6e3e3'>From <strong>$200-$1,200+</strong> per month for ongoing SEO, ad management, etc...</td>
+        </tr>
+        <tr>
+          <td align='center' valign='middle' nowrap='nowrap' bgcolor='#c7d9fd'><font color='#ff0000'><strong><a name='cost' id='cost'></a>RelyLocal<br />
+            Campaign</strong></font></td>
+          <td valign='middle' bgcolor='#c7d9fd'><font color='#ff0000'><strong>ONLY $25 PER MONTH!</strong></font> <br />
+            Gain new local exposure in all of the outlets above for about <strong>half the cost</strong> of a single 30-second radio        spot! <em>(Co-op opportunities are on a first-come, first-served basis...)</em></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Your Problems, RelyLocal's Solutions</h3>
+    <p><strong>Problem #1: </strong>Sure, most small local businesses can’t afford the thousands         of dollars needed each month to advertise with newspapers, coupon  packs,        billboards, tv, radio - let alone hiring an internet  marketing firm or find        time to spend on social networking! How  can they possibly compete with national        chains or established  competitors?</p>
+    <blockquote>
+      <p><strong>Solution:</strong> RelyLocal is much  more than just another online business directory and community campaign! Think of us as  your co-op advertising agency, internet marketing firm, and part time sales staff - repping you in the community all day, every day.</p>
+    </blockquote>
+    <p><strong>Problem #2:</strong> Many businesses already have a good  web site, but nobody really uses it. They spend precious time and         money for ongoing design, SEO, and expensive advertising that appears  to        produce no tangible results. Other businesses don't have a web  presence        at all, but know that they are losing customers as a  result.</p>
+    <blockquote>
+      <p><strong>Solution:</strong> If potential customers  can’t find your web site        or listings, they aren't likely to find  your physical location, either. We not only        bring you new, highly  qualified traffic directly from your listing on RelyLocal.com,         but we also feed the search engines and other directories, increasing  your        overall online  exposure and organic (free) rankings. </p>
+    </blockquote>
+    <p>If you are a local business owner who would like to partner with RelyLocal, just <a href='/contact-us'>get in touch</a> or <a href='NEW_apply_page'>apply today</a>! We'd love to meet with you and figure out even more ways that we can help your business!</p>"
+
+  private_list_your_businesses: "<h1>Promoting Local Businesses</h1>
+    <p>
+        The main reason we launched (brand_name) in (territory_name) was to help the &quot;little guys&quot; (and gals) compete! In this economy, we began to see more and more established businesses slowly disappear while many new local businesses didn&#39;t know how to get started and get their name in front of new customers. Budgets are tight and many businesses think that the first cut should always be in advertising. They are wrong! But, don&#39;t just take our word for it...</p>
+    <blockquote>
+        <em>&quot;Stopping advertising to save money is like stopping a clock to save time.&quot; - <a href='http://www.relylocal.com/blog/quote/henry-ford-genius/' target='_new'>Henry Ford</a></em></blockquote>
+    <h3>
+        Advertising Incubator and Community Campaigns</h3>
+    <p>
+        (brand_name) isn&#39;t meant to be a full replacement for all of your other marketing efforts. We like to think of ourselves as an advertising incubator, the one thing that every local business needs to be a part of to help drive their other advertising efforts - online and off. Use (brand_name) as a starter, and work your way into other (more expensive) advertising options. Here are a few of the details on what we offer our members.</p>
+    <blockquote>
+        <strong><img align='right' alt='' border='0' hspace='5' src='http://www.relylocal.com/rely_images/badges/relylocal_logo.png' vspace='5' />(brand_name) WEB SITE</strong><br />
+        Our web site is a small but integral piece of our entire local marketing solution. You simply choose a category (or multiple) in which to feature your business listing and we&#39;ll take care of entering all of your information; company description, logo, location, hours of operation, web address, email - even, photos, banner ads and links to your Blog, Facebook, or Twitter pages! Our first goal is to drive traffic to your business - online or off. As a result, some customers will find what they need about your business directly on our site, while other customers will continue on to your site to get even more information.
+        <p>
+            &nbsp;</p>
+        <p>
+            <strong><img align='right' border='0' hspace='5' src='http://www.relylocal.com/rely_images/online.jpg' />Search Engine Results (Organic)</strong><br />
+            While our #1 goal isn&#39;t necessarily to get your business on &quot;page one&quot; at Google (please consider our minimal costs) - it DOES happen all the time! In addition to the new customers you will gain directly from the web site, you will also begin to see increased traffic and exposure on many other search engines and directories. With things like meta keywords and even the content on your page becoming less relevant to search engines (because it can be manipulated), your site being featured on trusted sites like ours will help to increase your search engine rankings.</p>
+        <p>
+            <strong>Social Media Ambassadors</strong><br />
+            <strong><img align='right' alt='' border='0' hspace='5' src='http://www.relylocal.com/rely_images/facebook.jpg' vspace='3' /></strong><strong><img align='right' alt='' border='0' hspace='5' src='http://www.relylocal.com/rely_images/twitter.jpg' vspace='3' /></strong>Let us be your online ambassador - connecting you with our ever-growing network of &quot;Loyal Locals&quot; on Facebook and Twitter. Imagine - the next time you are holding a special event or offering a special promotion, you can reach hundreds (if not thousands) of qualified local customers with your message every time we make a post on your behalf... Instantly! (Try that with legacy marketing methods!) Plus, we keep things fun - with quizzes, contests, and giveaways designed to increase our fan base, while generating new exposure for your business in new markets!</p>
+        <p>
+            <strong>Co-Op Local Advertising</strong><br />
+            If you have been in business long, you realize that without advertising, you&#39;ll never survive. You also realize that most advertising is extremely expensive and difficult to justify on your bottom line. Let us compliment your current advertising plans and reach new audiences that you never thought you could afford. We pool the funds of active members in order to advertise with newspapers, billboards, television, and radio - even sponsoring local events. As an example, for a typical 60-second TV or radio spot, we will spend 30 seconds explaining what the (brand_name) campaign is all about, and how customers can support local business. The second half of the ad will feature specific (brand_name) members who helped to underwrite the ads. Each newspaper ad will feature the latest new members. Each billboard will play up the grass-roots community feel while highlighting several members! All for a fraction of the cost of &quot;going it alone&quot;...</p>
+        <p>
+            <strong><img align='right' alt='' border='0' hspace='5' src='http://www.relylocal.com/rely_images/organizer/oregon/bend/coupon.jpg' vspace='5' />Local Coupon Marketing</strong><br />
+            Coupon mailings can be very effective, but are also very expensive considering the ROI. While they do hit a lot of households, not everyone needs a muffler or likes Chinese food. As part of your normal membership, you may feature up to three coupons each month (you choose the expiration dates) for customers to print and use at your location. As we continue to grow, we will also insert &quot;highlight coupons&quot; in the major mailings in the area to showcase all of the coupons available on the web site. This is a great incentive to entice new customers.</p>
+        <p>
+            <strong><img align='right' alt='' border='0' height='166' hspace='5' src='http://www.relylocal.com/rely_images/CafePress.jpg' vspace='5' width='120' />(territory_name) Community Campaign</strong><br />
+            While we provide businesses and loyal locals with window decals, bumper stickers, and t-shirts - it is about much more than just that &quot;warm-and-fuzzy&quot; feeling. These tools are a small but very deliberate part of building an effective grass-roots campaign to support local business. It is our way of making (brand_name) the new &quot;Good Housekeeping Seal of Approval&quot; for local businesses in the (territory_name) area.</p>
+        <p>
+            <strong>Your Role - Our Partner!</strong><br />
+            (brand_name) isn&#39;t just about what we can do for you, it&#39;s about what you can do for your community. We don&#39;t view our business members and web users as clients and customers, we view them as partners! Get involved, make a minimal investment in (territory_name), and you&#39;ll receive a lot more in return than just more clicks to your web site. We are here to help!</p>
+    </blockquote>
+    <h3>
+        The Most Cost-Effective Marketing in (territory_name)</h3>
+    <table align='center' border='0' cellpadding='5' cellspacing='10' width='80%'>
+        <tbody>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle' width='19%'>
+                    <strong>Yellow Pages</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle' width='81%'>
+                    From <strong>$500-$25,000</strong> per year, per publisher<br />
+                    <em>depending on type of ad</em></td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>Billboards</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    Typical minimum investment of <strong>$4,350</strong><br />
+                    <em>production, minimum 3 months</em></td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>Newspaper</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    An average of <strong>$380 </strong>for a one-time, 1/4 page ad</td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>Coupon Mailings</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    Between <strong>$200-$900</strong> per month<br />
+                    <em>Coupon Saver, ValuPak, FamilySaver</em></td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>Television Ads</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    <strong>$350-$400</strong> for one 30-second spot during prime time<br />
+                    <em>not including production cost</em></td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>Radio Ads</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    <strong>$50-$150</strong> for one 30-second spot during drive time</td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#e6e3e3' nowrap='nowrap' valign='middle'>
+                    <strong>eMarketing</strong></td>
+                <td bgcolor='#e6e3e3' valign='middle'>
+                    From <strong>$200-$1,200+</strong> per month for ongoing SEO, ad management, etc...</td>
+            </tr>
+            <tr>
+                <td align='center' bgcolor='#c7d9fd' nowrap='nowrap' valign='middle'>
+                    <font color='#ff0000'><strong>(brand_name)<br />
+                    Campaign</strong></font></td>
+                <td bgcolor='#c7d9fd' valign='middle'>
+                    <br />
+                    Gain new local exposure in all of the outlets above for about <strong>half the cost</strong> of a single 30-second radio spot! <em>(Co-op opportunities are on a first-come, first-served basis...)</em></td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>
+        Your Problems, (brand_name)&#39;s Solutions</h3>
+    <p>
+        <strong>Problem #1: </strong>Sure, most small local businesses can&rsquo;t afford the thousands of dollars needed each month to advertise with newspapers, coupon packs, billboards, TV, radio - let alone hiring an internet marketing firm or find time to spend on social networking! How can they possibly compete with national chains or established competitors?</p>
+    <blockquote>
+        <p>
+            <strong>Solution:</strong> (brand_name) is much more than just another online business directory and community campaign! Think of us as your co-op advertising agency, internet marketing firm, and part time sales staff - representing you in the community all day, every day.</p>
+    </blockquote>
+    <p>
+        <strong>Problem #2:</strong> Many businesses already have a good web site, but nobody really uses it. They spend precious time and money for ongoing design, SEO, and expensive advertising that appears to produce no tangible results. Other businesses don&#39;t have a web presence at all, but know that they are losing customers as a result.</p>
+    <blockquote>
+        <p>
+            <strong>Solution:</strong> If potential customers can&rsquo;t find your web site or listings, they aren&#39;t likely to find your physical location, either. We not only bring you new, highly qualified traffic directly from your listing on the (brand_name) web site, but we also feed the search engines and other directories, increasing your overall online exposure and organic (free) rankings.</p>
+    </blockquote>
+    <p>
+        If you are a local business owner who would like to partner with (brand_name), just <a href='/contact-us'>get in touch</a> or <a href='NEW_apply_page'>apply today</a>! We&#39;d love to meet with you and figure out even more ways that we can help your business!</p>"
+
+  show_your_support: &show_your_support "<h1>Show Your Support - Get Involved!</h1>
+    <p>Don't just sit on the sidelines - show your support for (territory_name) businesses and the RelyLocal campaign! We are the new &quot;kid&quot; on the block and need your  help to  connect more of our neighbors with local businesses!</p>
+    <blockquote><em>&quot;It takes a community to raise a child.&quot; - African Proverb</em></blockquote>
+    <p> Our passion is to  build a stronger community  (online and off) and here are just a few of the  ways you can show your support for our grass  roots campaign to rebuild our local economy, (while shamelessly reminding  businesses  and customers to rely on one another).</p>
+    <h3>Around Town - Flash your RelyLocal Bling! </h3>
+    <p><img src='http://www.relylocal.com/rely_images/CafePress.jpg' hspace='5' vspace='5' align='right' />Show your support by throwing a RelyLocal bumper sticker on your car,             a  window cling in your shop window, a decal on your laptop, or even sporting some  hip RelyLocal            clothing. You can find bumper stickers at a number of  local businesses around            town, or by <a href='contact-us'>contacting             us</a>. Because we don't have a storefront in town, we have limited supply of shirts and hats - but let us know if you are interested! <em>(Be sure to let us know if you'd be interested in selling any RelyLocal campaign gear in your store...)</em></p>
+
+    <h3>Join The Online Community</h3>
+    <p>Stay in the loop and join the conversation  by clicking on any of our Social Networking links in the upper right corner. Not only can you interact with other loyal locals, but we'll keep  you in  the loop on everything from special events and promotions to  history and information  about local businesses. We will even run  regular contests, giving friends and  followers fun (and valuable) gifts  from local businesses. <a href='../#connect'>Get connected!</a></p>
+    <h3>Link To RelyLocal! - Grab an Online Badge!</h3>
+    <p>One of the best ways to support the RelyLocal campaign is by linking to us with an official RelyLocal badge on your website. Below are several options  to show  your support. <em>Please copy the supplied HTML from the boxes on the right  and paste into your web site's code in the desired location.</em></p>
+    <table align='center'>
+      <tr>
+        <td width='154' style='padding-left:40px'><div align='center'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_logo.png' alt='RelyLocal - Supporting Local Business' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal' /></a></div></td>
+        <td width='273'><textarea name='RL_Logo' cols='30' rows='5' id='RL_Logo'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_logo.png' alt='RelyLocal - Supporting Local Business' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal' /></a></textarea></td>
+      </tr>
+      <tr>
+        <td style='padding-left:40px'><div align='center'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_member.png' alt='Proud Member of RelyLocal' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal2' /></a></div></td>
+        <td><textarea name='RL_Logo2' cols='30' rows='5' id='RL_Logo2'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_member.png' alt='Proud Member of RelyLocal' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal2' /></a></textarea></td>
+
+      </tr>
+      <tr>
+        <td style='padding-left:40px'><div align='center'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_supporter.png' alt='Proud Supporter of RelyLocal' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal3' /></a></div></td>
+        <td><textarea name='RL_Logo3' cols='30' rows='5' id='RL_Logo3'><a href='http://www.relylocal.com' target='_blank'><img src='http://www.relylocal.com/rely_images/badges/relylocal_supporter.png' alt='Proud Supporter of RelyLocal' name='RelyLocal' width='100' height='105' hspace='3' vspace='3' border='0' id='RelyLocal3' /></a></textarea></td>
+      </tr>
+    </table>
+    <h3>Promoting Your Business </h3>
+    <p>If you own or manage a local business, there is no better way to get  involved than to become a RelyLocal member. Help new customers find you  more easily, while getting more for your advertising dollars. <a href='NEW_promote_your_business_page'>Learn more</a> or <a href='NEW_apply_today_page'>apply today</a>!</p>"
+
+  private_show_your_support: "<h1>
+    	Show Your Support - Get Involved!</h1>
+    <p>
+    	Don&#39;t just sit on the sidelines - show your support for (territory_name) businesses and the (brand_name) campaign!</p>
+    <blockquote>
+    	<em>&quot;It takes a community to raise a child.&quot; - African Proverb</em></blockquote>
+    <p>
+    	Our passion is to build a stronger community (online and off) and here are just a few of the ways you can show your support for our grass roots campaign to rebuild our local economy, (while shamelessly reminding businesses and customers to rely on one another).</p>
+    <h3>
+    	Around Town - Flash your (brand_name) Bling!</h3>
+    <p>
+    	<img align='right' hspace='5' src='http://www.relylocal.com/rely_images/CafePress.jpg' vspace='5' />Show your support by using your Local Rewards card at your favorite local businesses, throwing a (brand_name) bumper sticker on your car, a window cling in your shop window, a decal on your laptop, or even sporting some hip (brand_name) clothing. You can find stickers at a number of local businesses around town, or by <a href='contact-us'>contacting us</a>.</p>
+    <h3>
+    	Join The Online Community</h3>
+    <p>
+    	Stay in the loop and join the conversation by clicking on any of our Social Networking links in the upper right corner. Not only can you interact with other loyal locals, but we&#39;ll keep you in the loop on everything from special events and promotions to history and information about local businesses. We will even run regular contests, giving friends and followers fun (and valuable) gifts from local businesses. <a href='../#connect'>Get connected!</a></p>
+    <h3>
+    	Link To (brand_name)! - Grab an Online Badge!</h3>
+    <p>
+    	One of the best ways to support the (brand_name) campaign is by linking to us with an official (brand_name) badge on your web site. Below are several options to show your support. Please copy the supplied HTML from the boxes on the right and paste into your web site&#39;s code in the desired location.</p>
+    <table align='center'>
+    	<tbody>
+    		<tr>
+    			<td style='padding-left:40px' width='154'>
+    				<div align='center'>
+    					<a href='http://www.relylocal.com' target='_blank'><img alt='RelyLocal - Supporting Local Business' border='0' height='105' hspace='3' id='RelyLocal' name='RelyLocal' src='http://www.relylocal.com/rely_images/badges/relylocal_logo.png' vspace='3' width='100' /></a></div>
+    			</td>
+    			<td width='273'>
+    				<textarea cols='30' id='RL_Logo' name='RL_Logo' rows='5'>&lt;a  data-cke-saved-href=&#39;http://www.relylocal.com&#39; href=&#39;http://www.relylocal.com&#39; target=&#39;_blank&#39;&gt;&lt;img  data-cke-saved-src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_logo.png&#39; src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_logo.png&#39; alt=&#39;RelyLocal - Supporting Local Business&#39;  data-cke-saved-name=&#39;RelyLocal&#39; name=&#39;RelyLocal&#39; width=&#39;100&#39; height=&#39;105&#39; hspace=&#39;3&#39; vspace=&#39;3&#39; border=&#39;0&#39; id=&#39;RelyLocal&#39; /&gt;&lt;/a&gt;</textarea></td>
+    		</tr>
+    		<tr>
+    			<td style='padding-left:40px'>
+    				<div align='center'>
+    					<a href='http://www.relylocal.com' target='_blank'><img alt='Proud Member of RelyLocal' border='0' height='105' hspace='3' id='RelyLocal2' name='RelyLocal' src='http://www.relylocal.com/rely_images/badges/relylocal_member.png' vspace='3' width='100' /></a></div>
+    			</td>
+    			<td>
+    				<textarea cols='30' id='RL_Logo2' name='RL_Logo2' rows='5'>&lt;a  data-cke-saved-href=&#39;http://www.relylocal.com&#39; href=&#39;http://www.relylocal.com&#39; target=&#39;_blank&#39;&gt;&lt;img  data-cke-saved-src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_member.png&#39; src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_member.png&#39; alt=&#39;Proud Member of RelyLocal&#39;  data-cke-saved-name=&#39;RelyLocal&#39; name=&#39;RelyLocal&#39; width=&#39;100&#39; height=&#39;105&#39; hspace=&#39;3&#39; vspace=&#39;3&#39; border=&#39;0&#39; id=&#39;RelyLocal2&#39; /&gt;&lt;/a&gt;</textarea></td>
+    		</tr>
+    		<tr>
+    			<td style='padding-left:40px'>
+    				<div align='center'>
+    					<a href='http://www.relylocal.com' target='_blank'><img alt='Proud Supporter of RelyLocal' border='0' height='105' hspace='3' id='RelyLocal3' name='RelyLocal' src='http://www.relylocal.com/rely_images/badges/relylocal_supporter.png' vspace='3' width='100' /></a></div>
+    			</td>
+    			<td>
+    				<textarea cols='30' id='RL_Logo3' name='RL_Logo3' rows='5'>&lt;a  data-cke-saved-href=&#39;http://www.relylocal.com&#39; href=&#39;http://www.relylocal.com&#39; target=&#39;_blank&#39;&gt;&lt;img  data-cke-saved-src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_supporter.png&#39; src=&#39;http://www.relylocal.com/rely_images/badges/relylocal_supporter.png&#39; alt=&#39;Proud Supporter of RelyLocal&#39;  data-cke-saved-name=&#39;RelyLocal&#39; name=&#39;RelyLocal&#39; width=&#39;100&#39; height=&#39;105&#39; hspace=&#39;3&#39; vspace=&#39;3&#39; border=&#39;0&#39; id=&#39;RelyLocal3&#39; /&gt;&lt;/a&gt;</textarea></td>
+    		</tr>
+    	</tbody>
+    </table>
+    <h3>
+    	Promoting Your Business</h3>
+    <p>
+    	If you own or manage a local business, there is no better way to get involved than to become a (brand_name) member. Help new customers find you more easily, while getting more for your advertising dollars. <a href='NEW_promote_your_business_page'>Learn more</a> or <a href='NEW_apply_today_page'>apply today</a>!</p>"
+
+  contact_us: &contact_us "(Link to Headshot here)
+    <p>I'm a local business owner just like you! After being frustrated with hundreds of dollars spent each month on advertising in the Yellow Pages, newspapers, billboards, search engines, and coupon flyers, I decided to
+    find a way to offer local businesses a better way to reach more potential customers for much less money.  I am here to help make the most out of your advertising budget and help connect you with more customers!</p>
+    <p>If you would like to find out how to become a part of the fastest growing grass roots community in the (territory_name) area for connecting local businesses with local customers, contact me today!</p>
+    <p>(enter your First and Last names)</p>
+    <p>Phone: (enter your contact name(s))</p>
+    <p>Email: (enter your public email)</p>
+    <p><b>Business Hours</b></br>
+    (enter your hours)</p>"
+
+  private_contact_us: "<p>
+    	We&rsquo;ve decided to launch a RelyLocal campaign to help local consumers find the local businesses that they&rsquo;re looking for in the (territory_name)&nbsp; area. We&rsquo;re here to help make the most out of local business&#39; advertising budget and help consumers re-connect with the mom-and-pop businesses that make the (territory_name)&nbsp; area so great!</p>
+    <p>
+    	<strong>Organization Name</strong><br />
+    	Address Line1<br />
+    	Address Line 2<br />
+    	City, ST ZIP<br />
+    	Phone:<br />
+    	FAX:<br />
+    	Email:</p>
+    <p>
+    	<b>Business Hours</b><br />
+    	(enter your hours)</p>'"
+
+  mobile_contact_us: "<b>Organization Name</b><br/>
+    Address Line1<br/>
+    Address Line 2<br/>
+    City, ST ZIP<br/>
+    Phone:<br/>
+    FAX:<br/>
+    Email:<br/><br/>
+
+    <b>Business Hours</b><br/>
+    (enter your hours)"
+
+  private_mobile_contact_us: "<b>Organization Name</b><br/>
+                                 Address Line1<br/>
+                                 Address Line 2<br/>
+                                 City, ST ZIP<br/>
+                                 Phone:<br/>
+                                 FAX:<br/>
+                                 Email:<br/><br/>
+
+                                 <b>Business Hours</b><br/>
+                                 (enter your hours)"
+
+  discovery_text: &discovery_text Every dollar you spend with a (territory_name) business stimulates our local economy! Browse our local business directory or simply use our search to find what you are looking for from a local business in the (territory_name) area.
+
+  private_discovery_text: Every dollar you spend with a (territory_name) business stimulates our local economy! Browse our (brand_name) business directory or use our local search tool to find what you are looking for from a local business in the (territory_name) area.
+
+  save_text: &save_text You don’t have to break the piggy bank to support local businesses! Just print local coupons for businesses in the (territory_name) area to save money while doing your part to support the community. It’s fast, it’s fun, it’s free!
+
+  private_save_text: You don’t have to break the piggy bank to support local businesses! Just print local coupons for businesses in the (territory_name) or use your Local Rewards card to save money every day supporting the local businesses you already love!
+
+  connect_text: &connect_text Get involved! Connect with other “loyal locals” and stay up to date on the latest special offers and events. Show your support with a free bumper sticker or web badge. Let local business in (territory_name) know that they can rely on you!
+
+  private_connect_text: Get involved! Connect with other loyal locals, and stay up to date on the latest special offers and events. Show your support with a "(brand_name)" bumper sticker or web badge. Let business in (territory_name) know that they can rely on you!
+
+  can_rely_text: &can_rely_text <h3>Making Local Business Everybody’s Business</h3>
+    In our fast-paced world of thrift, it’s easy to forget about the little guy - until it’s too late! Local businesses are the backbone of the (territory_name) community and need our support! What does it mean to see
+    a local company close its doors? It means the loss of great products and services, the loss of local jobs, and the loss of tax revenue that funds our schools, parks, and roads! You rely on our local businesses every day -
+    can they rely on you?
+
+  private_can_rely_text: "<h3>
+    	Local Business in (territory_name) is Everybody&rsquo;s Business!</h3>
+    <p>
+    	Local businesses are the backbone of the (territory_name) community and need our support! What does it mean to see a local company close its doors? It means the loss of great products and services, the loss of local jobs, and the loss of tax revenue that funds our schools, parks, and roads! We started (brand_name) in the (territory_name) area to help local consumers connect with the businesses that make the (territory_name) area a great place to live!</p>"
+
+  advertise_with_us: &advertise_with_us "<h1>Advertising With RelyLocal</h1>
+    <p>Our job is to make your business everybody's business. Here are a few ways to get started...</p>
+    <h3>RelyLocal Membership</h3>
+    <p>If you own (or manage) a local business and are ready to become a partner in our campaign to strengthen the community, please <a href='contact-us'>contact us</a> to set up a time to chat through all of the options. <em>(We'd love to meet face-to-face and get to know you, allowing us to make sure that we are a &quot;good fit&quot; for your specific needs.)</em></p>
+    <p><em><strong>Price:</strong></em> $25 per month *<br />
+    <em><strong>Includes:</strong></em> Full web directory listing  in up to two categories of your choice and includes; your logo, short  description, long description, hours of operation, phone, fax, email,  address with interactive google map, printable coupons, photos,  downloadable documents, user reviews, inclusion in search engines and  links to facebook, twitter, blog, myspace, skype, indeed, youtube, and  your website. Also included: a local account manager and membership in  RelyLocal's community campaign to support local businesses. <br />
+    </p>
+    <p><em><strong>*Additional Services:</strong></em> Additional  services may be available for an additional fee. Once you are an active member, we will keep you in the loop as new opportunities become available.</p>
+    <h3>Local Banner Advertising</h3>
+    <p>Are you looking for a truly local audience of visitors who have already  pre-qualified themselves as being interested in supporting local businesses? We have some of the most cost-effective banner ad packages in town (especially for our business members). To keep our site simple and clean, we limit our banner advertising to three banners per page, with this exclusive placement  giving  our advertisers an ever better value for their money. Please <a href='contact-us'>contact us</a> today to discuss your needs.</p>
+    <h3>Local Job Postings</h3>
+    <p>Our job postings are part of the <a href='http://www.indeed.com/jobs?indpubnum=3041400695423329' target='_blank'>Indeed.com</a> network. In addition to being displayed on RelyLocal, your  job posting will also be distributed to thousands of  other web          sites around the world! (Not bad, we know...)</p>
+    <p> <em><strong>Price:</strong></em> $35 <br />
+    <em><strong>Duration: </strong></em>30 Days <br />
+    <strong><em>Payment:</em></strong> Upon Submission (billed directly by Indeed.com)<br />
+    <strong><em>Location:</em></strong> RelyLocal.com - Plus thousands of web sites across the globe! (We also regularly plug job openings through our SocialMedia outlets...)<br />
+    <strong><em>How o List:</em></strong>Simply visit the <a href='find-local-jobs'>Find           Local Jobs</a> section of our site, then click <u><strong>Post a  Job</strong></u></p>"
+
+  private_advertise_with_us: "<h1>
+    	Your Business With (brand_name)</h1>
+    <p>
+    	Our job is to make your business everybody&#39;s business. Here are a few ways to get started...</p>
+    <h3>
+    	(brand_name) Membership</h3>
+    <p>
+    	If you own (or manage) a local business and are ready to become a partner in our campaign to strengthen the community, please <a href='contact-us'>contact us</a> to set up a time to talk through all of the options.</p>
+    <p>
+    	<em><strong>Price:</strong></em> $10 - $30 per month *<br />
+    	<em><strong>Includes:</strong></em> Full web directory listing in up to two categories of your choice and includes; your logo, short description, long description, hours of operation, phone, fax, email, address with interactive google map, printable coupons, photos, downloadable documents, user reviews, inclusion in search engines and links to facebook, twitter, blog, myspace, skype, indeed, youtube, and your web site. Also included: a local account manager and membership in (brand_name)&#39;s community campaign to support local businesses.</p>
+    <p>
+    	<em><strong>*Additional Services:</strong></em> Additional services may be available for an additional fee. Once you are an active member, we will keep you in the loop as new opportunities become available.</p>
+    <h3>
+    	Local Banner Advertising</h3>
+    <p>
+    	Are you looking for a truly local audience of visitors who have already pre-qualified themselves as being interested in supporting local businesses? We have some of the most cost-effective banner ad packages in town. To keep our site simple and clean, we limit our banner advertising to three banners per page, with this exclusive placement giving our advertisers an ever better value for their money. Please <a href='contact-us'>contact us</a> today to discuss your needs.</p>
+    <h3>
+    	Local Job Postings</h3>
+    <p>
+    	Our job postings are part of the <a href='http://www.indeed.com/jobs?indpubnum=3041400695423329' target='_blank'>Indeed.com</a> network. In addition to being displayed on (brand_name), your job posting will also be distributed to thousands of other web sites around the world! (Not bad, we know...)</p>
+    <p>
+    	<em><strong>Price:</strong></em> $35<br />
+    	<em><strong>Duration: </strong></em>30 Days<br />
+    	<strong><em>Payment:</em></strong> Upon Submission (billed directly by Indeed.com)<br />
+    	<strong><em>Location:</em></strong> (brand_name) web site - Plus thousands of web sites across the globe! (We also regularly plug job openings through our Social Media outlets...)<br />
+    	<strong><em>How To List:</em></strong> Simply visit the <a href='find-local-jobs'>Find Local Jobs</a> section of our site, then click <u><strong>Post a Job</strong></u></p>"
+
+  rewards_text: &rewards_text "<p><img src='/images/rely-local-rewards-card.jpg' alt='RelyLocal Rewards Card' width='300' height='349' hspace='5' vspace='5' border='0' align='right' /><strong>How It Works:</strong> Local businesses want to reward you for your loyalty and support by offering you special deals on everything from your daily coffee to a new roof for your house. These rewards can save you a few cents on a car cash or a few hundred dollars on car repair. And, the best news is - the cards are valid for one full year! Our members will post their ever-changing &quot;Rewards&quot; right here on the site. All you need to do is show your own Local Rewards card to the vendor in order to receive their special reward. </p>
+    <p><strong>How Much Does It Cost?</strong> As we launch the Local Rewards program, we'll be selling the cards at a reduced rate of only $XX.XX. <em>(That is less than $0.XX per day for access to major savings while supporting the local community!)</em> We do anticipate this price to increase soon, so don't wait, buy early - buy often! They also make fantastic gift cards!</p>
+    <p><strong>Where To Buy:</strong> The Local Rewards cards are popping up all over town. You can find them at XXX, YYY, and ZZZ. You can also find them through various fundraising campaigns, or you can always buy them <a href='../contact-us'>directly from us</a>. Depending on where you purchase your Local Rewards card, a hefty portion of the proceeds will go toward supporting a non-profit, a school sports team, or  the RelyLocal campaign to help stimulate the local economy.</p>"
+
+  private_rewards_text: *rewards_text
+
+  local_jobs_text: &local_jobs_text "We have partnered with Indeed.com to provide the most complete database of local jobs in the area. If you are interested in an advertised position, simply click on the link for more information. You may also <a href='https://ads.indeed.com/Post-Jobs'>post a local job</a> through Indeed.com to have it featured on this page."
+
+  private_local_jobs_text: *local_jobs_text
+
+test:
+  <<: *COMMON
+
+legacy:
+  <<: *COMMON
+
+staging:
+  <<: *COMMON
+
+production:
+  <<: *COMMON
+
+development:
+  <<: *COMMON
+

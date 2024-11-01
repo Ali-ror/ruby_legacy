@@ -1,0 +1,70 @@
+.index-page
+  .title
+    %h1
+      Manage Pictures
+    %h2
+      - if @business_listing
+        = link_to( @business_listing.name,
+                   admin_territory_business_listings_path( @business_listing.territory,
+                                                           :specifically => @business_listing.id ) )
+      - else
+        = @territory.description
+    .tip
+      %p
+        You can easily manage your pictures here. Just use the add picture,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+
+  - if can? :create, Picture
+    .link-bar
+      %ul
+        - if @business_listing
+          %li
+            = link_to "Add Picture", new_admin_territory_business_listing_picture_path( @territory, @business_listing ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @pictures ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Picture
+        %th
+          Status
+        %th
+          Caption
+        %th.last
+          Actions
+        -#%th.last
+          Select
+    %tbody
+      - @pictures.each do |p|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            %a.image(href="#{p.picture.url}")= image_tag p.picture.url(:thumb)
+          %td.moderate
+            - if can? :update, p
+              = render "admin/common/moderate", :object => p
+            - else
+              = p.state
+          %td
+            = p.caption
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_business_listing_picture_path( @territory, p.business_listing, p ) if can? :update, p
+              %li= link_to "Delete", admin_territory_business_listing_picture_path( @territory, p.business_listing, p ), :confirm => 'Are you sure you wish to delete this Picture?', :method => :delete if can? :destroy, p
+          -#%td.last
+            = check_box_tag dom_id( p )
+
+  .pagination
+    Page
+    = will_paginate( @pictures ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Comments", "", :class => "delete-link"

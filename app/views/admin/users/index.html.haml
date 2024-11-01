@@ -1,0 +1,72 @@
+.index-page
+  .title
+    %h1
+      Manage
+      = @territory ? "Territory Users" : "Users"
+    .tip
+      %p
+        You can easily manage your users here. Just use the add user,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+
+  .browse-title
+    Browse By First Name
+    %ul
+      %li
+        = link_to "All", polymorphic_path([:admin, @territory, User], :user_type => params[:user_type] || "listing_managers"), :class => "browse-by-name remote"
+      - ( 'A'..'Z' ).to_a.each do |l|
+        %li
+          = link_to l, polymorphic_path( [:admin, @territory, User], :starts_with => l, :user_type => params[:user_type] || "listing_managers"), :class => "browse-by-name remote"
+  
+  = form_tag polymorphic_path([:admin, @territory, User], :user_type => params[:user_type] || "listing_managers"), :id => "search-form", :class => "remote", :method => :get do
+    .filter-users-bar
+      %span.inline-header Filter By User Type
+    
+      - if current_user.is_global_admin?
+        %label Global Admins
+        = radio_button_tag :user_type, "global_admins", params[:global_admins] == "1", {:class => "remote"}
+
+      - if current_user.is_global_admin? || current_user.is_territory_admin_for?(@territory)
+        &nbsp;&nbsp;&nbsp;        
+        %label Business Members
+        = radio_button_tag :user_type, "listing_managers", params[:listing_managers] == "1" || params[:listing_managers].blank?, {:class => "remote"}
+        
+        &nbsp;&nbsp;&nbsp;        
+        %label Local Admins
+        = radio_button_tag :user_type, "local_admins", params[:local_admins] == "1", {:class => "remote"}
+
+        &nbsp;&nbsp;&nbsp;        
+        %label General Public
+        = radio_button_tag :user_type, "generic_users", params[:generic_user] == "1", {:class => "remote"}
+  
+        &nbsp;&nbsp;&nbsp;        
+        %label All
+        = radio_button_tag :user_type, "all", params[:all] == "1", {:class => "remote"}
+
+    .search-bar
+      %span.inline-header Search By Name
+      = text_field_tag :keyword, params[:keyword], :autocomplete => "off"
+      = submit_tag :search
+
+  .link-bar
+    %ul
+      %li
+        = link_to "Add User", new_polymorphic_path([:admin, @territory, User]), :class => "add-link"
+      -#%li
+        =# link_to "Download Users", "", :class => "download-link"
+      - if @territory
+        %li
+          = link_to "Download All Listing Members", admin_territory_business_listings_path( @territory, :format => "csv" ), :class => "download-link"
+      
+
+  #users= render 'users'
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Users", "", :class => "delete-link"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery.ba-bbq.min.js"

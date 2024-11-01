@@ -1,0 +1,64 @@
+%nav#main
+  - if @territory
+    %ul{ :style => style_param }
+      - if !style_param.blank?
+        %li
+          = link_to "Home", territory_root_path( @territory.to_param )
+      %li
+        = link_to "What is RelyLocal?", territory_what_is_relylocal_path(@territory)
+        %ul
+          %li= link_to "About Us", territory_what_is_relylocal_path(@territory)
+          %li= link_to "Promote Your Business", territory_promote_your_business_path(@territory)
+          %li= link_to "Advertise With Us", territory_advertise_with_us_path(@territory)
+          %li= link_to " - Apply/Register", territory_submit_business_path(@territory)
+
+      %li= link_to "Local Businesses", territory_categories_path(@territory)
+
+      - if @territory.deal_of_the_day_enabled || @territory.rewards_enabled
+        %li
+          - if controller.action_name == "home"
+            = link_to_function "Local Savings", "$( '#action_two' ).click()"
+          - else
+            = link_to "Local Savings", territory_root_path( @territory, :show_save => true )
+          %ul
+            - if @territory.deal_of_the_day_enabled
+              %li
+                = link_to "Deal of the Day", territory_rewards_path( @territory )
+            %li
+              = link_to "Local Coupons", territory_coupons_path( @territory )
+            %li
+              = link_to "Local Rewards", territory_rewards_path( @territory )
+            %li
+              = link_to "Where to Buy Rewards Cards", territory_rewards_card_resellers_path( @territory )
+
+      - else
+        %li= link_to "Local Coupons", territory_coupons_path(@territory)
+
+      %li= link_to "Local Jobs", territory_jobs_path(@territory)
+      %li
+        = link_to "Connect", "#{territory_root_path(@territory)}#connect", :class => "connect"
+        = render "common/local_links"
+
+      %li{ :style => ( "float:right" unless style_param.blank? ) }
+        = form_for business_listing_search,
+            :url => territory_search_path(@territory),
+            :html => { :class => "single_field_form",
+            :method => :post } do |f|
+          = f.text_field :name_or_long_description_or_short_description_contains, :placeholder => "Search", :type => "text"
+          %input.submit{:type => "submit", :value => "Go"}
+  - else
+    %ul
+      %li= link_to "About RelyLocal?", "/page/what-is-relylocal"
+      %li= link_to "Find a Campaign", "/page/relylocal-campaigns"
+      %li= link_to "Launch A Campaign", "/page/career-opportunities"
+      %li= link_to "Press & Media", "/page/press-and-media"
+      %li= link_to "The RelyLocal Blog", "http://www.relylocal.com/blog/", :target => "_blank"
+
+    %ul#social_networking
+      %li.google
+        :erb
+          <g:plusone href="http://www.relylocal.com" size="small"></g:plusone>
+      %li.twitter
+        %a(href="http://www.twitter.com/relylocal" target="_blank" title="Twitter") Twitter
+      %li.facebook
+        %a(href="http://www.facebook.com" target="_blank" title="Facebook") Facebook

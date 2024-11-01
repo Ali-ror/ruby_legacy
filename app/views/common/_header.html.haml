@@ -1,0 +1,20 @@
+%header
+  %h1#site-title
+    = link_to "RelyLocal", @territory ? territory_root_path(@territory.to_param) : root_path
+  %nav.top
+    = render "layouts/user_navigation"
+  %nav.bottom
+    %a#city_list(class="iframe fancy" href="#{national_path(:format => 'plain')}")
+      %ul
+        %li
+          = PrivateLabel.instance.header_name if @territory
+
+    - if @territory
+      %ul#social_networking
+        %li
+          :erb
+            <g:plusone href="<%=territory_root_url( @territory.to_param )%>" size="small"></g:plusone>
+        - @territory.links.includes(:link_type).each do |link|
+          = social_link(link)
+
+= render :partial => "common/navigation", :locals => { :style_param => "" }

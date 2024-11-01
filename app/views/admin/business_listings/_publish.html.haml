@@ -1,0 +1,12 @@
+%span(id="#{dom_id(object)}_publish")
+  - if object.published
+    Yes
+    = link_to "(Un-Publish)", polymorphic_path([:unpublish,  :admin, object.territory, object]), :class => "remote"
+  - else
+    No
+    - object.published = true
+    - if object.valid?
+      = link_to "(Publish)", polymorphic_path([:publish,  :admin, object.territory, object]), :class => "remote"
+    - else
+      (edit to finalize)
+    - object.published = false

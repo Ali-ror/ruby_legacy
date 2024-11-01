@@ -1,0 +1,18 @@
+%aside
+  .logo_vote
+    %a(href="#{territory_business_listing_path(@territory, reward.business_listing)}")
+      = image_tag reward.business_listing.logo.url(:normal)
+
+  %h2
+    %a(href="#{territory_business_listing_path(@territory, reward.business_listing)}")= reward.business_listing.name
+    = @title == "home" || @title == "Business Listings" ? display_franchise(reward.business_listing) : display_franchise_text(reward.business_listing)
+
+  - b = "<b>Reward Details:</b>"
+  - expires = reward.never_expires ? "Never" : reward.expiration_date.strftime('%m/%d/%y')
+  %p= "#{b} #{reward.description} (Expires: #{expires})".html_safe
+  
+  - if !reward.business_listing.coupons.blank?
+    %h4.coupon
+      = link_to "coupons", "#{territory_business_listing_path(@territory, reward.business_listing)}#coupons", :class => "with-icon"
+  %h4.reward
+    = link_to "rewards", "#{territory_business_listing_path(@territory, reward.business_listing)}#rewards"

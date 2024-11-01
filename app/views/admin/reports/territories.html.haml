@@ -1,0 +1,39 @@
+= link_to "<< Back to Territories", admin_territories_path
+
+%h1
+  Territory Billing Report
+
+%table{ :border => 1 }
+  %thead
+    %tr
+      %th
+        Territory Name
+      %th
+        Paid Listings
+      %th
+        Feeder Listings
+      %th
+        Non-Member Listings
+      %th
+        RelyLocal Rewards
+      %th
+        Deal of the Day
+      %th
+        CSVs
+  %tbody
+    - @territories.each do |t|
+      %tr
+        %td
+          = t.name
+        %td
+          = t.business_listings.active.paid_listings.count
+        %td
+          = t.business_listings.active.feeder_listings.count
+        %td
+          = t.business_listings.active.non_member_listings.count
+        %td
+          = "X" if t.rewards_enabled
+        %td
+          = "X" if t.deal_of_the_day_enabled
+        %td
+          = link_to "#{t.name}-paid-listing-emails.csv", paid_listing_users_admin_reports_path( :territory_id => t )

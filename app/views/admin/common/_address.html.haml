@@ -1,0 +1,8 @@
+- validate = true if validate.nil?
+
+= f.input :address1,    :required => validate
+= f.input :address2,    :required => false
+= f.input :city,        :required => validate
+= f.input :state,       :required => validate
+= f.input :zip,         :required => validate
+= f.input :country,     :as => :string

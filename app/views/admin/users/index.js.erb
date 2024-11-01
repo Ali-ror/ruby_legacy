@@ -1,0 +1,12 @@
+$("#users").html("<%=escape_javascript(render('users'))%>");
+
+function updateUserType(element){
+  var current_href = element.attr('href');
+  element.attr('href',jQuery.param.querystring(current_href,"user_type=<%=params[:user_type]||'listing_managers'%>"));
+}
+
+updateUserType($('#search-form'));
+
+$('.browse-by-name').each(function(){
+  updateUserType($(this));
+});

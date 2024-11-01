@@ -1,0 +1,28 @@
+/*@import "compass/utilities/tables";
+
+table {
+  @include outer-table-borders(1px, none);
+  @include inner-table-borders(1px, none);
+}
+
+th {
+  padding: 5px 10px 5px 10px;
+  background-color: #293845;
+  color: #F0F0F0;
+  border-bottom: 1px solid #FFF;
+}
+
+td { 
+  text-align: center;
+  padding: 5px; 
+}
+tr.odd { background-color: white; }
+td.even { background-color: grey; }
+
+table#categories td {
+  float: left;
+}
+
+table#categories td.actions {
+  float: none;
+}*/

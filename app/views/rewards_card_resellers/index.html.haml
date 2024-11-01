@@ -1,0 +1,45 @@
+%h1
+  Where to buy: Local Rewards Cards
+
+.resellers
+  %p
+    Below is a list of RelyLocal members in the
+    = @territory.name
+    area that are helping to distribute our Local Rewards cards. Use the list
+    or map to find your favorite business. Be sure to keep your eyes open for
+    special partnerships with proceeds going to support local non-profit
+    organizations. And, don't forget - Local Rewards cards are valid with
+    participating local businesses all over town!
+
+  - if @resellers.first.blank?
+    %p(style="text-align: center;font-size: 14px;")
+      %br/
+      %br/
+      %br/
+      %br/
+      %b
+        Stay tuned - we'll be adding several locations soon!
+      
+  - else
+    - @resellers.each do |rs|
+      .column
+        %ul
+          - rs.each do |r|
+            %li
+              .logo
+                = image_tag r.logo.url(:partner)#, :size => "70x36"
+              .reseller_details
+                .name
+                  = link_to r.name, territory_business_listing_path( @territory, r )
+                = r.address.address1
+                - if r.address.address2
+                  %br/
+                  = r.address.address2
+                = "#{r.address.city}, #{r.address.state}, #{r.address.zip}"
+                %br/
+                = r.phone
+
+    #map(style="width:616px;height:400px;clear: both;margin: 12px 0;")
+
+    - content_for :javascript do
+      = render :partial => "rewards_card_resellers/resellers_map"

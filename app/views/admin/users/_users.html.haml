@@ -1,0 +1,47 @@
+.pagination.remote
+  Page
+  = will_paginate( @users ) || link_to( "1", "##" )
+
+%table.index-table
+  %thead
+    %tr
+      %th.first
+        Email
+      %th
+        Full Name
+      - if current_user.global_admin?
+        %th
+          Local Admin in Territories
+        %th
+          Global Admin
+      %th.last
+        Actions
+      -#%th.last
+        Select
+  %tbody
+    - @users.each do |user|
+      %tr{ :class => "#{cycle 'odd', 'even'}" }
+        %td.first
+          = user.email
+        %td
+          = user.to_label
+          
+        - if current_user.global_admin?
+          %td
+            - user.local_admins.each do |ter|
+              = ter.description
+              %br/
+          %td
+            = user.is_global_admin?
+        %td.last
+          %ul.actions
+            %li
+              = link_to "Edit", edit_polymorphic_path([:admin, @territory, user])
+            %li
+              = link_to "Delete", polymorphic_path([:admin, @territory, user]), :confirm => "Are you sure you want to delete this User?", :method => :delete if current_user.global_admin?
+        -#%td.last
+          = check_box_tag dom_id( user )
+
+.pagination.remote
+  Page
+  = will_paginate( @users ) || link_to( "1", "##" )

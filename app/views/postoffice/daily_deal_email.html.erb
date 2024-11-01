@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="imagetoolbar" content="no">
+  <title>RelyLocal Deal of the Day</title>
+</head>
+<body leftmargin="0" rightmargin="0" bottommargin="0" topmargin="0" marginheight="0" marginwidth="0" bgcolor="#FFFFFF">
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
+<div align="center">
+
+  <table border="0" cellspacing="0" cellpadding="5" bgcolor="#d7d4cf">
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="20" bgcolor="#b6ad9c">
+          <tr>
+            <td>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan=3>
+                    <!-- Header -->
+                    <table width="700" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td>
+                          <a href="<%= territory_rewards_path(@deal.business_listing.territory, :only_path => false) %>">
+                            <img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/logo.gif" width=145 height=119 border=0 alt="RelyLocal">
+                          </a>
+                        </td>
+                        <td background="http://<%= Postoffice.default_url_options[:host] %>/images/email/header_bg.gif" height=119>
+                          <table width="555" border="0" cellspacing="0" cellpadding="0" height="119">
+                            <tr>
+                              <td align="left" style="color:#ffffff; font-family: arial, helvetica; font-size: 12px">
+                                <span style="font-size: 20px"><b>The Deal of the Day</b></span><br>
+                                <%= @deal.business_listing.territory.name %>
+                              </td>
+                              <td align="right" style="color:#ffffff; font-family: arial, helvetica; font-size: 12px">
+                                <span style="font-size: 10px;">Today's deal for:</span><br>
+                                <%= Date.today.strftime("%B %d, %Y") %>
+                              </td>
+                              <td>
+                                <img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/space.gif" width=10 height=1 border=0 alt="">
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <!-- Main Content -->
+                  <td valign="top" width="489">
+                    <table width="0" cellspacing="0" cellpadding="20" bgcolor="#ffffff">
+                      <tr>
+                        <td style="font-family:arial, helvetica; font-size: 12px; color:#666666">
+												<span style="font-size: 18px;">
+                          <b>
+                            <a href="<%= territory_business_listing_path(@deal.business_listing.territory, @deal.business_listing, :only_path => false) %>" style="color:#931c00" target="_blank">
+                              <%= @deal.title %>
+                            </a>
+                          </b>
+                        </span>
+
+                          <p>
+                            <a href="<%= territory_business_listing_path(@deal.business_listing.territory, @deal.business_listing, :only_path => false) %>">
+                              <img src="http://<%= Postoffice.default_url_options[:host] + @deal.deal_image.url(:large) %>" width=440 height=145 border=1 alt="<%= @deal.title %>">
+                            </a>
+                          </p>
+
+                          <p><b><span style="color:#000000">Details:</span></b><br>
+                            <%= @deal.description %>
+                          </p>
+
+                          <p><b><span style="color:#000000">Restrictions:</span></b><br>
+                            <%= @deal.restrictions %>
+                          </p>
+
+                          <div align="right" style="font-size: 11px">
+                            Expires:
+                            <%= @deal.expiration_date.strftime("%B %d, %Y") %>
+                          </div>
+
+                          <img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/grey_line.gif" width=440 height=4 border=0 alt="">
+
+                          <br><br>
+                          This Deal of the Day is brought to you by:<br><br>
+                          <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td width="240" align="center">
+                                <a href="<%= territory_business_listing_path(@deal.business_listing.territory, @deal.business_listing, :only_path => false) %>"><img src="http://<%= Postoffice.default_url_options[:host] + @deal.business_listing.logo.url %>" width=174 height=68 border=0 alt="<%= @deal.business_listing.name %>"></a>
+                              </td>
+                              <td style="font-family:arial, helvetica; font-size: 12px; color:#666666">
+                                <a href="<%= territory_business_listing_path(@deal.business_listing.territory, @deal.business_listing, :only_path => false) %>" style="color:#931c00" target="_blank">
+                                  <%= @deal.business_listing.name %>
+                                </a><br>
+                                <%= @deal.business_listing.address.address1 %> <%= @deal.business_listing.address.address2 unless @deal.business_listing.address.address2.blank? %>
+                                <br>
+                                <%= @deal.business_listing.address.city %> <%= @deal.business_listing.address.state %> <%= @deal.business_listing.address.zip %>
+                                <br>
+                                <%= @deal.business_listing.phone %>
+                                <br>
+                                <% web = @deal.business_listing.links.by_type("Website") %>
+                                <% unless web.blank? %>
+                                  <a href="<%= web.url %>" style="color:#931c00" target="_blank"><%= web.url %></a>
+                                <% end %>
+                              </td>
+                            </tr>
+                          </table>
+                          <p>
+                            <b><span style="color:#000000">About This business:</span></b><br>
+                            <%= @deal.business_listing.short_description %>
+                          </p>
+
+                          <div align="right">
+                            <a href="#" target="_blank"><img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/more_white.gif" width=57 height=22 border=0 alt="More"></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td valign="top" bgcolor="#ffffff">
+                    <img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/faded_line.gif" width=1 height=468 border=0 alt="">
+                  </td>
+                  <!-- Right Column -->
+                  <td valign="top" bgcolor="#f2f2f1" width="210">
+                    <table border="0" cellspacing="0" cellpadding="20">
+                      <tr>
+                        <td style="font-family: arial, helvetica; font-size: 12px; color: #666666">
+                          <b><span style="color:#000000">TO REDEEM:</span></b><br>
+                          This email is not the actual voucher. To redeem, please follow these
+                          simple steps:
+
+                          <br><br><img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/step1.gif" width=166 height=15 border=0 alt="Step 1"><br>
+                          <a href="<%= new_user_session_path(:only_path => false) %>" style="color:#931c00" target="_blank">Login</a>
+                          or
+                          <a href="<%= new_user_registration_path(:only_path => false) %>" style="color:#931c00" target="_blank">Register</a>
+                          (Free)
+
+                          <br><br><img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/step2.gif" width=166 height=15 border=0 alt="Step 2"><br>
+                          Print the
+                          <a href="<%= territory_reward_path(@deal.business_listing.territory, @deal, :only_path => false) %>" style="color:#931c00" target="_blank">official
+                            Deal of the Day voucher</a> (available today only)
+
+                          <br><br><img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/step3.gif" width=166 height=15 border=0 alt="Step 3"><br>
+                          Present the printed voucher along with your
+                          valid <!--a href="#" style="color:#931c00" target="_blank"-->Local
+                          Rewards Card<!--/a--> to merchant prior to the expiration date.
+
+                          <br><br>
+                          <hr size=1>
+
+                          <p><b><span style="color:#000000">MORE LOCAL REWARDS:</span></b></p>
+
+                          <% @rewards.each do |r| %>
+                            <p>
+                              <a href="<%= territory_business_listing_path(r.business_listing.territory, r.business_listing, :only_path => false) %>" style="color:#931c00" target="_blank"><%= r.description %>
+                                from <%= r.business_listing.name %></p>
+                          <% end %>
+
+                          <div align="right">
+                            <a href="#" target="_blank"><img src="http://<%= Postoffice.default_url_options[:host] %>/images/email/more_grey.gif" width=57 height=22 border=0 alt="More"></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+<span style="font-family: arial, helvetica; font-size: 12px; color: #000000">
+  <b>Remember: This deal is only active today! Be sure to
+    <a href="<%= new_user_session_path(:only_path => false) %>" style="color:#931c00" target="_blank">log in</a> and
+    print your voucher before it is too late!</b>
+  <hr width="70%" size="1">
+  <span style="font-size: 11px">
+    You are receiving this email because you signed up for RelyLocal's Deal Of The Day alerts for <%= @deal.business_listing.territory.name %>
+    . <br>
+    If you prefer not to receive the Deal Of The Day email, you can always <a href="<%= edit_registration_path(@ut.user, :only_path => false) %>" style="color:#931c00" target="_blank">unsubscribe
+    here</a><br><br>
+
+    Email delivered by <a href="<%= Postoffice.default_url_options[:host] %>" style="color:#931c00" target="_blank">RelyLocal</a> | 1451 NW Spruce Ct | Redmond, OR 97756
+  </span>
+  <br/>
+  <% @deal.business_listing.territory.links.includes(:link_type).each do |link| %>
+    <%= social_icon(link) %>
+  <% end %>
+</span>
+</div>
+</body>
+</html>

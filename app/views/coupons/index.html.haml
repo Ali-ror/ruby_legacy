@@ -1,0 +1,19 @@
+.custom-content
+  %h1
+    = "Local Coupons in #{@territory.name}"
+
+= render :partial => "common/category_drill_down", :locals => { :context => :coupons }
+
+.single_business{ :style => "padding: 0 10px 10px 10px;" }
+  %section#coupons
+    - unless @coupons.blank?
+      = render :partial => "coupons/coupon", :collection => @coupons, :as => :coupon
+    - else
+      %p No coupons available yet.  
+        
+  .large_list
+    %footer
+      = will_paginate(@business_listings, :renderer => WillPaginate::ViewHelpers::CustomLinkRenderer)
+
+- content_for :javascript do
+  = render "common/share_this"

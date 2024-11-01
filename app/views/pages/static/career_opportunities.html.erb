@@ -1,0 +1,5 @@
+<div class="custom-content">
+  <% url = "http://www.relylocal.com/career_opportunities.php" %>
+  <% url += "?" + request.query_string  unless request.query_string.blank? %>
+  <iframe class="resizable" src="<%= url %>" width="630px" height= "1500px" scrolling="yes"></iframe>
+</div>

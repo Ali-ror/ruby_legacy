@@ -1,0 +1,30 @@
+<script type='text/javascript'>
+  //<![CDATA[
+  $("#state").change(function(){
+    if($("#state").val() != "") {
+      $.ajax({
+        url: "/states/"+ $("#state").val() + "/cities.js?rewards=<%= rewards %>",
+        method: "GET",
+        context: document.body, 
+        success: function(data){
+          if(data.length == 1) {
+            $('#city').html('<option selected></option>');
+          } else {
+            $('#city').html(data);
+          }
+        }
+      });
+    } else {
+      $('#city').html('<option selected>- Select a city -</option>');
+    }
+  });
+
+  function gotoURL() {
+    <% if rewards %>
+      window.parent.location.href = '/' + $('#city').val() + "/rewards";
+    <% else %>
+      window.parent.location.href = '/' + $('#city').val();
+    <% end %>
+  }
+  //]]>
+</script>

@@ -1,0 +1,54 @@
+.index-page
+  .title
+    %h1
+      Banner Manager
+    .tip
+      %p
+        You can easily manage your banner ads here.
+
+      There are 2 banner sizes - wide (300x140) and square (140x140). You may add up to 20 wide
+      banners, and up to 40 square banners (60 total). Once you upload custom/local banners, the
+      default placeholders will automatically disappear.
+
+  - if !available_banners.empty?
+    .link-bar
+      %ul
+        %li
+          = link_to "Add Banner", new_admin_territory_banner_path( @territory ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @banners ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Banner
+        %th
+          Status
+        %th
+          Size
+        %th
+          Link
+        %th.last
+          Actions
+    %tbody
+      - @banners.each do |b|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            %a.image(href="#{b.banner_image_url}")= image_tag( b.banner.url(:thumb) ) unless b.banner.url.nil?
+          %td
+            =  b.active ? "Active" : "Inactive"
+          %td
+            =  b.size
+          %td
+            =  b.link
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_banner_path( @territory, b )
+              %li= link_to "Delete", admin_territory_banner_path( @territory, b ), :confirm => 'Are you sure you wish to delete this Banner?', :method => :delete
+
+  .pagination
+    Page
+    = will_paginate( @banners ) || link_to( "1", "##" )

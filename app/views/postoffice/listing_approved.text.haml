@@ -1,0 +1,8 @@
+Hello #{@business_listing.user.to_label},
+
+We are pleased to let you know that your business listing named #{@business_listing.name} has been published by the RelyLocal Team.
+
+You can find your listing at: #{territory_business_listing_url(@business_listing.territory, @business_listing)}.
+
+Sincerely,
+The RelyLocal Team

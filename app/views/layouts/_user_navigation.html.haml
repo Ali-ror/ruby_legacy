@@ -1,0 +1,48 @@
+#user-panel
+  - if current_user
+    %ul
+      %li
+        = "Welcome, #{current_user.email}"
+      %li
+        = link_to "My Account", edit_registration_path(current_user)
+      %li
+        = admin_link_helper if current_user.is_admin?
+      -#%li= link_to "My Listings", admin_business_listings_path if current_user.is_listing_manager? && !current_user.is_admin?
+      %li
+        = link_to "Logout", destroy_user_session_path
+
+  - else
+    = form_for :user, :url => user_session_path, :html => { :id => "login-panel" } do |f|
+      %ul
+        %li
+          = hinted_text_field_tag "user[email]", nil, "email", { :size => 22 }
+        %li
+          = hinted_password_field_tag "user[password]", nil, "password", { :size => 22 }
+        %li
+          = f.submit "Login"
+        %li
+          = link_to "Sign Up", new_user_registration_path
+        %li
+          = link_to "Forgot Password?", new_user_password_path
+
+:javascript
+  function show_password_field() {
+    var pf = $( "#login_password_field" );
+    var tf = $( "#login_password_text_field" );
+
+    pf.clonePosition( tf, { setHeight: false, setWidth: false } );
+    tf.hide();
+    pf.show();
+    pf.focus();
+  }
+
+  function hide_password_field() {
+    var pf = $( "#login_password_field" );
+    var tf = $( "#login_password_text_field" );
+
+    if ( pf.val() == "" ) {
+      tf.clonePosition( pf, { setHeight: false, setWidth: false } );
+      pf.hide();
+      tf.show();
+    }
+  }

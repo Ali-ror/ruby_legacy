@@ -1,0 +1,37 @@
+- no_actions ||= false
+
+%figure.coupon(id="daily_deal#{daily_deal.id}" style="margin-bottom: 12px")
+  %h6.provided_by== Provided by #{daily_deal.business_listing.name}
+  %a(href="#{territory_business_listing_path(@territory, daily_deal.business_listing)}#daily_deal#{daily_deal.id}")
+    - if !daily_deal.deal_image.blank?
+      = image_tag daily_deal.deal_image.url(:large)
+    - elsif @business_listing
+      = image_tag(@business_listing.logo.url(:normal), :style => "width:140px; margin-left:150px")
+    - else
+      = daily_deal.title
+  .caption.daily_deal
+    %h3= daily_deal.title
+    %p
+      = daily_deal.description
+      - if !daily_deal.restrictions.blank?
+        %br
+        %small.restrictions
+          :erb
+            ( <%= daily_deal.restrictions %> )
+
+    %footer
+      %h5.expiration== Expiration #{daily_deal.expiration_date.strftime("%m/%d/%Y") if daily_deal.expiration_date}
+      - if current_user && !current_user.full_name.blank?
+        - if current_user
+          %h5.redeemed== Redeemed by #{current_user.full_name}
+
+- unless no_actions
+  %aside.actions
+    %ul
+      - if current_user
+        %li.print
+          = link_to "PrintThis", territory_reward_path(@territory, daily_deal), :target => "_blank"
+      - else
+        = link_to "Login to Print", new_session_path(User), :class => "login-to-print"
+      %li.share
+        %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_business_listing_url(@territory, daily_deal.business_listing)}#daily_deal#{daily_deal.id}") ShareThis

@@ -1,0 +1,21 @@
+- if @territory
+  - cache("#{@territory.id}_popular_categories") do
+    - categories_groups =  popular_categories_for(@territory)
+    
+    - unless categories_groups[0].blank?
+      %aside.categories
+        %h2
+          %a{:href => "##"} Popular Categories
+          = link_to territory_categories_path(@territory) do
+            %span{ :style => "font-size: 12px;" }
+              view all
+
+        - if categories_groups
+          - categories_groups.each do |group|
+            %ul
+              - group.each do |cat|
+                %li
+                  = link_to( "#{simple_full_category_name(cat)}".html_safe, territory_category_path(@territory, :categories => cat.slugger) ) if cat
+          %footer
+            / %h4
+            /   = link_to "View All", territory_categories_path(@territory)

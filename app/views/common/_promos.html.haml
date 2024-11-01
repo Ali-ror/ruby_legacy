@@ -1,0 +1,139 @@
+-# if @territory
+  - @owner = @territory.business_listings.paid_active.featured_owner.sample
+  -# if @business_listing && controller.controller_name == "business_listings" && @business_listing.show_default_banners_only
+    - @wide_ad    = nil
+    - @narrow_ads = []
+  -# else
+    - @wide_ad    = @territory.banners.active.wide.sample
+    - @narrow_ads = @territory.banners.active.narrow.random.limit(2)
+- get_banners
+
+%section.promo
+  - if @territory && @owner && controller.controller_name != "BusinessListing" && controller.action_name != "show"
+    %figure
+      .meet_owner{ :onclick => "window.location = '#{territory_business_listing_path( @territory, @owner )}#media'" }
+        .title
+          Meet a Local Leader
+        .left
+          - if @owner.owner_photo.url( :normal ).nil?
+            &nbsp;
+          - else
+            = image_tag @owner.owner_photo.url(:normal)
+        .right
+          .name
+            = @owner.owner_name
+          .business_name
+            = @owner.name
+          .bio
+          .custom-content
+            = truncate_html( @owner.owner_bio.html_safe, :length => 140, :omission => '... (more)' )
+
+  %figure
+    - if @territory && @territory.deal_of_the_day_enabled
+      - daily_deal = @territory.daily_deals.for_day( Date.today ).first
+      .rewards
+        .daily_deal_page
+          - url =  territory_rewards_path( @territory )
+          %a(href="#{url}")
+            - if daily_deal.nil?
+              = image_tag "deal_of_the_day_default.jpg"
+            - elsif !daily_deal.deal_image.blank?
+              = image_tag daily_deal.deal_image.url(:medium)
+            - elsif daily_deal.business_listing
+              = image_tag(daily_deal.business_listing.logo.url(:normal), :style => "width:140px; margin-left:150px")
+            - else
+              = daily_deal.title
+          - if daily_deal
+            .caption.daily_deal
+              %h3= daily_deal.title
+              For the full details, visit
+              = link_to daily_deal.business_listing.name, url
+              to print the official Deal of the Day voucher.
+          - else
+            .caption.daily_deal
+              %h3 Subscribe Today For Upcoming Deals!
+              No deal today, but more coming soon! Don't miss out! Subscribe today for FREE!
+
+    -# if !@wide_ad.nil?
+      %a(href="#{@wide_ad.link}" target="_blank")
+        = image_tag(@wide_ad.banner_image_url)
+    -# elsif @territory
+      = link_to territory_events_path(@territory) do
+        = image_tag "300x140_default.jpg"
+    -# else
+      = link_to "/page/career_opportunities" do
+        = image_tag "national_300x140.jpg"
+
+  %figure.wide_ad
+    %a( href="#{@top_wide[:link]}" target="#{@top_wide[:target]}" )
+      = image_tag( @top_wide[:banner] )
+
+  %figure.narrow_ad(class="#{cycle('left','right')}")
+    %a( href="#{@top_left[:link]}" target="#{@top_left[:target]}" )
+      = image_tag( @top_left[:banner] )
+
+  %figure.narrow_ad(class="#{cycle('left','right')}")
+    %a( href="#{@top_right[:link]}" target="#{@top_right[:target]}" )
+      = image_tag( @top_right[:banner] )
+
+  - if @territory # only show bottom ads if not national
+    %figure.narrow_ad(class="#{cycle('left','right')}")
+      %a( href="#{@bottom_left[:link]}" target="#{@bottom_left[:target]}" )
+        = image_tag( @bottom_left[:banner] )
+
+    %figure.narrow_ad(class="#{cycle('left','right')}")
+      %a( href="#{@bottom_right[:link]}" target="#{@bottom_right[:target]}" )
+        = image_tag( @bottom_right[:banner] )
+
+    %figure.wide_ad
+      %a( href="#{@bottom_wide[:link]}" target="#{@bottom_wide[:target]}" )
+        = image_tag( @bottom_wide[:banner] )
+
+
+  -# if !@narrow_ads.blank?
+    - 2.times do |i|
+      %figure.narrow_ad(class="#{cycle('left','right')}")
+        - if @narrow_ads[i]
+          %a(href="#{@narrow_ads[i].link}" target="_blank")
+            = image_tag(@narrow_ads[i].banner_image_url)
+        - else
+          - if i == 0
+            = link_to image_tag( "occupy_banner.jpg" ), territory_impact_of_local_spending_path( @territory )
+          - else
+            = link_to territory_jobs_path(@territory) do
+              = image_tag "140x140_default_2.jpg"
+
+  -# elsif @territory
+    %figure.narrow_ad(class="left")
+      = link_to image_tag( "occupy_banner.jpg" ), territory_impact_of_local_spending_path( @territory )
+    %figure.narrow_ad(class="right")
+      = link_to territory_jobs_path(@territory) do
+        = image_tag "140x140_default_2.jpg"
+
+  -# else
+    %figure.narrow_ad(class="left")
+      = link_to "http://www.youtube.com/RelyLocal#p/a/f/0/bXU249fBdoY" do
+        = image_tag "national_140x140a.jpg"
+    %figure.narrow_ad(class="right")
+      = link_to image_tag( "occupy_banner.jpg" ), occupy_main_street_path
+
+
+  %p.readmore
+    %a(href="#{@territory.blank? ? '/page/advertise-with-us' : territory_advertise_with_us_path(@territory) }") Advertise Here
+    %br/
+    %br/
+
+
+  %figure.mobile_ad.left
+    = link_to "https://play.google.com/store/apps/details?id=com.RelyLocal" do
+      = image_tag "relylocal_android.png"
+  %figure.mobile_ad.right
+    = link_to "http://itunes.apple.com/us/app/relylocal-mobile/id505228868" do
+      = image_tag "relylocal_iphone.png"
+
+  %p.switchmobile
+    %a(href="http://m.relylocal.com") Switch to Mobile Site
+    %br/
+    %br/
+
+  / end lower_content promo class

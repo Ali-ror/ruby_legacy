@@ -1,0 +1,30 @@
+RelyLocal's Deal Of The Day for <%= @ut.territory.name %>
+Today's Deal for <%= Date.today.strftime( "%B %d, %Y" )>%>
+
+<%= @deal.business_listing.name %> is offering this exclusive deal (today only):
+The Deal: <%= @deal.title%>
+Details: <%= @deal.description%>
+Restrictions: <%= @deal.restrictions%>
+Expiration Date: This voucher can only be accessed today, but must be redeemed by <%= @deal.expiration_date.strftime( "%m/%d/%Y" )%>
+
+Today's Deal Of The Day Is Brought To You By: <%= @deal.business_listing.name %>
+
+(xxx) xxx-xxxx | http://www.their_url.com
+Info: (Short_description from listing detail) <link_to_listing> (more info...)</link_to_listing>
+
+To Redeem the Deal Of The Day:
+1. Visit http://www.relylocal.com/(territory)/rewards
+2. Login or Register (Free)
+3. Print the official Deal of the Day voucher (available today only)
+4. Present the printed voucher along with your valid <link_to_rewards>Local Rewards Card</link> to merchant prior to the expiration date.
+
+You are receiving this email because you signed up for RelyLocal's Deal Of The Day alerts for (territory_name). If you prefer not to receive the Deal Of The Day email, you can always <link>unsubscribe here</link>
+Email delivered by RelyLocal | 1451 NW Spruce Ct | Redmond, OR 97756
+
+
+
+<%= @deal.description%>
+<%= @deal.title%>
+<%= @deal.expiration_date%>
+<%= @deal.restrictions%>
+<%= @ut.territory.name %>

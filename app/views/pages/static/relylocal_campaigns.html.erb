@@ -1,0 +1,14 @@
+<% @title = "full" %>
+<div class="custom-content">
+  <h1>Find a Campaign</h1>
+  <% City.with_territory.all.group_by { |c| c.state }.sort.each do |state, cities| %>
+    <h2><%= state %></h2>
+    <ul>
+      <% for city in cities.sort_by { |c| c.city } %>
+        <li>
+          <%= link_to city.city, territory_root_path(city.territory), :target => "_parent" %>
+        </li>
+      <% end %>
+    </ul> 
+  <% end %>
+</div>

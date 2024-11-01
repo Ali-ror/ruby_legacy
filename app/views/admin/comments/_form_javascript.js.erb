@@ -1,0 +1,10 @@
+<script type="text/javascript">
+
+// Use Standard Autocomplete
+$('#comment_user_proxy').initAutoComplete({
+  target_field:"#comment_user_id", 
+  url: '<%= polymorphic_path([:admin, @territory, User], :format => "json") %>', 
+  target_field_value: 'id'
+});
+
+</script>

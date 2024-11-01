@@ -1,0 +1,43 @@
+.index-page
+  .title
+    %h1
+      Manage Deal of the Day
+    %h2
+      = @territory.description
+    .tip
+      - if !@territory.deal_of_the_day_enabled
+        %p
+          %b
+            Add-On Module:
+          The Deal Of The Day program is an optional add-on module for the Local Rewards, separate from your standard
+          licensing agreement. If you would like to review the agreement addendum to add Deal Of The Day to your territory,
+          please email the
+          = mail_to "admin@relylocal.com", "Admin Team"
+          for assistance. In the meantime, you can pre-load Deals of The Day into your site, as you'd like. However - they
+          will not be visible to the public until you have chosen to activate the add-on module.
+
+      %p
+        %b
+          Adding a Deal Of The Day:
+        Please be careful to completely/accurately describe the Deal Of The Day being offered by your client. To avoid
+        confusion between your clients and their customers, please provide as many details as possible.
+
+      %p
+        %b
+          Automated Emails:
+        These deals will automatically be emailed to opt-in subscribers at about midnight each day
+        = link_to "example email.", image_path( "deal_of_the_day_template.jpg"), :class => "fancybox"
+        %i
+          (As a result, please be very careful about adding any "test" deals if you don't want your subscribers to see
+          them.)
+
+  = generate_calendar
+
+:javascript
+  $( function() {
+    $( '.monthName' ).html( "#{Date::MONTHNAMES[@date.month]} #{@date.strftime('%Y')}" );
+    $( '.day' ).addClass( 'unused' );
+    $( '.day .deal .listing_name' ).closest( '.day' ).removeClass( 'unused' ).addClass( 'used' );
+    $( 'a.fancybox' ).fancybox();
+  });
+

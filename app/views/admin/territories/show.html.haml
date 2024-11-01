@@ -1,0 +1,239 @@
+.title
+  %h1
+    Territory Statistics and Summary
+  %h2
+    = @territory.description
+  .tip
+    %p
+      Below are statistics of your territory, including users, business listings,
+      pictures, and comments. Click on an item to be taken to a filtered
+      view that that information.
+    %p
+      For more details web analysis, please set up an account with Google Analytics (or similar system) and paste the tracking code into the Tacking Code field on your Modify Territory Info admin page.
+
+
+.section
+  .column
+    %table.summary
+      %thead
+        %tr
+          %th
+            Listing Info
+          %th
+      %tbody
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory )}'" }
+          %td.first
+            Total Listings:
+          %td
+            = @territory.business_listings.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :active )}'" }
+          %td.first
+            Total Active Listings:
+          %td
+            = @territory.business_listings.active.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :expired )}'" }
+          %td.first
+            Total Expired Listings:
+          %td
+            = @territory.business_listings.expired.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :non_member_listings )}'" }
+          %td.first
+            Non-Member Total:
+          %td
+            = @territory.business_listings.non_member_listings.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :non_member_listings, :filter3 => :active )}'" }
+          %td.first
+            Non-Member Active:
+          %td
+            = @territory.business_listings.non_member_listings.active.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :non_member_listings, :filter3 => :expired )}'" }
+          %td.first
+            Non-Member Expired:
+          %td
+            = @territory.business_listings.non_member_listings.expired.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :feeder_listings )}'" }
+          %td.first
+            Feeder Total:
+          %td
+            = @territory.business_listings.feeder_listings.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :feeder_listings, :filter3 => :active )}'" }
+          %td.first
+            Feeder Active:
+          %td
+            = @territory.business_listings.feeder_listings.active.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :feeder_listings, :filter3 => :expired )}'" }
+          %td.first
+            Feeder Expired:
+          %td
+            = @territory.business_listings.feeder_listings.expired.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :paid_listings )}'" }
+          %td.first
+            Paid Total:
+          %td
+            = @territory.business_listings.paid_listings.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :paid_listings, :filter3 => :active )}'" }
+          %td.first
+            Paid Active:
+          %td
+            = @territory.business_listings.paid_listings.active.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :paid_listings, :filter3 => :expired )}'" }
+          %td.first
+            Paid Expired:
+          %td
+            = @territory.business_listings.paid_listings.expired.count
+        -#%tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :pending )}'" }
+          %td.first
+            Pending Listings:
+          %td
+            = @territory.business_listings.pending.count
+        -#%tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :rejected )}'" }
+          %td.first
+            Rejected Listings:
+          %td
+            = @territory.business_listings.rejected.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :published => :false )}'" }
+          %td.first
+            Unpublished Listings:
+          %td
+            = @territory.business_listings.unpublished.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :expiring_in_30_days )}'" }
+          %td.first
+            Listings Expiring
+            %br/
+            within 30 days:
+          %td
+            = @territory.business_listings.expiring_in_30_days.count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :coupons_expiring_in_30_days )}'" }
+          %td.first
+            Coupons Expiring
+            %br/
+            within 30 days:
+          %td
+            = get_expiring_coupon_count
+        %tr{ :onclick => "window.location='#{admin_territory_business_listings_path( @territory, :filter2 => :rewards_expiring_in_30_days )}'" }
+          %td.first
+            Rewards Expiring
+            %br/
+            within 30 days:
+          %td
+            = get_expiring_rewards_count
+
+  .column
+    - picture_summary = get_summary_count( :pictures )
+    %table.summary
+      %thead
+        %tr
+          %th
+            Picture Info
+          %th
+      %tbody
+        %tr{ :onclick => "window.location='#{admin_territory_pictures_path( @territory )}'" }
+          %td.first
+            Total Pictures:
+          %td
+            = picture_summary[0]
+        %tr{ :onclick => "window.location='#{admin_territory_pictures_path( @territory, :filter => :active )}'" }
+          %td.first
+            Active Pictures:
+          %td
+            = picture_summary[1]
+        %tr{ :onclick => "window.location='#{admin_territory_pictures_path( @territory, :filter => :rejected )}'" }
+          %td.first
+            Rejected Pictures:
+          %td
+            = picture_summary[2]
+        %tr{ :onclick => "window.location='#{admin_territory_pictures_path( @territory, :filter => :pending )}'" }
+          %td.first
+            Pending Pictures:
+          %td
+            = picture_summary[3]
+  .column
+    - comment_summary = get_summary_count( :comments )
+    %table.summary
+      %thead
+        %tr
+          %th
+            Comments Info
+          %th
+      %tbody
+        %tr{ :onclick => "window.location='#{admin_territory_comments_path( @territory )}'" }
+          %td.first
+            Total Comments:
+          %td
+            = comment_summary[0]
+        %tr{ :onclick => "window.location='#{admin_territory_comments_path( @territory, :filter => :active )}'" }
+          %td.first
+            Active Comments:
+          %td
+            = comment_summary[1]
+        %tr{ :onclick => "window.location='#{admin_territory_comments_path( @territory, :filter => :rejected )}'" }
+          %td.first
+            Rejected Comments:
+          %td
+            = comment_summary[2]
+        %tr{ :onclick => "window.location='#{admin_territory_comments_path( @territory, :filter => :pending )}'" }
+          %td.first
+            Pending Comments:
+          %td
+            = comment_summary[3]
+  .column
+    %table.summary
+      %thead
+        %tr
+          %th
+            User Info
+          %th
+      %tbody
+        %tr{ :onclick => "window.location='#{admin_territory_users_path( @territory )}'" }
+          %td.first
+            Total Users:
+          %td
+            = @territory.users.count
+        %tr.no_link
+          %td.first
+            Total Territory Admins:
+          %td
+            = @territory.local_admins.count
+        %tr.no_link
+          %td.first
+            Total Business Members:
+          %td
+            = @territory.business_listings.includes( :user ).collect(&:user).uniq.length
+
+.section
+  .column
+    %table.summary
+      %thead
+        %tr
+          %th
+            Email Subscribers
+          %th
+      %tbody
+        %tr.no_link
+          %td.first
+            Active Paid Business Members:
+          %td
+            = @territory.business_listings.paid_active.collect { |bl| bl.user }.reject { |u| u.nil? }.uniq.length
+        %tr.no_link
+          %td.first
+            Public Email List:
+          %td
+            Coming Soon!
+        %tr.no_link
+          %td.first
+            Deal of the Day:
+          %td
+            = @territory.user_territories.select { |ut| ut.subscribe_daily_deal_email }.length
+
+.title
+  .tip
+    %b
+      Note:
+    There are no royalty charges on expired listings nor are there royalty
+    charges for Non-Member Listings
+
+- if current_user.is_global_admin?
+  .section.reset_links
+    = link_to "Reset All Default Texts", reset_default_text_admin_territory_path( @territory ),
+      :remote => true,
+      :confirm => "Are you sure you want to reset the default text for #{@territory.name}?"

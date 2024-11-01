@@ -1,0 +1,37 @@
+= simple_form_for [ :admin, @territory, @header ], :html => { :multipart => true } do |f|
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Header
+      - else
+        Edit Header
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        header.
+
+      %p
+        You may upload up to 5 custom header images that will automatically rotate for your users. Header images should be a 1,000 x 180 pixel JPG or PNG (whichever produces smallest file size while retaining the clarity) with no text layers. The site will automatically add the logo, territory name, and shadows to your image.
+        %i
+          (Please Note: A bad header can really damage your site's credibility, so please try to use the best local photography you can find (Maybe barter with a local photographer - use their images in exchange for a credit link in your footer.)
+
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :territory_id
+
+  .fieldset
+    - if !f.object.new_record? && !f.object.header.url.nil?
+      = image_tag f.object.header.url(:small)
+    = f.input :header, :as => :file, :label => "Upload Header Image", :hint => "Upload a 1,000 x 180 pixel jpg, or png."
+    = f.input :credit, :hint => "Please give proper credit to the photographer or artist using the following format: <a href='insert_link_here'>Insert Name</a>"
+    = f.input :link, :hint => "Please use the full URL path to the site; http://..."
+  .submit
+    .buttons
+      = f.submit submit_label( f )

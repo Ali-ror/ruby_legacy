@@ -1,0 +1,34 @@
+= simple_form_for [ :admin, @territory, @business_listing, @picture ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Picture
+      - else
+        Edit Picture
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        coupon.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+    = f.hidden_field :business_listing_id
+
+  .fieldset
+    %h3 Picture Information
+    = f.input :caption
+    - if !f.object.new_record? && !f.object.picture.url.nil?
+      = image_tag f.object.picture.url(:thumb)
+    = f.input :state, :collection => [ BusinessListing::PENDING, BusinessListing::APPROVED, BusinessListing::REJECTED ]
+    = f.input :picture, :as => :file
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+

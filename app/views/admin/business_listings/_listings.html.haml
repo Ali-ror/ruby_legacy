@@ -1,0 +1,121 @@
+.pagination
+  Page
+  = will_paginate( @business_listings ) || link_to( "1", "##" )
+
+%table.index-table
+  %thead
+    %tr
+      %th.first
+        Logo
+      %th
+        Details
+      %th
+        Other Info
+      %th.last
+        Actions
+  %tbody
+    - @business_listings.each do |bl|
+      - terr = @territory || bl.territory
+      %tr{ :class => "#{cycle 'odd', 'even'}" }
+        %td.first
+          = link_to edit_admin_territory_business_listing_path( terr, bl ) do
+            = image_tag( bl.logo.url(:normal) ) unless bl.logo.url.nil?
+        %td
+          %table.inner
+            %tbody
+              %tr
+                %td.name(colspan=2)
+                  = link_to bl.name, edit_admin_territory_business_listing_path( terr, bl )
+
+              %tr
+                %td.label
+                  Owner
+                %td.value
+                  = bl.listing_member ? bl.listing_member.to_label : "(listing member no longer exists... needs to be fixed)"
+              %tr
+                %td.label
+                  Expires
+                %td.value
+                  = bl.expires
+              %tr
+                %td.label
+                  Package
+                %td.value
+                  = bl.package_type
+              %tr
+                %td.label
+                  Business Tier
+                %td.value
+                  = bl.business_tier
+              %tr
+                %td.label
+                  Featured
+                %td.value
+                  = bl.featured_text
+              %tr
+                %td.label
+                  Published?
+                %td.value
+                  - if current_user.is_admin?
+                    .moderate
+                      = render "publish", :object => bl
+                  - else
+                    = bl.published?
+        %td
+          %table.inner
+            %tbody
+              %tr
+                %td.label
+                  Pictures
+                %td.value
+                  = bl.pictures.count
+              %tr
+                %td.label
+                  Comments
+                %td.value
+                  = bl.comments.count
+              %tr
+                %td.label
+                  Coupons
+                %td.value
+                  = bl.coupons.count
+              %tr
+                %td.label
+                  Views
+                %td.value
+                  = bl.visits || 0
+              %tr
+                %td.label
+                  Rewards
+                %td.value
+                  = bl.rewards.count
+        %td.last
+          %ul.actions
+            %li
+              = link_to "Edit",     edit_admin_territory_business_listing_path( terr, bl )
+            %li
+              = link_to "Delete",
+                        admin_territory_business_listing_path( terr, bl ),
+                        :confirm => "Are you sure you want to delete the Business Listing for #{bl.name}?",
+                        :method => :delete if can? :destroy?, bl
+            %li
+              = link_to "Comments", admin_territory_business_listing_comments_path( terr, bl )
+            %li
+              = link_to "Pictures", admin_territory_business_listing_pictures_path( terr, bl )
+            %li
+              = link_to "Coupons",  admin_territory_business_listing_coupons_path( terr, bl )
+            %li
+              = link_to "Rewards",  admin_territory_business_listing_rewards_path( terr, bl )
+            %li
+              = link_to "Files",    admin_territory_business_listing_file_models_path( terr, bl )
+            %li
+              = link_to "View Live", territory_business_listing_path( terr, bl )
+            %li
+              = link_to "Mobile QR Code",
+                        mobile_qrcode_territory_business_listing_path( terr, bl, :format => :png ),
+                        :class => "fancy_inline"
+
+.pagination
+  Page
+  = will_paginate( @business_listings ) || link_to( "1", "##" )
+

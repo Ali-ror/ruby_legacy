@@ -1,0 +1,91 @@
+.admin-navigation
+  .content
+    .logo
+      %a(href="#{root_path}")= image_tag "relylocal-logo.png"
+    %ul.main
+      - if territory_navigation?
+        %li{ :class => "#{'first' if can?( :read, User )}" }
+          = link_to "Users", admin_territory_users_path( @territory ) if can?( :read, User )
+        %li{ :class => "#{'first' if !can?( :read, User ) && can?( :read, BusinessListing )}" }
+          = link_to "Listings", admin_territory_business_listings_path( @territory ) if can?( :read, BusinessListing )
+        %li= link_to "Categories", admin_territory_categories_path( @territory ) if can?( :read, Category )
+
+        %li
+          = link_to "Featured Ads", admin_territory_banners_path( @territory ) if can?( :read, Banner )
+          %ul
+            %li
+              = link_to "Banner Ads", admin_territory_banners_path( @territory ) if can?( :read, Banner )
+            %li
+              = link_to "Featured Member Listings", edit_admin_territory_featured_listings_path( @territory ) if can?( :feature, BusinessListing )
+            %li
+              = link_to "Featured Business Owners", edit_admin_territory_featured_owners_path( @territory ) if can?( :feature, BusinessListing )
+            %li
+              = link_to "Featured on Mobile", edit_admin_territory_featured_mobiles_path( @territory ) if can?( :feature, BusinessListing )
+
+        %li
+          = link_to "Header Images", admin_territory_headers_path( @territory ) if can?( :read, Header )
+        %li
+          = link_to "My Listings", admin_business_listings_path if current_user.is_listing_manager? && !current_user.is_admin?
+        %li
+          = link_to "Events", admin_territory_events_path( @territory, :territory_nav => true ) if current_user.is_admin?
+        %li
+          = link_to "Deal of the Day", admin_territory_daily_deals_path( @territory, :territory_nav => true ) if ( current_user.is_territory_admin_for?( @territory ) || current_user.is_admin? )
+        %li
+          = link_to "Send Mass Email", mass_email_admin_territory_path( @territory, :territory_nav => true )  if can?( :send_mass_email, Territory )
+
+      - else
+        - if current_user.is_listing_manager?
+          %li(class="first")
+            = link_to "My Listings", admin_business_listings_path
+          %li
+            = link_to "Administration", admin_root_path if current_user.is_admin?
+
+      %li= link_to "Logout", destroy_user_session_path
+
+    - if territory_navigation? && current_user.is_admin?
+      %ul.quick-links
+        %li.label Quick Links:
+        %li.first
+          = link_to "Summary", admin_territory_path( @territory )
+        %li
+          = link_to "Add a User", new_admin_territory_user_path( @territory )
+        %li
+          = link_to "Add a Listing", new_admin_territory_business_listing_path( @territory )
+        %li
+          = link_to "Add a Category", new_admin_territory_category_path( @territory )
+        %li
+          = link_to "Modify Territory Info", edit_admin_territory_path( @territory, :territory_nav => true )
+        %li
+          = link_to "Custom Pages", admin_territory_sub_pages_path( @territory )
+        %li
+          = link_to "Help & Docs", docs_help_admin_territory_path( @territory, :territory_nav => true  )
+
+.where-are-we
+  .content
+    %ul
+      %li
+        %b
+          Logged In:
+        %br/
+        = @current_user.to_label
+      - if @territory && !@territory.new_record? || (controller_name == "territories" && params[:action] == "show")
+        %li
+          %b
+            Territory:
+          %br/
+          = @territory.description
+
+- if @current_user.is_global_admin?
+  .global-admin
+    .content
+      %ul
+        %li
+          Global Admin:
+        %li
+          = link_to "Territories", admin_territories_path
+        %li
+          = link_to "Users", admin_users_path
+        %li
+          = link_to "Categories", admin_categories_path
+        %li
+          = link_to "Territories Report", territories_admin_reports_path

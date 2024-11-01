@@ -1,0 +1,12 @@
+.categories_drill_down
+  - @categories.each do |cs|
+    - if !cs.empty?
+      .column
+        %ul
+          - cs.each do |c|
+            %li
+              - path = territory_category_path( @territory, c.slugger )         if context == :business
+              - path = territory_coupons_category_path( @territory, c.slugger ) if context == :coupons
+              - path = territory_rewards_category_path( @territory, c.slugger ) if context == :rewards
+
+              = link_to( c.name, path )

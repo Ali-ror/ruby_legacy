@@ -1,0 +1,96 @@
+= simple_form_for [ :admin, @territory, @daily_deal ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Deal of the Day
+      - else
+        Edit Deal of the Day
+    - if !f.object.new_record?
+      %h2
+        = f.object.title
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        deal of the day.
+
+      %p
+        Please be careful to completely/accurately describe the Deal Of The Day being offered by your client. To avoid
+        confusion between your clients and their customers, please provide as many details as possible.
+
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = hidden_field_tag "daily_deal[deal_date]", params[:date] || @daily_deal.deal_date
+
+  .fieldset
+    %h3 Deal of the Day Information
+    = f.input :title
+    - if !f.object.new_record? && !f.object.deal_image.url.nil?
+      = image_tag f.object.deal_image.url(:normal)
+    = f.input :deal_image, :as => :file
+    = f.input :description
+    = f.input :restrictions
+    = f.input :business_listing_proxy, :required => true, :as => :string, :label => "Business Listing"
+    = f.hidden_field :business_listing_id
+    %span.hint(class="#{f.object.errors && !f.object.errors[:business_listing_id].blank? ? 'error' : ''}")
+      IMPORTANT: Type in an existing Business Listings name in your territory. This is a required field.
+    %br
+    = f.input :expiration_date, :as => :string, :input_html => { :class => "datepicker", :size => 10 }
+    .input.string
+      %label= "Deal of the Day Date"
+      = params[:date]
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+  = javascript_include_tag "jquery.initAutoComplete"
+
+
+:javascript
+  $( function() {
+    $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+  } );
+
+  function parseResult(data){
+    var formatting = $.map(data, function(item) {
+      return {
+        label: item.name,
+        value: item.name,
+        id: item.id
+      }
+    });
+    return formatting;
+  }
+
+  $( function() {
+    $( "#daily_deal_business_listing_proxy" ).live( 'focus', function() {
+      $(this).autocomplete({
+        minLength: 2,
+        source: function(request, response){
+          $.ajax({
+            url: '#{polymorphic_path([:admin, @territory, BusinessListing], :format => "json")}',
+            data: { keyword: request.term },
+            success: function(data){
+              response(parseResult(data));
+            }
+          });
+        },
+        select: function(event,ui) {
+          $( this ).parent().next().val( ui.item.id );
+        }
+      });
+    });
+  });

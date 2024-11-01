@@ -1,0 +1,78 @@
+= simple_form_for [ :admin, @territory, @banner ], :html => { :multipart => true } do |f|
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Banner
+      - else
+        Edit Banner
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        banner. Banners should have dimensions of 300x140 pixels or
+        140x140 pixels.
+
+      %p
+        You may add up to 20 wide (300x140) banners and up to 40 square (140x140) banners for your site.
+        If you have reached your limit for a particular size, you must first delete a banner before a
+        new banner can be added.
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :territory_id
+
+  .fieldset
+    %h3 Banner Information
+    = f.input :size, :collection => available_banners, :label => "Banner size", :include_blank => "-- Choose Size --"
+    - if !f.object.new_record? && !f.object.banner.url.nil?
+      = image_tag f.object.banner.url(:small)
+    = f.input :banner, :as => :file, :label => "Upload Banner", :hint => "Upload a jpg, gif, or png. Please, no animated flash banners."
+    = f.input :link, :hint => "Please use the full URL path to advertiser's site; http://..."
+    = f.input :active, :hint => "Un-check if you need to temporarily remove a banner from public view."
+
+    %h3 Banner Locations
+    - Banner::LOCATIONS.each do |l|
+      %div.input.boolean.optional
+        = check_box_tag "#{f.object_name}[locations][#{l}]",
+                        l,
+                        f.object.in_location?( l ),
+                        { :name => "#{f.object_name}[locations][]", :class => 'boolean optional' }
+
+        = label_tag "#{f.object_name}_locations_#{l}", l, :class => 'boolean optional'
+
+    = hidden_field_tag "#{f.object_name}[locations][]", ""
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+:javascript
+  $( function() {
+    handleBannerSize();
+    $( '#banner_size' ).change( handleBannerSize );
+  });
+
+  function handleBannerSize() {
+    var size = $( '#banner_size' );
+    if ( size.val() == "140x140" ) {
+      $( $( 'input[name="banner[locations][]"]' )[0] ).attr( 'checked', false ).attr( 'disabled', true );
+      $( $( 'input[name="banner[locations][]"]' )[1] ).attr( 'checked', false ).attr( 'disabled', true );
+      $( $( 'input[name="banner[locations][]"]' )[2] ).attr( 'disabled', false );
+      $( $( 'input[name="banner[locations][]"]' )[3] ).attr( 'disabled', false );
+      $( $( 'input[name="banner[locations][]"]' )[4] ).attr( 'disabled', false );
+      $( $( 'input[name="banner[locations][]"]' )[5] ).attr( 'disabled', false );
+    }
+    else if ( size.val() == "300x140" ) {
+      $( $( 'input[name="banner[locations][]"]' )[0] ).attr( 'disabled', false );
+      $( $( 'input[name="banner[locations][]"]' )[1] ).attr( 'disabled', false );
+      $( $( 'input[name="banner[locations][]"]' )[2] ).attr( 'checked', false ).attr( 'disabled', true );
+      $( $( 'input[name="banner[locations][]"]' )[3] ).attr( 'checked', false ).attr( 'disabled', true );
+      $( $( 'input[name="banner[locations][]"]' )[4] ).attr( 'checked', false ).attr( 'disabled', true );
+      $( $( 'input[name="banner[locations][]"]' )[5] ).attr( 'checked', false ).attr( 'disabled', true );
+    }
+  }

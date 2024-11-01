@@ -1,0 +1,17 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+config/database.yml
+.sass-cache/*
+.DS_Store
+.idea
+.project
+.redcar
+nbproject/**/*
+nbproject/*
+.rvmrc
+public/uploads/*
+mkmf.log
+vendor/ruby
+

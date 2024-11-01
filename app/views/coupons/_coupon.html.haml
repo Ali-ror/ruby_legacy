@@ -1,0 +1,69 @@
+- no_actions ||= false
+
+- unless coupon.class == LegacyCoupon
+  %figure.coupon(id="coupon#{coupon.id}")
+    %h6.provided_by== Provided by #{coupon.business_listing.name}
+    %a(href="#{territory_business_listing_path(@territory, coupon.business_listing)}#coupon#{coupon.id}")
+      - if !coupon.coupon_image.blank?
+        = image_tag coupon.coupon_image.url(:large)
+      - elsif @business_listing
+        = image_tag(@business_listing.logo.url(:normal), :style => "width:140px; margin-left:150px")
+      - else
+        = coupon.title
+    .caption
+      %h3= coupon.title
+      %p
+        = coupon.description
+        - if !coupon.restrictions.blank?
+          %br
+          %small.restrictions
+            :erb
+              ( <%= coupon.restrictions %> )
+        
+      %footer
+        - if !coupon.expiration_date.nil?
+          %h5.expiration== Expiration #{coupon.expiration_date.strftime("%m/%d/%Y")}
+        - if current_user && !current_user.full_name.blank?
+          - if current_user
+            %h5.redeemed== Redeemed by #{current_user.full_name}
+        				
+  - unless no_actions
+    %aside.actions
+      %ul
+        - if current_user
+          %li.print
+            = link_to "PrintThis", territory_business_listing_coupon_path(@territory, coupon.business_listing, coupon), :target => "_blank"
+        - else
+          = link_to "Login to Print", new_session_path(User), :class => "login-to-print"
+        %li.share
+          %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_business_listing_url(@territory, coupon.business_listing)}#coupon#{coupon.id}") ShareThis
+        %li.google
+          :erb
+            <g:plusone href="<%=territory_business_listing_url(@territory, coupon.business_listing)%>#coupon<%=coupon.id%>" size="small"></g:plusone>
+                    
+- else
+  %figure.coupon.legacy(id="coupon#{coupon.id}")
+    %h6.provided_by== Provided by #{coupon.business_listing.name}
+    %a(href="#{territory_business_listing_path(@territory, coupon.business_listing)}#coupon#{coupon.id}")    
+      - if !coupon.legacy_coupon.blank?
+        = image_tag coupon.legacy_coupon.url
+      - elsif @business_listing
+        = image_tag(@business_listing.logo.url(:normal), :style => "width:140px; margin-left:150px")
+      - else
+        = coupon.legacy_coupon.url
+
+    .caption
+      %footer
+        - if current_user
+          %h5.redeemed== Redeemed by #{current_user.full_name}
+  
+  - unless no_actions 
+    %aside.actions
+      %ul
+        - if current_user
+          %li.print
+            = link_to "PrintThis", territory_business_listing_coupon_path(@territory, coupon.business_listing, coupon), :target => "_blank"
+        - else
+          = link_to "Login to Print", new_session_path(User), :class => "login-to-print"
+        %li.share
+          %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_business_listing_url(@territory, coupon.business_listing)}#coupon#{coupon.id}") ShareThis

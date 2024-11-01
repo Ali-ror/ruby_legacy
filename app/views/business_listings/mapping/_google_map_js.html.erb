@@ -1,0 +1,98 @@
+<% if @business_listing.hide_map == false && @business_listing.address %>
+
+var mapOptions = {
+  zoom: 13,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+
+var map         = new google.maps.Map(document.getElementById('map-container'), mapOptions);    
+var marker      = new google.maps.Marker({ map: map, title: '<%=escape_javascript(@business_listing.name)%>'});
+var geocoder    = new google.maps.Geocoder();
+var infoWindow  = new google.maps.InfoWindow({ 
+  content: '<%= escape_javascript(render "business_listings/mapping/info_window_content") %>'
+});
+
+// Get Directions Service
+directionsService = new google.maps.DirectionsService();
+
+function showMap(){  
+  // Geocode then set map center and add marker
+  geocoder.geocode({ 'address': '<%=full_address(@business_listing)%>'}, function(results, status) { 
+    if (status == google.maps.GeocoderStatus.OK) {
+      google.maps.event.trigger(map, 'resize');      
+      var ll = results[0].geometry.location;
+      map.setCenter(ll);
+      marker.setPosition(ll);
+    } else {
+      $('#map-container').hide();
+      $('#map').hide();
+      $('.tab.map-link').hide();    
+    }
+  });
+  
+  // Add info window to marker
+  google.maps.event.addListener(marker, 'click', function() {
+    infoWindow.open(map,marker);
+  });  
+};
+
+// Change form for directions to the listed location
+function tohere() {
+  infoWindow.setContent('<%=escape_javascript(render("business_listings/mapping/directions_form", :direction => "to_here"))%>');
+};
+
+// Change form for directions from the listed location
+function fromhere() {
+  infoWindow.setContent('<%=escape_javascript(render("business_listings/mapping/directions_form", :direction => "from_here"))%>');
+};
+
+function getDirections() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById("map-directions"));
+
+  geocoder.geocode({ 'address': $('#mapform input[name="addr"]').val()}, function(results, status) { 
+    if (status == google.maps.GeocoderStatus.OK) {
+
+      if ($('#mapform input[name="direction"]').val() == "to_here"){
+        var origin = results[0].geometry.location;
+        var dest   = marker.getPosition();
+      } else {        
+        var origin = marker.getPosition();
+        var dest   = results[0].geometry.location;
+      };
+
+      if( $('#mapform input[name="walk"]').attr("checked") ) {
+        var travelMode = google.maps.DirectionsTravelMode["WALKING"];
+      } else {
+        var travelMode = google.maps.DirectionsTravelMode["DRIVING"];
+      }
+
+      if( $('#mapform input[name="highways"]').attr("checked") ) {
+        var avoidHwy = true;
+      } else {
+        var avoidHwy = false;
+      }
+
+      var request = {
+          origin: origin, 
+          destination: dest,
+          travelMode: travelMode,
+          avoidHighways: avoidHwy
+      };
+
+      directionsService.route(request, function(response, status) {        
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        }
+      });
+
+    }
+  });
+}
+
+$('.tab.map-link').click(function(){
+  showMap();
+});    
+
+<% end %>

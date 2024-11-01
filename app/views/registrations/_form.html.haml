@@ -1,0 +1,44 @@
+- ignore_password ||= false
+
+= f.input :first_name,  :label => "First Name"
+= f.input :last_name,   :label => "Last Name"
+
+= f.simple_fields_for :address do |f_address|
+  = f_address.input :city,  :required => false
+  %label State
+  = f_address.state_select :state, country='US', :include_blank => true
+
+= f.input :email
+
+- unless ignore_password
+  = f.input :password
+  = f.input :password_confirmation, :label => "Confirm Password"
+
+= f.input :opt_in_newsletter, :hint => "Click here to subscribe to the RelyLocal Newsletter - full of the latest coupons, contests, and tips on supporting the local economy. (Don't worry - your email will never be shared with any third-parties.)"
+
+- unless f.object.new_record?
+  %h3(style="margin-top: 12px")
+    Deal of the Day Subscriptions
+  .hint
+    RelyLocal's Deal of the Day is available for free to all members of the RelyLocal Rewards program. To receive
+    a daily email on the Deal of the Day, subscribe to any or all of your area's Deal of the Day email.
+
+  %table(style="margin-top: 12px")
+    %tbody
+      - shown = false
+      - f.object.user_territories.each do |ut|
+        - if ut.territory.deal_of_the_day_enabled
+          - shown = true
+          %tr(style="border-bottom: 1px dotted #A1A1A1")
+            %td(style="padding: 6px 24px 6px 0;font-size: 12px")
+              = ut.territory.name
+            %td(style="font-size: 12px")
+              - if ut.subscribe_daily_deal_email.nil? || !ut.subscribe_daily_deal_email
+                = link_to "Subscribe",  toggle_subscription_territory_rewards_path( ut.territory )
+              - else
+                = link_to "Unsubscribe",  toggle_subscription_territory_rewards_path( ut.territory )
+      - if !shown
+        %tr(style="border-bottom: 1px dotted #A1A1A1")
+          %td(style="padding: 6px 24px 6px 0;font-size: 12px")
+            Check back soon for deals in your area!
+

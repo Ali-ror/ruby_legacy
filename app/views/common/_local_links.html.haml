@@ -1,0 +1,9 @@
+%ul
+  %li= link_to "RelyLocal Rewards", territory_rewards_path( @territory ) if @territory && @territory.rewards_enabled
+  %li= link_to "Events Calendar", territory_events_path(@territory) if @territory && !@territory.hide_events_calendar
+  - if @territory && !@territory.sub_pages.blank?
+    - for page in @territory.sub_pages do
+      %li= link_to page.page_title, territory_sub_page_path(@territory, page)
+  %li= link_to "Show Your Support", territory_show_your_support_path(@territory)
+  %li= link_to "Contact Us", territory_contact_us_path(@terrtitory)
+  %li= link_to "Impact of Local Spending", territory_impact_of_local_spending_path( @territory )

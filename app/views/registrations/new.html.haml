@@ -1,0 +1,19 @@
+.custom-content
+  %h2 Sign up
+  %br
+  %h4 Why Do I Need To Sign Up? 
+  %p 
+    The main functions of RelyLocal are open to the public. However, in order to cut down on spam comments and people taking advantage of coupons, our members have asked us to require some sort of log-in system to help crack down on the troublemakers. It's free, easy, and safe. 
+  %p.small
+    %em
+      Please Note: Your information will be kept private and will never be sold or shared with third-parties. Unless you opt-in to one of our email lists, you will not receive any email from RelyLocal.
+      %br
+      #{link_to "View Privacy Policy", (@territory.blank? ? '/page/privacy-policy' : territory_privacy_policy_path(@territory)), :target => "_blank"}
+  
+  = simple_form_for(@user, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    = render "form", :f => f
+    
+    %p= f.submit "Sign up"
+    
+  = render :partial => "devise/shared/links"

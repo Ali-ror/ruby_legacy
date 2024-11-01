@@ -1,0 +1,46 @@
+- if ( @search && !params[:search][:name_or_long_description_or_short_description_contains].blank? )
+  %h1
+    = params[:search][:name_or_long_description_or_short_description_contains]
+    = " in #{@territory.name}, "
+    = @business_listings.length
+    = " local "
+    = @business_listings.length == 1 ? "business" : "businesses"
+
+- else
+  = render "common/breadcrumbs"
+
+  %h1
+    = "#{@category.name} in #{@territory.name}" if @category
+
+  = render :partial => "common/category_drill_down", :locals => { :context => :business }
+
+%section#businesses.large_list
+  - unless @business_listings.blank?
+    = render :partial => "business_listings/listing", :collection => @business_listings, :as => :listing
+  - else
+    .custom-content
+      %p No business listings found.
+
+  %footer
+    = render "common/business_icon_legend"
+    - if ( @search && !params[:search][:name_or_long_description_or_short_description_contains].blank? )
+      = will_paginate( @business_listings,
+        :renderer => WillPaginate::ViewHelpers::CustomLinkRenderer,
+        :params => { :search => { :name_or_long_description_or_short_description_contains => params[:search][:name_or_long_description_or_short_description_contains] } } )
+    - else
+      = will_paginate( @business_listings,
+        :renderer => WillPaginate::ViewHelpers::CustomLinkRenderer )
+
+  / end businesses
+
+- if @territory.private_label
+  - content_for :javascript do
+    :javascript
+      $( function() {
+        $( '.logo_vote' ).find( 'img' ).each( function( i, item ) {
+          var it = $( item );
+          if ( it.attr( 'src' ).contains( '#{PrivateLabel.instance.default_logo}' ) ) {
+            it.addClass( 'private' );
+          }
+        });
+      });

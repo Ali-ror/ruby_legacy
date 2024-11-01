@@ -1,0 +1,32 @@
+= simple_form_for @category, :url => polymorphic_path([:admin, @territory, @category]) do |f|
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Category
+      - else
+        Edit Category
+        = @category.name
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        category.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  .fieldset
+    .input
+      = f.label   :parent_id, "Parent Category"
+      = f.select  :parent_id, parent_category_options, :include_blank => "-- Select Category --"
+      %span.hint
+        To add a top-level category, do NOT choose a parent category.
+    = f.input :name, :hint => "Please use concise category names, related to keywords that users will search for. (Ex. 'Pizza' instead of 'Pizzerias')"
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+

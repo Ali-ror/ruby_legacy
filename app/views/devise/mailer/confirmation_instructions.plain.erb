@@ -1,0 +1,7 @@
+Thank you registering a new account with http://www.RelyLocal.com. Your account has been registered using <%=@resource.email%> and is awaiting final confirmation. 
+
+To proceed with the final step, you may simply click the the confirmation link below, or, copy and paste the following link:
+<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
+
+Thank you for your support!
+The RelyLocal Team

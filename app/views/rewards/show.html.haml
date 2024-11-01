@@ -1,0 +1,22 @@
+.custom-content
+  %p
+    RelyLocal's Deal of the Day is available for free to all members of the RelyLocal Rewards program (details
+    below). To redeem, simply follow these instructions.
+
+  %ol
+    %li
+      = link_to "Login", new_user_session_path
+      or
+      = link_to "Register", new_user_session_path
+      (Free)
+    %li
+      Print the official Deal of the Day
+    %li
+      Present the printed voucher along with your RelyLocal Rewards card to merchant.
+
+%section#coupons
+  = render "rewards/daily_deal", :daily_deal => @daily_deal, :no_actions => true
+
+- content_for :javascript do
+  :javascript
+    setTimeout( "window.print();window.close();", 1000)

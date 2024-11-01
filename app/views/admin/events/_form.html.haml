@@ -1,0 +1,32 @@
+= simple_form_for [ :admin, @territory, @event ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      Edit Event
+      = @event.name
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        event.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  .fieldset
+    %h3 Event Information
+    = f.input :name
+    = f.input :description, :as => :text, :input_html => { :rows => 5 }, :hint => "Limit of 255 characters".html_safe
+    = f.input :when, :start_year => Date.today.year, :end_year => Date.today.year + 1, :order => [:month, :day, :year], :prompt => true, :minute_step => 5, :twelve_hour => true
+    = f.input :duration, :label => "Duration (in minutes)", :input_html =>  { :size => 4 }, :hint => "How long is this event? (numeric field only please, in minutes - 90 minutes is an hour and a half)"
+    = f.input :url
+    = f.input :public_email
+    = f.input :private_email
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+

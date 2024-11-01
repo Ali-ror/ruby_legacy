@@ -1,0 +1,89 @@
+.index-page
+  .title
+    %h1
+      Manage RelyLocal Rewards
+    %h2
+      - if @business_listing
+        = link_to( @business_listing.name,
+                   admin_territory_business_listings_path( @business_listing.territory,
+                                                           :specifically => @business_listing.id ) )
+      - else
+        = @territory.description
+    .tip
+      - if !@territory.rewards_enabled
+        %p
+          %b
+            Add-On Module:
+          The Local Rewards program is an optional add-on module, separate from your standard licensing agreement. For
+          more information, please download the
+          = link_to "Local Rewards Overview", "http://www.relylocal.com/RelyLocal_LocalRewardsOverview.pdf"
+          If you would like to review the addendum to add Local Rewards to your territory, please email the
+          = mail_to "admin@relylocal.com", "Admin Team."
+
+        %p
+          In the meantime, you can pre-load Local Rewards into your site, as you'd like. However - they will not be
+          visible to the public until you have chosen to activate the add-on module.
+
+      %p
+        %b
+          Adding Rewards:
+        Please completely describe the reward being offered by your client when the RelyLocal Rewards Card is presented.
+        Avoid confusion between your clients and their customers by providing as many details as possible. For example,
+        %i
+          "Bob's Donuts offers a buy-one-get-one free deal to RelyLocal Rewards members. Offer valid before 10am, Mon-Fri."
+
+      %p
+        %b
+          Ordering Local Rewards Cards:
+        To order more official Local Rewards cards, please
+        = link_to "click here.", "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MC9QZ2665FJWJ"
+
+  - if can?( :create, Reward ) && @rewards.length < 3
+    .link-bar
+      %ul
+        %li
+          = link_to "Add Reward", new_admin_territory_business_listing_reward_path( @territory, @business_listing ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @rewards ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Description
+        %th
+          Expiration Date
+        %th
+          Never Expires?
+        %th.last
+          Actions
+        -#%th.last
+          Select
+    %tbody
+      - @rewards.each do |r|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            = r.description
+          %td
+            = r.expiration_date
+          %td
+            = "X" if r.never_expires
+          %td.last
+            %ul.actions
+              %li= link_to( "Edit", edit_admin_territory_business_listing_reward_path( @territory, r.business_listing, r ) ) if can?( :update, r )
+              %li= link_to( "Delete", admin_territory_business_listing_reward_path( @territory, r.business_listing, r ), :confirm => 'Are you sure you wish to delete this Reward?', :method => :delete ) if can?( :destroy, r )
+          -#%td.last
+            = check_box_tag dom_id( c )
+
+  .pagination
+    Page
+    = will_paginate( @rewards ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Rewards", "", :class => "delete-link"

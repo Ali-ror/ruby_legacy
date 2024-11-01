@@ -1,0 +1,76 @@
+.index-page
+  .title
+    %h1
+      Manage Comments
+    %h2
+      - if @business_listing
+        = link_to( @business_listing.name,
+                   admin_territory_business_listings_path( @business_listing.territory,
+                                                           :specifically => @business_listing.id ) )
+      - else
+        = @territory.description
+    .tip
+      %p
+        You can easily manage your comments here. Just use the add comment,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+
+  - if can?( :create, Comment )
+    .link-bar
+      %ul
+        - if @business_listing
+          %li
+            = link_to "Add Comment", new_admin_territory_business_listing_comment_path( @territory, @business_listing ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @comments ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Comment
+        %th
+          Rating
+        %th
+          State
+        %th
+          Author
+        %th.last
+          Actions
+        -#%th.last
+          Select
+    %tbody
+      - @comments.each do |c|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            = c.comment
+          %td
+            = c.rating
+          %td.moderate
+            - if can? :update, c
+              = render "admin/common/moderate", :object => c
+            - else
+              = c.state
+
+          %td
+            = c.user.to_label
+            = c.user.email
+          %td.last
+            %ul.actions
+              %li= link_to( "Edit", edit_admin_territory_business_listing_comment_path( @territory, c.business_listing, c ) ) if can?( :update, c )
+              %li= link_to( "Delete", admin_territory_business_listing_comment_path( @territory, c.business_listing, c ), :confirm => 'Are you sure you wish to delete this Comment?', :method => :delete ) if can?( :destroy, c )
+          -#%td.last
+            = check_box_tag dom_id( c )
+
+  .pagination
+    Page
+    = will_paginate( @comments ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Comments", "", :class => "delete-link"

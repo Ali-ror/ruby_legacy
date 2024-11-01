@@ -1,0 +1,6 @@
+.custom-content
+  %h1== Cities for #{params[:state]}
+
+  %ul
+    - for city in @cities
+      %li= link_to city[0], territory_root_path(city[1]), :target => "_parent"

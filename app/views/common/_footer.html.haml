@@ -1,0 +1,70 @@
+%footer#site_footer
+  %section#fat_footer
+    - if @territory
+      %h1
+        == #{PrivateLabel.instance.site_name} - #{@territory.name}
+        %span
+
+          %a(class="iframe fancy" href="#{national_path(:format => 'plain')}") Change Location
+
+        %ul
+          .territory-links
+            %li= link_to "What is RelyLocal?", territory_what_is_relylocal_path(@territory)
+            %li= link_to "Support Local Businesses", territory_categories_path(@territory)
+            %li= link_to "Print Local Coupons", territory_coupons_path(@territory)
+            %li= link_to "Find Local Jobs", territory_jobs_path(@territory)
+            %li= link_to "Show Your Support", territory_show_your_support_path(@territory)
+
+          .national-links
+            %li= link_to "National Homepage", national_path
+            %li= link_to "Terms of Use", territory_tos_path(@territory)
+            %li= link_to "Privacy Policy", territory_privacy_policy_path(@territory)
+            %li= link_to "Copyright Notice", territory_copyright_path(@territory)
+            %li= link_to "Contact Us", territory_contact_us_path(@territory)
+    - else
+      %ul
+        %li= link_to "About RelyLocal", "/page/what_is_relylocal"
+        %li= link_to "Find a Campaign", "/page/relylocal-campaigns"
+        %li= link_to "Launch A Campaign", "/page/career-opportunities"
+        %li= link_to "Press & Media", "/page/press_and_media"
+        %li= link_to "The RelyLocal Blog", "http://www.relylocal.com/blog/", :target => "_blank"
+        %li= link_to "Terms of Use", "/page/terms-of-use"
+        %li= link_to "Privacy Policy", "/page/privacy-policy"
+        %li= link_to "Copyright Notice", "/page/copyright"
+        %li= link_to "Contact Us", "/page/contact_us"
+
+    %p
+      Copyright © 2009-2012 : RelyLocal : All rights reserved.
+      %br/
+      - if @current_header
+        - unless @current_header.model.credit.blank?
+          Header photography by
+          == #{@current_header.model.credit.html_safe}.
+      - else
+        :erb
+          Header photography by <a href="http://www.ricergenbright.com/" target="_blank">Ric Ergenbright Photography</a>.
+
+      %br/
+      %br/
+
+      %ul
+        %li
+          = link_to "View Mobile Version", "http://m.relylocal.com"
+
+      - if PrivateLabel.instance.private_label_mode
+        %ul
+          %li
+            Powered By RelyLocal
+
+    / end fat_footer section
+
+  %section#partners
+    - if @territory && !@territory.affiliates.blank?
+      %h1 Community Partners
+      %ul
+        - @territory.affiliates.each do |a|
+          %li
+            %a(href="#{normalize_link(a.link)}" title="#{a.name}" target="_blank" class="affiliate")
+              = image_tag a.logo.url(:partner)
+
+  .clear

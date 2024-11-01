@@ -1,0 +1,11 @@
+%h1
+  Submit a Business Listing
+
+- if current_user
+  = render "form"
+- else
+  %div(style="margin-left: 10px;")
+    You must first
+    = link_to "Login or Register", new_user_session_path
+    to apply to register your business.
+

@@ -1,0 +1,106 @@
+/* fix height on submit button */
+.single_field_form {
+  position: relative;
+  left: -40px;
+}
+
+.single_field_form input {
+  position: relative;
+  margin: 0px 0px 0px 0px;
+}
+
+.single_field_form input.submit {
+  padding: 0px 5px 0 5px;
+  position: absolute;
+  right: -30px;
+}
+
+/* make forms stay on to */p
+.single_field_form input {
+  position: relative;
+}
+
+/* fix height on submit button */
+.single_field_form input.submit {
+  padding: 1px 5px;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* Login Panel for IE 7 */
+/*form#login-panel #user_submit {
+  float: right;
+  clear: both;
+  position: relative;
+  top: -25px;
+  left: -100px;
+}
+
+form#login-panel a {
+  top: -60px;
+}*/
+
+
+/* Nav Header */
+a#city_list ul li {
+  margin-top: 5px;
+}
+
+/* Submit Hide Label */
+.submit.fix {
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  top: 2px;
+}
+
+/* IE 7 Form stuff */
+form input.boolean {
+  position: relative;
+  top: 10px;
+}
+
+/* Fix State Select Headers */
+a#city_list ul {
+  line-height: 30px;
+}
+
+a#city_list ul li {
+  margin-top: -5px;
+}
+
+/*********************************
+* =Affiliates
+*********************************/
+a.affiliate img {
+	filter: alpha(opacity=75);
+}
+
+/*********************************
+* =Coupons
+*********************************/
+/*#action_two_content .coupon .expires {
+  position: absolute;
+  bottom: 40px;
+  margin-left: 240px;
+}*/
+
+/*********************************
+* =Single Business Detail Page Fix
+*********************************/
+.single_business .vcard #vcard_contact span.tel {
+  display:block;
+  height: 25px;
+}
+.single_business .vcard #vcard_contact span.email {
+  display:block;
+  height: 25px
+}
+.single_business .vcard #vcard_contact span.website {
+  display:block;
+  height: 25px
+}
+.single_business .vcard #vcard_contact span.skype {
+  display:block;
+  height: 25px
+}

@@ -1,0 +1,71 @@
+.index-page
+  .title
+    %h1
+      Manage Coupons
+    %h2
+      - if @business_listing
+        = link_to( @business_listing.name,
+                   admin_territory_business_listings_path( @business_listing.territory,
+                                                           :specifically => @business_listing.id ) )
+      - else
+        = @territory.description
+
+    .tip
+      %p
+        You can easily manage your coupons here. Just use the add coupon,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+      %p
+        To reorder your coupons, click and drag a row up or down.
+
+  .link-bar
+    %ul
+      %li
+        = link_to "Add Coupon", new_admin_territory_business_listing_coupon_path( @territory, @business_listing ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @coupons ) || link_to( "1", "##" )
+
+  %table#coupons.index-table
+    %thead
+      %tr
+        %th.first
+          Coupon Image
+        %th
+          Title
+        %th
+          Expiration Date
+        %th.last
+          Actions
+        -#%th.last
+          Select
+    %tbody
+      - @coupons.each do |c|
+        %tr{ :id => dom_id( c ), :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            %ul
+              %li
+                %a.image(href="#{c.coupon_image.url(:normal)}")= image_tag c.coupon_image.url(:thumb)
+          %td
+            = c.title
+          %td
+            = c.expiration_date
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_business_listing_coupon_path( @territory, @business_listing, c )
+              %li= link_to "Delete", admin_territory_business_listing_coupon_path( @territory, @business_listing, c ), :confirm => 'Are you sure you wish to delete this Coupon?', :method => :delete
+          -#%td.last
+            = check_box_tag dom_id( c )
+  .pagination
+    Page
+    = will_paginate( @coupons ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Coupons", "", :class => "delete-link"
+
+= render "javascript.js"

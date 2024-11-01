@@ -1,0 +1,8 @@
+%section.lists
+  %aside.subscribe
+    %h2 Subscribe
+    %p Sign up for our email newsletter to receive the latest news and updates!
+    %form.single_field_form{:action => "", :method => "post"}
+      %input.placeholder{:autocomplete => "off", :name => "q", :placeholder => "Email address", :type => "email"}
+        %input.submit{:type => "submit", :value => "Go"}
+    %footer

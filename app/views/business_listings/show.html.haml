@@ -1,0 +1,382 @@
+- label = PrivateLabel.instance
+
+= render "common/breadcrumbs"
+
+%section.single_business
+  .logo_vote
+    - if @business_listing.non_member_listing?
+      = image_tag label.default_logo
+    - else
+      = image_tag @business_listing.logo.url(:normal)
+    %ol
+      - unless @business_listing.average_rating.blank?
+        - @business_listing.average_rating.times do |i|
+          %li.star
+            %a(href="#" title="#{i}") 1
+
+      - if !@business_listing.non_member_listing?
+        %h5.ratings_count== #{@business_listing.comments.active.count} ratings
+        %h4.reviews
+          %a{:href => "#reviews"} Read Reviews
+  .vcard
+    %span.fn.n
+      %h1.org= @business_listing.name
+      = display_franchise_text(@business_listing)
+    %br
+      %span.adr
+        - if @business_listing.address && !@business_listing.hide_address
+          %span.street-address
+            = @business_listing.address.address1
+            = ", #{@business_listing.address.address2}" unless @business_listing.address.address2.blank?
+          %br
+            %span.locality= @business_listing.address.city
+            %abbr.region{:title => "#{@business_listing.address.state}"}= ", #{@business_listing.address.state}" unless @business_listing.address.state.blank?
+            %span.postal-code= @business_listing.address.zip
+            - if @business_listing.show_map?
+              -#%br
+              %span.directions
+                = link_to "(view map)", "#map"
+
+      - if !@business_listing.non_member_listing?
+        #vcard_contact
+          - unless @business_listing.phone.blank?
+            %span.tel
+              %span.contact.type Phone:
+              %span.value= @business_listing.phone
+
+          - unless @business_listing.fax.blank?
+            %span.tel
+              %span.contact.type FAX:
+              %span.value= @business_listing.fax
+
+          - unless @business_listing.email.blank?
+            %span.email
+              %span.contact.type Email:
+              %span.value
+                %a{:href => "mailto:#{@business_listing.email}"}= @business_listing.email
+
+          - unless @website.blank?
+            %span.website
+              %span.contact.type Website:
+              %span.value
+                - if @business_listing.paid_listing?
+                  %a.fn.org.url{:href => "#{@website.url}", :target => "_blank"}= @website.url
+                - else
+                  %a.fn.org.url{:href => "#{@website.url}", :target => "_blank", :rel => "nofollow" }= @website.url
+
+          - unless @business_listing.skype.blank?
+            %span.skype
+              %span.contact.type Skype:
+              %span.value
+                %a.url{:href => "skype:#{@business_listing.skype}?chat"}=  @business_listing.skype
+
+          - unless @business_listing.operating_hours.blank?
+            %span.hours
+              %span.contact.type Hours:
+              %span.value=raw RedCloth.new(@business_listing.operating_hours).to_html
+
+          - unless @links.blank?
+            %span.contact.type Social Media
+            %ul#social_networking
+              - if @links.by_type("Facebook")
+                %li.facebook
+                  = link_to "Facebook", @links.by_type("Facebook").url, :title => "Facebook", :target => "_blank"
+
+              - if @links.by_type("LinkedIn")
+                %li.linkedin
+                  = link_to "Linked In", @links.by_type("LinkedIn").url, :title => "Linked In", :target => "_blank"
+
+              - if @links.by_type("Flickr")
+                %li.flickr
+                  = link_to "Flickr", @links.by_type("Flickr").url, :title => "Flickr", :target => "_blank"
+
+              - if @links.by_type("Twitter")
+                %li.twitter
+                  = link_to "Twitter", @links.by_type("Twitter").url, :title => "Twitter", :target => "_blank"
+
+              - if @links.by_type("YouTube Channel")
+                %li.youtube
+                  = link_to "YouTube Channel", @links.by_type("YouTube Channel").url, :title => "YouTube", :target => "_blank"
+
+              - if @links.by_type("Etsy")
+                %li.etsy
+                  = link_to "Etsy", @links.by_type("Etsy").url, :title => "Etsy", :target => "_blank"
+
+              - if @links.by_type("Blog")
+                %li.blogger
+                  = link_to "Blog", @links.by_type("Blog").url, :title => "Blog", :target => "_blank"
+
+              - if @links.by_type("Google+")
+                %li.google
+                  = link_to "Google+", @links.by_type("Google+").url, :title => "Google", :target => "_blank"
+
+              - if @links.by_type("Picasa")
+                %li.picasa
+                  = link_to "Picassa", @links.by_type("Picasa").url, :title => "Picasa", :target => "_blank"
+
+              - if @links.by_type("Vimeo")
+                %li.vimeo
+                  = link_to "Vimeo", @links.by_type("Vimeo").url, :title => "Vimeo", :target => "_blank"
+
+              - if @links.by_type("Yelp")
+                %li.yelp
+                  = link_to "Yelp", @links.by_type("Yelp").url, :title => "Yelp", :target => "_blank"
+
+              - if @links.by_type("MySpace")
+                %li.myspace
+                  = link_to "MySpace", @links.by_type("MySpace").url, :title => "MySpace", :target => "_blank"
+
+              - if @links.by_type("Pinterest")
+                %li.pinterest
+                  = link_to "Pinterest", @links.by_type("Pinterest").url, :title => "Pinterest", :target => "_blank"
+
+              - if @links.by_type("FourSquare")
+                %li.foursquare
+                  = link_to "FourSquare", @links.by_type("FourSquare").url, :title => "FourSquare", :target => "_blank"
+
+              - if @links.by_type("Instagram")
+                %li.instagram
+                  = link_to "Instagram", @links.by_type("Instagram").url, :title => "Instagram", :target => "_blank"
+
+              - if @links.by_type("UrbanSpoon")
+                %li.urban_spoon
+                  = link_to "UrbanSpoon", @links.by_type("UrbanSpoon").url, :title => "UrbanSpoon", :target => "_blank"
+
+              - if @links.by_type("Tumblr")
+                %li.tumblr
+                  = link_to "Tumblr", @links.by_type("Tumblr").url, :title => "Tumblr", :target => "_blank"
+
+          %aside.actions
+            %ul
+              %li.print
+                %a{:href => "javascript:window.print()"} PrintThis
+              %li.share
+                %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_business_listing_url(@business_listing.territory, @business_listing)}")
+              - if !@coupons.blank? && @business_listing.paid_listing?
+                %li.coupons
+                  %a{:href => "#coupons"} Coupons
+              %li.google_bigger
+                :erb
+                  <g:plusone href="<%=territory_business_listing_url(@business_listing.territory, @business_listing)%>"></g:plusone>
+          / end vcard_contact
+        / end vcard
+      - else
+        #vcard_contact
+          - unless @business_listing.phone.blank?
+            %span.tel
+              %span.contact.type Phone:
+              %span.value= @business_listing.phone
+
+  - if @business_listing.non_member_listing?
+    %section#details
+      %h1.header Details
+      .custom-content
+        This listing has not been activated yet. If you are the owner of
+        = @business_listing.name
+        please
+        = link_to "Contact Us", territory_contact_us_path( @business_listing.territory )
+        to become a RelyLocal member and help us update your information, giving you access to all of our member
+        benefits. Become part of the campaign to support local businesses in the
+        = @business_listing.territory.name
+        area today!
+
+  - elsif !@business_listing.long_description.blank?
+    %section#details
+      %h1.header Details
+      .custom-content
+        = @business_listing.long_description.html_safe
+
+    / end details
+
+  - if @territory.deal_of_the_day_enabled && !@daily_deal.blank? && @business_listing.paid_listing? && current_user
+    %section#coupons
+      %h1.header
+        %a{:name => "deal_of_the_day"}
+          Deal of the Day
+      = render :partial => "rewards/daily_deal", :locals => { :daily_deal => @daily_deal }
+  / end daily deal
+
+  - if @territory.rewards_enabled && !@business_listing.rewards.empty? && @business_listing.paid_listing?
+    %section.rewards#rewards
+      %h1.header
+        Local Rewards
+
+      %div(style="clear:both")
+
+        %figure.reward
+          - @business_listing.rewards.active.each do |r|
+            %p
+              %b
+                Reward Details:
+              = r.description
+              - expires = r.never_expires ? "Never" : r.expiration_date.strftime('%m/%d/%y')
+              = "(Expires: #{expires})"
+
+        %aside.actions
+          %ul
+            %li
+              You must show a valid
+              %b
+                %i
+                  Local Rewards
+              card to receive discount.
+  / end rewards
+
+  - if !@coupons.blank? && @business_listing.paid_listing?
+    %section#coupons
+      %h1.header Coupons
+      = render :partial => "coupons/coupon", :collection => @coupons, :as => :coupon
+      / end coupons
+
+  %section#media
+    = media_tabs
+
+    - if !@business_listing.owner_bio.blank? && @business_listing.paid_listing?
+      %aside#meet_the_leader
+        .left
+          - if @business_listing.owner_photo.url( :normal ).nil?
+            &nbsp;
+          - else
+            = image_tag @business_listing.owner_photo.url(:normal)
+        .right
+          .name
+            = @business_listing.owner_name
+          .business_name
+            = @business_listing.name
+          .bio
+          .custom-content
+            = @business_listing.owner_bio.html_safe
+        / end meet the owner
+
+    - if !@business_listing.you_tube_links.empty? && @business_listing.paid_listing?
+      %aside#videos
+        %br/
+        %ul.media_list
+          - @business_listing.you_tube_links.each do |ytl|
+            %li
+              %a.fancy_youtube(href="#{ytl.you_tube_url}")
+                = image_tag ytl.you_tube_image
+        / end videos
+
+    - if !@business_listing.pictures.blank? && !@business_listing.non_member_listing?
+      %aside#photos
+        %br
+        %ul.media_list
+          - @business_listing.pictures.each do |pic|
+            %li
+              %a.fancy(href="#{pic.picture.url(:normal)}" title="#{pic.caption}")= image_tag pic.picture.url(:thumb)
+        / end photos
+
+    - if @business_listing.show_map?
+      %aside#map
+        %br
+        #map-container(style="width:600px;height:400px;")
+        #map-directions
+
+    - if !@business_listing.file_models.blank? && @business_listing.paid_listing?
+      %aside#downloads
+        %br
+        %ul.media_list_files
+          - @business_listing.file_models.each do |f|
+            %li
+              = link_to f.title, f.file_attachment.url, :target => "_blank"
+        / end downloads
+
+    / end media
+
+  - if !@business_listing.non_member_listing?
+    %section#reviews
+      %h1.header Reviews
+      - if current_user
+        = simple_form_for @comment, :url => territory_business_listing_comments_path(@territory, @business_listing), :id => "review_form" do |f|
+          #star_rating
+            %label Your Rating:
+            %br
+            %br
+            = f.input :rating, :collection => 1..5, :as => :select, :prompt => false, :label => false, :input_html => { :name => "comment[rating]" }
+
+          %br
+          %label Comment
+          = f.input :comment, :input_html => {:cols => "70", :placeholder => "Leave a comment...", :rows => "10", :style => "padding:5px;"}, :label => false
+          %br= f.submit "Publish"
+      - else
+        %p
+          = link_to "Login to post a review", new_session_path(User)
+
+      - for comment in @comments
+        %aside.comment
+          %h4
+            %span.date= comment.created_at.strftime("%d %b, %Y")
+            %br
+            %br
+            %span.commentator= commentor_says(comment.user)
+
+          %p= comment.comment
+
+          %br
+          %ol.star_list
+            - comment.rating.times do |i|
+              %li.star
+                %a(href="#" title="#{i}") i
+
+
+          / end comment
+
+      %h6#more_reviews
+        = will_paginate(@comments, :renderer => WillPaginate::ViewHelpers::CustomLinkRenderer)
+      / end reviews
+    / end single_business
+
+- content_for :support_content do
+  - if !@categories.blank? && !@business_listing.non_member_listing?
+    %section#related-categories.lists.support.secondary
+      %h2 Related Categories
+      %ul
+        - @categories.each do |c|
+          %li= link_to full_category_name(c), territory_category_path(@territory, c.slugger)
+
+  %section#tags.lists.support.lists.secondary
+    %h2 Tags
+    %ul
+      %li= tag_links(@business_listing)
+
+- content_for :custom_meta do
+  :erb
+    <meta property='og:image' content='<%=request.protocol + request.host_with_port + @business_listing.logo.url(:normal)%>' />
+    <% @business_listing.pictures.each do |p| %>
+      <meta property='og:image' content='<%=request.protocol + request.host_with_port + p.picture.url(:normal)%>' />
+    <% end %>
+    <meta property='og:image' content='<%=request.protocol + request.host_with_port + "/images/defaults/mobile_logo.png" %>' />
+
+- content_for :javascript_tags do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min", "jquery.ui.stars/jquery.ui.stars.min", "jquery.iframe.resize"
+
+- content_for :javascript do
+  %script(type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false")
+  = render "common/share_this"
+
+  :javascript
+    $("#star_rating").stars({
+      inputType: "select"
+    });
+
+    $(".directions a").click(function(){
+      $(".map-link").click();
+    });
+
+    $( 'iframe#long-desc' ).iframeAutoHeight();
+
+    // Draw Google Map
+    #{render "business_listings/mapping/google_map_js"}
+
+- if @territory.private_label
+  - content_for :javascript do
+    :javascript
+      $( function() {
+        $( '.logo_vote' ).find( 'img' ).each( function( i, item ) {
+          var it = $( item );
+          if ( it.attr( 'src' ).contains( '#{PrivateLabel.instance.default_logo}' ) ) {
+            it.addClass( 'private' );
+          }
+        });
+      });

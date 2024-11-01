@@ -1,0 +1,55 @@
+%h1
+  Local Jobs in
+  = @territory.name
+
+.custom-content
+  = @territory.local_jobs_text.html_safe
+
+.job
+  Total Jobs Found:
+  = @jobs['totalResults']
+  %br/
+  Showing:
+  = @jobs['start']
+  \-
+  = @jobs['end']
+
+.indeed-jobs
+  - @jobs['results'].each do |j|
+    .job
+      .title
+        = link_to j['jobtitle'], j['url']
+      .location
+        = j['company']
+        \-
+        = j['formattedLocation']
+      .description
+        = j['snippet']
+      .age
+        = j['formattedRelativeTime']
+
+.indeed-jobs-pagination
+  Total Jobs Found:
+  = @jobs['totalResults']
+  %br/
+  Showing:
+  = @jobs['start']
+  \-
+  = @jobs['end']
+
+.indeed-jobs-pagination(style="clear:both")
+  %ol.navcnt
+    - if @start > 0
+      %li
+        = link_to '← Previous', territory_jobs_path( @territory, :start => @jobs['end'] - 20 )
+    - if @jobs['end'] < @jobs['totalResults']
+      %li
+        = link_to 'Next →', territory_jobs_path( @territory, :start => @jobs['end'] )
+
+%footer
+  .job.centered
+    .title
+      = link_to "Post Your Local Job for the #{@territory.name} area.", 'https://ads.indeed.com/Post-Jobs'
+    %br/
+    :erb
+      <span id=indeed_at><a href="http://www.indeed.com/">jobs</a> by <a href="http://www.indeed.com/" title="Job Search"><img src="http://www.indeed.com/p/jobsearch.gif" style="border: 0; vertical‐align: middle;" alt="Indeed job search"></a></span>

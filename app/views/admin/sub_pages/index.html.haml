@@ -1,0 +1,39 @@
+.index-page
+  .title
+    %h1
+      Custom Pages Manager
+    .tip
+      %p
+        You can easily manage your 5 custom pages for your territory here.
+
+  - if @sub_pages.length < 5
+    .link-bar
+      %ul
+        %li
+          = link_to "Add Custom Page", new_admin_territory_sub_page_path( @territory ), :class => "add-link"
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Page Title
+        %th
+          Page Meta Description
+        %th
+          Page Meta Tags
+        %th.last
+          Actions
+    %tbody
+      - @sub_pages.each do |s|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            = s.page_title
+          %td
+            = s.meta_content_description
+          %td
+            = s.meta_tags
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_sub_page_path( @territory, s )
+              %li= link_to "Delete", admin_territory_sub_page_path( @territory, s ), :confirm => 'Are you sure you wish to delete this Custom Page?', :method => :delete
+

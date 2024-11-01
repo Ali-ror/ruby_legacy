@@ -1,0 +1,217 @@
+= simple_nested_form_for [ :admin, @territory ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  = hidden_field_tag( :territory_nav, true ) if params[:territory_nav]
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Territory
+      - else
+        Edit Territory
+    - if !f.object.new_record?
+      %h2
+        = @territory.description
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        territory.
+
+      %p
+        Use this page to modify the content for your local pages. You can also add/edit your own social media links, community partner logos, web analytics code, meta information, and more. Please take your time to customize your site for your location, using keyword-relevant, but user-friendly text.
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+
+  .fieldset
+    %h3 Territory Information
+
+    - if current_user.is_global_admin?
+      = f.input :name, :label => "Name"
+      = f.input :territory_type,
+                :collection => Territory::VALID_TERRITORY_TYPES,
+                :default => Territory::VALID_TERRITORY_TYPES[0],
+                :hint => "Select 'Private Owner' if this is a normal territory, and select 'Organization' if this is a Chamber of Commerce or other private label territory."
+      = f.input :brand_name, :hint => "The brand of this Territory (i.e. Lubbock Chamber of Commerce)"
+
+      #org_info(style="display:none")
+        %h3
+          Organization Information
+        - if !f.object.new_record? && !f.object.brand_default_logo.url(:normal).nil?
+          = image_tag f.object.brand_default_logo.url(:normal)
+        = f.input :brand_default_logo,
+                  :label => "Brand Logo",
+                  :as => :file,
+                  :hint => "Logos must be of reasonable size and will be automatically re-sized for various display through the site. Acceptable file types: .jpg, .gif, and, .png"
+
+    - elsif !f.object.new_record?
+      %table
+        %tbody
+          %tr
+            %td(style="text-align: right;padding-right: 6px;")
+              %b
+                Territory Name:
+            %td
+              = f.object.name
+          %tr
+            %td(style="text-align: right;padding-right: 6px;")
+              %b
+                Territory Type:
+            %td
+              = f.object.territory_type
+
+        - if f.object.private_label
+          %tr
+            %td(style="text-align: right;padding-right: 6px;")
+              %b
+                Brand Name:
+            %td
+              = f.object.brand_name
+          %tr
+            %td(style="text-align: right;padding-right: 6px;")
+              %b
+                Brand Logo:
+            %td
+              = image_tag f.object.brand_default_logo.url(:normal)
+      %br/
+      %br/
+
+    %h3 Corresponding Cities
+    - if current_user.is_global_admin?
+      = f.simple_fields_for :cities do |f_cities|
+        = f_cities.input :city
+        .input
+          = f_cities.label :state
+          = f_cities.state_select :state, country='US'
+        = f_cities.link_to_remove "Remove City"
+      = f.link_to_add "Add Another City", :cities
+    - else
+      %ul
+        - f.object.cities.each do |c|
+          %li
+            = c.location
+    %br/
+
+  - if !f.object.new_record?
+    .fieldset
+      %h3 User Facing Information for this Territory
+      = f.input :discovery_text_proxy,
+                :as => :text,
+                :hint => "This is shown in the 'Discover Local Business' area on the user facing site for this territory (255 characters... any longer and it could go over the allotted space)",
+                :input_html => { :class => "wysiwyg-light" },
+                :label => "Discover text"
+      = f.input :save_text_proxy,
+                :as => :text,
+                :hint => "This is shown in the 'Save Time and Money' area on the user facing site for this territory (255 characters... any longer and it could go over the allotted space)",
+                :input_html => { :class => "wysiwyg-light" },
+                :label => "Save text"
+      = f.input :connect_text_proxy,
+                :as => :text,
+                :hint => "This is shown in the 'Connect With theCommunity' area on the user facing site for this territory (255 characters... any longer and it could go over the allotted space)",
+                :input_html => { :class => "wysiwyg-light" },
+                :label => "Connect text"
+      = f.input :can_rely_text_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Featured home",
+                :hint => "This text will appear as the main article/excerpt on your home page. You can use it to highlight content from an internal page or feature content from outside your site (external blog, facebook, etc...)"
+      = f.input :featured_link,
+                :hint => "Enter the link to content featured in the above text. Please use the full URL path: http://..."
+      = f.input :what_is_relylocal_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "What is RelyLocal?"
+      = f.input :list_your_businesses_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Promote your business"
+      = f.input :show_your_support_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Show your support"
+      = f.input :contact_us_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Contact us"
+      = f.input :mobile_contact_us_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg-light" },
+                :label => "Mobile Contact us"
+      = f.input :local_jobs_text_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Local Jobs"
+      = f.input :advertise_with_us_proxy,
+                :as => :text,
+                :input_html => { :class => "wysiwyg" },
+                :label => "Advertise with us"
+      - if f.object.rewards_enabled || current_user.is_global_admin?
+        = f.input :rewards_text_proxy,
+                  :as => :text,
+                  :input_html => { :class => "wysiwyg" },
+                  :label => "RelyLocal Rewards"
+
+  - if current_user.is_global_admin?
+    .fieldset
+      %h3 RelyLocal Rewards / Deals of the Day
+      = f.input :rewards_enabled, :label => "Activate RelyLocal Rewards"
+      = f.input :deal_of_the_day_enabled, :label => "Activate Deal of the Day", :hint => "Deal of the Day cannot be enabled unless RelyLocal Rewards is enabled."
+
+  .fieldset
+    %h3 Social Media/Web Links
+    = f.simple_fields_for :links do |f_links|
+      = f_links.input :url
+      = f_links.association :link_type, :include_blank => false
+      = f_links.link_to_remove "Remove Link"
+    = f.link_to_add "Add Link", :links
+
+  .fieldset
+    %h3 Page Meta Data / Web Analytics Tracking Code
+    = f.input :page_title, :hint => "The title which appears in the browser next to RelyLocal"
+    = f.input :meta_description, :as => :text, :input_html => { :rows => 3, :cols => 60 }, :hint => "The description used for Search Engine Optimization. This is not displayed on the browser"
+    = f.input :meta_tags, :as => :text, :input_html => { :rows => 3, :cols => 60 }, :hint => "The tags used for Search Engine Optimization. This is not displayed on the browser"
+    = f.input :tracking_code, :as => :string, :hint => "Enter the tracking code used by your web analytics tool - example: UA-XXXXXXXX-X", :input_html => { :rows => 6, :cols => 60 }
+
+  .fieldset
+    %h3 Community Partners
+    = f.simple_fields_for :affiliates do |f_a|
+      - if !f_a.object.new_record? && !f_a.object.logo.url.nil?
+        = image_tag f_a.object.logo.url(:normal)
+      = f_a.input :logo, :as => :file, :hint => "These logos should fit within a 140 x 72 pixel box. Two-color or black and white logos work the best, as the site will add the transparency effect automatically."
+      = f_a.input :link, :hint => "Enter link to Community Partner, using the full URL path: http://...."
+      = f_a.link_to_remove "Remove Community Partner"
+    = f.link_to_add "Add Another Community Partners (Max 5)", :affiliates
+    - if f.object.errors[:affiliates]
+      - f.object.errors[:affiliates].each do |e|
+        .error= e
+
+  - if current_user.is_global_admin?
+    .fieldset
+      %h3 Territory Administrators
+      = f.simple_fields_for :user_territory_local_admins do |f_admins|
+        = f_admins.input :user_proxy, :as => :string, :label => "Local Admin", :hint => "Type in an existing User's name or email for a list of matching names", :input_html => { :class => "autocomplete-user" }
+        = f_admins.hidden_field :user_id
+        = f_admins.link_to_remove "Remove Local Admin"
+      = f.link_to_add "Add Another Local Admin", :user_territory_local_admins
+
+  .fieldset
+    %h3 Hide Events Calendar
+    = f.input :hide_events_calendar, :hint => "Selecting this will remove the Events Calendar link from the user facing site."
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+
+= render "form_javascript"
+

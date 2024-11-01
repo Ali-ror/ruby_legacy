@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+  %body
+    %p
+      Hello
+      = "#{@resource.email}!"
+
+    %p
+      Your account has been locked due to an excessive amount of unsuccessful sign in attempts. Click the link below to
+      unlock your account:
+
+    %p
+      -#= link_to( 'Unlock my account', unlock_url(@resource, :unlock_token => @resource.unlock_token) )

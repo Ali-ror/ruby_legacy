@@ -1,0 +1,16 @@
+%h2= @business_listing.name
+%br
+%p
+  %span.street-address
+    = @business_listing.address.address1
+    = ", #{@business_listing.address.address2}" unless @business_listing.address.address2.blank?
+  %br
+    %span.locality= @business_listing.address.city
+    %abbr.region{:title => "#{@business_listing.address.state}"}= ", #{@business_listing.address.state}" unless @business_listing.address.state.blank?
+    %span.postal-code= @business_listing.address.zip
+
+%br
+%label Directions:
+= link_to "To here", "javascript:tohere();"
+&nbsp;-&nbsp;
+= link_to "From here", "javascript:fromhere();"

@@ -1,0 +1,44 @@
+= simple_form_for [ :admin, @territory, @business_listing, @comment ], :html => { :multipart => true } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a Comment
+      - else
+        Edit Comment
+        = @comment.comment
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        comment.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :business_listing_id
+
+  .fieldset
+    %h3 Comment Information
+    = f.input :user_proxy, :as => :string, :label => "User", :hint => "Type in an existing User's name or email for a list of matching names"
+    = f.hidden_field :user_id
+    
+    = f.input :comment, :input_html =>  { :rows => 4, :cols => 60 }
+    = f.input :state, :collection => [ BusinessListing::PENDING, BusinessListing::APPROVED, BusinessListing::REJECTED ]
+    = f.input :rating, :collection => 1..5
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+  = javascript_include_tag "jquery.initAutoComplete"
+
+= render "form_javascript.js"

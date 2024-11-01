@@ -1,0 +1,59 @@
+= simple_nested_form_for @user, :url => polymorphic_path([:admin, @territory, @user]) do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a User
+      - else
+        Edit User
+        = @user.email
+    .tip
+      %p
+        Please fill out the following form completely to 
+        = f.object.new_record? ? "add a new" : "edit this"
+        user.
+      %p
+        This form is primarily used to manually add business members prior to adding their associated listing(s). This information does not appear publicly in their listing, but is meant for your internal use. Additionally, you may use this form to add a new "Admin" to your site.        
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  .fieldset
+    %h3
+      User Credentials
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation, :label => "Confirm Password"
+    = f.input :global_admin if current_user.is_global_admin?
+    
+  .fieldset
+    %h3
+      User Information
+    = f.input :first_name,  :label => "First Name"
+    = f.input :last_name,   :label => "Last Name"
+    = f.simple_fields_for :address do |f_address|
+      = render "admin/common/address", :f => f_address
+
+  .fieldset
+    %h3 User Territories
+    = f.simple_fields_for :user_territories do |f_terr|
+      = f_terr.input :territory_proxy, :as => :string, :label => "Associated Territory", :hint => "Type in an existing Territory for a list of matching names", :required => false, :input_html => { :class => "autocomplete-territory", :disabled => !current_user.is_global_admin? && f_terr.object.local_admin }
+      = f_terr.hidden_field :territory_id
+      = f_terr.input :local_admin, :hint => "WARNING: Only check this box for those on your staff that you would like to have full access to your Admin Panel." if current_user.is_global_admin?
+      = f_terr.link_to_remove "Remove Territory" if current_user.is_global_admin?
+    = f.link_to_add "Add Another Territory", :user_territories
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+
+= render "form_javascript.js"

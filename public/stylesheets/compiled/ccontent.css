@@ -1,0 +1,30 @@
+.custom-content { color: #000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; margin: 10px; line-height: 1.5em; text-transform: none !important; /* IE */ }
+.custom-content td, .custom-content pre { color: #000; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; margin: 8px; }
+.custom-content h1 { font-size: 2em; margin-left: 0px !important; }
+.custom-content h2 { font-size: 1.5em; }
+.custom-content h3 { font-size: 1.17em; margin: 10px 0px; }
+.custom-content h4 { font-size: 1em; }
+.custom-content h5 { font-size: .83em; }
+.custom-content h6 { font-size: .75em; }
+.custom-content h1, .custom-content h2, .custom-content h3, .custom-content h4, .custom-content h5, .custom-content h6 { text-transform: none !important; line-height: 1; }
+.custom-content p, .custom-content ul { margin: 10px 0px; }
+.custom-content ul, .custom-content ol { margin-left: 16px; }
+.custom-content ul li { list-style-type: disc; }
+.custom-content ol li { list-style: decimal outside; }
+.custom-content .mceItemTable, .custom-content .mceItemTable td, .custom-content .mceItemTable th, .custom-content .mceItemTable caption, .custom-content .mceItemVisualAid { border: 1px dashed #BBB; }
+.custom-content a.mceItemAnchor { display: inline-block; width: 11px !important; height: 11px  !important; background: url(img/items.gif) no-repeat 0 0; }
+.custom-content span.mceItemNbsp { background: #DDD; }
+.custom-content td.mceSelected, .custom-content th.mceSelected { background-color: #3399ff !important; }
+.custom-content img { border: 0; }
+.custom-content table { cursor: default; border-collapse: separate; }
+.custom-content table td, .custom-content table th { cursor: text; }
+.custom-content ins { border-bottom: 1px solid green; text-decoration: none; color: green; }
+.custom-content del { color: red; text-decoration: line-through; }
+.custom-content cite { border-bottom: 1px dashed blue; }
+.custom-content acronym { border-bottom: 1px dotted #CCC; cursor: help; }
+.custom-content abbr { border-bottom: 1px dashed #CCC; cursor: help; }
+.custom-content * html body { scrollbar-3dlight-color: #F0F0EE; scrollbar-arrow-color: #676662; scrollbar-base-color: #F0F0EE; scrollbar-darkshadow-color: #DDD; scrollbar-face-color: #E0E0DD; scrollbar-highlight-color: #F0F0EE; scrollbar-shadow-color: #F0F0EE; scrollbar-track-color: #F5F5F5; }
+.custom-content img:-moz-broken { -moz-force-broken-image-icon: 1; width: 24px; height: 24px; }
+.custom-content font[face=mceinline] { font-family: inherit !important; }
+
+.custom-content.standard-page h1 { text-transform: uppercase !important; }

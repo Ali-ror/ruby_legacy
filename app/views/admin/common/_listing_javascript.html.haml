@@ -1,0 +1,45 @@
+- content_for :css_includes do
+  = stylesheet_link_tag "css/custom-theme/jquery-ui-1.8.7.custom.css"
+
+- content_for :js_includes do
+  = javascript_include_tag "jquery-ui-1.8.7.custom.min"
+  = javascript_include_tag "jquery.initAutoComplete"
+
+- owners ||= false
+- all_listings ||= false
+
+- data = "{ 'keyword':request.term }"
+- data = "{ 'keyword':request.term, 'owner':true }" if owners
+- data = "{ 'keyword':request.term, 'all_listings':true }" if all_listings
+
+:javascript
+  function parseResult(data){
+    var formatting = $.map(data, function(item) {
+      return {
+        label: item.name,
+        value: item.name,
+        id: item.id
+      }
+    });
+    return formatting;
+  }
+
+  $( function() {
+    $( ".listing_autocomplete" ).live( 'focus', function() {
+      $(this).autocomplete({
+        minLength: 2,
+        source: function(request, response){
+          $.ajax({
+            url: '#{polymorphic_path([:admin, @territory, BusinessListing], :format => "json")}',
+            data: #{data},
+            success: function(data){
+              response(parseResult(data));
+            }
+          });
+        },
+        select: function(event,ui) {
+          $( this ).parent().next().val( ui.item.id );
+        }
+      });
+    });
+  });

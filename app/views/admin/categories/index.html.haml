@@ -1,0 +1,94 @@
+.index-page
+  .title
+    %h1
+      Manage Listing Categories
+    .tip
+      %p
+        You can easily manage the categories for your business listings here.
+      %p
+        Global Categories can only be modified by global admins. Territory admins
+        can modify their local categories. Only categories not in use by a
+        business listing can be deleted. Any Category can be hidden.
+
+  .browse-title
+    Browse By Category
+    %ul
+      %li
+        = link_to "All", @territory ? admin_territory_categories_path( @territory ) : admin_categories_path
+      - ( 'A'..'Z' ).to_a.each do |l|
+        %li
+          - options = {}
+          - options[:filter] = l
+          = link_to l, @territory ? admin_territory_categories_path( @territory, options ) : admin_categories_path(options)
+
+  .link-bar
+    %ul
+      %li
+        = link_to "Add Category", new_polymorphic_path([:admin, @territory, Category]), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @categories ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first Category
+        %th Listings Count
+        %th Global/Local
+        %th.last Actions
+        -#%th.last Select
+    %tbody
+      - @categories.each do |category|
+        %tr(id="#{dom_id(category)}" class="#{cycle 'odd', 'even'}")
+          %td.first
+            = category.path_name_cache.html_safe if category.path_name_cache
+          %td
+            - if !@territory.nil? && category.territory_id != @territory.id
+              - count = category.business_listings.select { |bl| bl.territory_id == @territory.id }.length
+            - else
+              - count = category.business_listings.length
+            = count
+          %td
+            = category.territory_id.nil? ? "Global" : "Local - #{category.territory.name}"
+          %td.last
+            %ul
+              - if can? :update, category
+                %li
+                  = link_to "Edit", edit_polymorphic_path([:admin, @territory, category])
+              - if can? :destroy, category
+                %li
+                  = link_to "Delete", polymorphic_path([:admin, @territory, category]), :method => :delete, :confirm => "Are you sure you want to delete this category?"
+              - if @territory
+                - if count == 0
+                  %li
+                    = link_to "Remove", "javascript:void(0)", :class => "hide", 'data-reference' => category.id
+                %li
+                  = link_to "Browse Listings", admin_territory_business_listings_path( @territory, :filter4 => category.id )
+          -#%td.last
+            = check_box_tag dom_id( category )
+
+  .pagination
+    Page
+    = will_paginate( @categories ) || link_to( "1", "##" )
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Categories", "", :class => "delete-link"
+
+- if @territory
+  :javascript
+    $( function() {
+      $( '.hide' ).click( function() {
+        if ( confirm( "Are you sure you wish to remove this category?" ) ) {
+          var e = $( this );
+          var id = e.attr( "data-reference" );
+          $.get( "/admin/categories/" + id + "/hide?territory_id=#{@territory.id}", function( data ) {
+            window.location.reload();
+          } );
+        }
+      } );
+    } );

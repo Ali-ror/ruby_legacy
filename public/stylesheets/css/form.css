@@ -1,0 +1,112 @@
+/* General Simple Forms */
+form { padding: 10px; }
+form p { margin-top: 15px; }
+form a { padding-top: 15px; }
+
+form.single_field_form { padding: 0px; }
+
+legend { 
+  font-size: 120%;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+form.simple_form {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f2f2f2;
+  color: #797979;
+}
+
+form.simple_form p {
+  clear: left;
+  margin: 10px 0;
+}
+
+form.simple_form label {
+  font-weight: bold;
+  display: block;
+  margin: 10px 0px;
+}
+
+form.simple_form .error {
+  display: none;
+}
+
+form.simple_form .hint {
+  clear: left;
+  color: #a1a1a1;
+  display: block;
+  font-style: italic;
+}
+
+
+form input.boolean {
+  float: left;
+  margin: 0px 10px 0px 0px
+}
+
+/* User Panel Form */
+/*form#login-panel {
+  margin: 0px;
+  padding: 3px 10px 15px 10px; 
+  width: 650px;
+  color: #ffffff;
+  background: none;
+}
+
+form#login-panel label { 
+  margin-right: 9px;
+  font-weight: bold;
+}
+
+form#login-panel input { 
+  margin-right: 12px;
+}
+
+form#login-panel .email, form#login-panel .password { 
+  width: 130px;
+  display: inline;
+}
+
+/*form#login-panel #user_submit {
+  float: right;
+  margin: 2px 0px 0px 0px;
+}*/
+
+/*form#login-panel a {
+  position: relative;
+  float: right;
+  /*clear: both;*/
+/*  top: -9px;
+  color: #ffffff;
+  display: inline;
+  margin-right: 9px;
+}*/
+
+form#login-panel {
+  /*width: 600px;*/
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+form#login-panel ul {
+  height: 15px;
+  margin-top: 5px;
+}
+
+form#login-panel li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 0 0 9px;
+  border: none;
+  float: none;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+form#login-panel li .hint {
+  color: #A8A8A8;
+  font-style: italic;
+}

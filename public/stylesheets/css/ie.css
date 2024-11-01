@@ -1,0 +1,66 @@
+/* fix height on submit button */
+.single_field_form {
+  position: relative;
+}
+
+.single_field_form input {
+  margin-right: 40px;
+}
+
+.single_field_form input.submit {
+  padding: 0px 5px 0 5px;
+  position: absolute;
+  right: -30px;
+}
+
+/* make forms stay on top of things */
+.single_field_form input {
+  position: relative;
+}
+
+/* set up background image on main nav hovers */
+#main ul li a:hover {
+  background: #b2b2b2 url(/images/main_nav_item_background_hover.png);
+}
+
+/* Login Panel for IE */
+/*form#login-panel #user_submit {
+  float: right;
+  clear: both;
+  position: relative;
+  top: 0px;
+  left: -100px;
+}
+
+form#login-panel a {
+  top: -35px;
+}*/
+
+/* Submit Hide Label */
+.submit.fix {
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  top: -5px;
+}
+
+/* Fix State Select Headers */
+a#city_list ul li {
+  margin-top: 0px;
+}
+
+/*********************************
+* =Affiliates
+*********************************/
+a.affiliate img {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+}
+
+/*********************************
+* =Coupons
+*********************************/
+#action_two_content .coupon-container {
+  width: 230px;
+  height: 300px;
+  margin-right: 10px;
+}

@@ -1,0 +1,37 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<script type='text/javascript'>
+  var map;
+  var bounds = new google.maps.LatLngBounds();
+
+  $( function() {
+    createMap();
+  } );
+
+  function createMap() {
+    var myOptions = {
+      zoom: 13,
+      center: new google.maps.LatLng(0, 0),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map( document.getElementById( 'map' ), myOptions );
+
+    <% @resellers.flatten.each do |r| %>
+        <% if !r.address.latitude.nil? && !r.address.longitude.nil? %>
+          addMarker( new google.maps.LatLng( <%= r.address.latitude %>, <%= r.address.longitude %> ), "<%= r.name %>" );
+        <% end %>
+    <% end %>
+  }
+
+  function addMarker( ll, name ) {
+    bounds.extend( ll );
+    new google.maps.Marker( {
+      position: ll,
+      title: name,
+      map: map
+    });
+
+    map.fitBounds( bounds );
+  }
+
+</script>

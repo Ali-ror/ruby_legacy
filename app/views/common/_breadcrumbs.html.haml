@@ -1,0 +1,6 @@
+%aside.breadcrumb
+  %h4
+    = "#{PrivateLabel.instance.site_name}:"
+  %ul
+    %li= link_to @territory.name, territory_categories_path(@territory)
+    = full_category_name(@category, :links => true) if @category

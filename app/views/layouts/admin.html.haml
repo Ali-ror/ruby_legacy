@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title
+      = "RelyLocal Administration | #{controller.controller_name.titlecase} #{(@territory && !@territory.new_record?) ? '| ' + @territory.description : ''}"
+    %link{ :href => "/images/favicon.ico", :rel => "icon", :type => "image/ico" }
+    = stylesheet_link_tag "reset-min"
+    = stylesheet_link_tag "fonts-min"
+    = stylesheet_link_tag "grids-min"
+    = stylesheet_link_tag "carousel.css"
+    = stylesheet_link_tag "compiled/style"
+    = stylesheet_link_tag "/javascripts/fancybox/jquery.fancybox-1.3.4.css"
+    = stylesheet_link_tag "calendar_style"
+    = yield :css_includes
+
+    = javascript_include_tag "jquery.min.js", "nested_form.js", "rails.js"
+    = javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack"
+    -#= javascript_include_tag "tiny_mce/tiny_mce.js"
+    = javascript_include_tag "ckeditor/ckeditor.js"
+    = javascript_include_tag "ckeditor/adapters/jquery.js"
+    = javascript_include_tag "application"
+    -#= javascript_include_tag :defaults
+    = yield :js_includes
+    
+    = csrf_meta_tag
+  %body
+    = render "admin/common/navigation" if @current_user
+    = yield
+    
+    = yield :javascript

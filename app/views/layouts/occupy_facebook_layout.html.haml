@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag 'compiled/ccontent', :media => :all
+  %body
+    = yield
+
+    = javascript_include_tag "jquery.min"
+
+    = yield :javascript_tags
+    = yield :javascript

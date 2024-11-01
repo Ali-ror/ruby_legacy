@@ -1,0 +1,72 @@
+== RelyLocal ==
+
+Device install notes:
+===============================================================================
+
+Some setup you must do manually if you haven't yet:
+
+  1. Setup default url options for your specific environment. Here is an
+     example of development environment:
+
+       config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+     This is a required Rails configuration. In production it must be the
+     actual host of your application
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root :to => "home#index"
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+===============================================================================
+Getting Started with RelyLocal Application
+===============================================================================
+1. run 'rake db:migrate'
+2. run 'rake db:seed' to create a global admin
+3. Email address and Password will output in console you can use that to log in
+4. Startup app and add "/admin" to get the login screen
+
+===============================================================================
+
+===============================================================================
+Spork based testing
+===============================================================================
+As spork is now a git project based gem, to run spork, call:
+bundle exec spork
+Them in another terminal, run any rspec command:
+rspec spec # for the entire test suite
+rspec spec/acceptance/banner_feature_spec.rb # for one test scenario
+===============================================================================
+
+
+===============================================================================
+Development with Steak
+===============================================================================
+
+Steak is a think layer on top of Rspec for faster integration testing from a
+development perspective. 
+
+  * To run only unit test and no acceptance testing
+    run command: 'rake spec:unit'
+
+  * To run only acceptance test only
+    run command: 'rake spec:acceptance'
+
+The rest of the spec commands should work fine with Steak. Autotest also works as
+well.
+===============================================================================
+
+
+- seo for user facing site
+
+- for business listing resources, add which business listing to the list/edit views
+- coupons
+
+- Coupons now have images... do they need to be approved?
+- What about documents and help?

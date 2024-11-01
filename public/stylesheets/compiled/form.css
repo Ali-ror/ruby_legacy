@@ -1,0 +1,27 @@
+form.simple_form .fieldset { background-color: #f2f2f2; margin-bottom: 15px; padding: 10px 10px 4px 10px; margin: 15px auto; width: 600px; }
+form.simple_form label { color: #666666; font-weight: bold; display: block; margin-bottom: 6px; }
+form.simple_form .hint { clear: left; font-size: 93%; color: #a1a1a1; display: block; font-style: italic; }
+form.simple_form .hint a { font-size: 85%; color: #a1a1a1; font-style: italic; }
+form.simple_form .boolean label, form.simple_form label.collection_radio { display: inline; padding-left: 3px; }
+form.simple_form abbr[title='required'] { color: #790e11; font-weight: bold; font-size: 123.1%; }
+form.simple_form h3 { font-weight: bold; font-size: 123.1%; margin-bottom: 15px; }
+form.simple_form .input { margin-bottom: 15px; }
+form.simple_form input, form.simple_form select { padding: 3px; }
+form.simple_form .submit { background-color: #dddddd; overflow: auto; }
+form.simple_form .submit .buttons { margin: 15px auto; width: 600px; }
+form.simple_form .submit .buttons input[type='submit'] { background-color: #09215f; color: #ffffff; height: 27px; border: 0 none; padding: 0 12px; }
+form.simple_form a.add_nested_fields { color: #102765; background: transparent url("/images/add-icon.png") no-repeat; padding-left: 20px; text-decoration: none; margin-bottom: 15px; display: block; }
+form.simple_form a.remove_nested_fields { color: #102765; background: transparent url("/images/remove-icon.png") no-repeat; padding-left: 20px; text-decoration: none; /*margin-bottom: 15px;*/ display: block; /*position: absolute;
+right: 50px;
+bottom: 0;*/ }
+form.simple_form .fields { background-color: #eae7e7; padding: 10px; margin-bottom: 10px; }
+form.simple_form a:hover { text-decoration: underline; }
+form.simple_form .error_explanation { background-color: #ffe5e6; color: #790e11; }
+form.simple_form .error_explanation h2 { padding: 20px 0 0 15px; font-weight: bold; font-size: 123.1%; margin: 0 auto; width: 620px; }
+form.simple_form .error_explanation ul { margin: 0 auto; padding-left: 5px; width: 620px; padding-bottom: 20px; }
+form.simple_form .error { background: transparent url("/images/error-icon.png") no-repeat 5px 1px; padding: 1px 1px 1px 25px; clear: left; color: #790e11; display: block; background-color: #790e11; color: #ffffff; font-weight: bold; margin-top: 3px; }
+form.simple_form .title { margin: 15px auto; width: 610px; }
+form.simple_form .title .tip { color: #a1a1a1; width: 90%; }
+form.simple_form .title .tip p { margin-bottom: 10px; }
+form.simple_form .title .tip a { color: #a1a1a1; }
+form.simple_form .title abbr[title='required'] { color: #790e11; font-weight: bold; font-size: 123.1%; }

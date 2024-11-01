@@ -1,0 +1,56 @@
+.index-page
+  .title
+    %h1
+      Manage Listings
+    .tip
+      %p
+        You can easily manage your listings here. Just use the add listing,
+        edit, delete, delete all, select all, deselect all and delete selected
+        links here.
+
+  .browse-title
+    Browse By Title
+    %ul
+      - options = {}
+      - [ :filter2, :filter3, :filter4 ].each  { |f| options[f] = params[f] if params[f] }
+      %li
+        = link_to "All", @territory ? admin_territory_business_listings_path( @territory ) : admin_business_listings_path
+      - ( [ '0-9' ] + ( 'A'..'Z' ).to_a ).each do |l|
+        %li
+          - options[:filter] = l
+          = link_to l, @territory ? admin_territory_business_listings_path( @territory, options ) : admin_business_listings_path( options )
+
+  = form_tag( polymorphic_path( [ :admin, @territory, BusinessListing ] ),
+              :id => "search-form",
+              :class => "remote",
+              :method => :get ) do
+    .search-bar
+      %span.inline-header Search By Listing Name
+      = text_field_tag :keyword, params[:keyword], :autocomplete => "off"
+      = submit_tag :search
+
+  - if can? :create, BusinessListing
+    .link-bar
+      %ul
+        %li
+          = link_to "Add Business Listing", new_admin_territory_business_listing_path( @territory ), :class => "add-link" unless @territory.blank?
+        - if @territory
+          %li
+            = link_to "Download All Listing Members", admin_territory_business_listings_path( @territory, :format => "csv" ), :class => "download-link"
+
+  #listings
+    = render 'listings'
+
+  -#.bottom-link-bar
+    %ul
+      %li
+        = link_to "De-select all", "", :class => "de-select-all-link"
+      %li
+        = link_to "Delete Selected Listings", "", :class => "delete-link"
+
+:javascript
+  $( function() {
+  	$("a.fancy_inline").fancybox({
+  		'hideOnContentClick': true
+  	});
+  });

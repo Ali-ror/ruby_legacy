@@ -1,0 +1,12 @@
+%h1
+  Local Businesses In
+  = @territory.name
+
+- if @categories.blank?
+  %p
+    There are currently no listings to be displayed in a category.
+- else
+  = render :partial => "common/category_drill_down", :locals => { :context => :business }
+  -#%ul#categories
+    - @categories.each do |c|
+      %li= link_to c.name, territory_category_path(@territory, c.slugger)

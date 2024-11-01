@@ -1,0 +1,43 @@
+.index-page
+  .title
+    %h1
+      Header Manager
+    .tip
+      %p
+        You can easily manage your territory header images here.
+
+  .link-bar
+    %ul
+      %li
+        = link_to "Add Header", new_admin_territory_header_path( @territory ), :class => "add-link"
+
+  .pagination
+    Page
+    = will_paginate( @headers ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          Header
+        %th
+          Credit
+        %th.last
+          Actions
+    %tbody
+      - @headers.each do |h|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            %a.image(href="#{h.header.url(:normal)}")= image_tag( h.header.url(:small) ) unless h.header.url.nil?
+          %td
+            = h.credit.html_safe
+            %br/
+            = h.link
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_header_path( @territory, h )
+              %li= link_to "Delete", admin_territory_header_path( @territory, h ), :confirm => 'Are you sure you wish to delete this Header?', :method => :delete
+
+  .pagination
+    Page
+    = will_paginate( @headers ) || link_to( "1", "##" )

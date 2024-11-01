@@ -1,0 +1,6 @@
+%section#coupons
+  = render "coupons/coupon", :coupon => @coupon, :no_actions => true
+  
+- content_for :javascript do
+  :javascript
+    setTimeout( "window.print();window.close();", 1000)

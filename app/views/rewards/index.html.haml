@@ -1,0 +1,108 @@
+%aside.breadcrumb
+  %h4 RelyLocal:
+  %ul
+    %li RelyLocal Rewards
+
+.rewards
+  = render :partial => "common/category_drill_down", :locals => { :context => :rewards }
+
+  - if @territory.deal_of_the_day_enabled
+    .daily_deal_page
+      .float_left_section.left
+        %h1 Deal Of The Day:
+        %aside.actions
+          %ul
+            %li.share
+              %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_rewards_url( @territory )}")
+        %br/
+        .daily_deal_instructions
+          %p
+            RelyLocal's Deal of the Day is available for free to all members of the RelyLocal Rewards program (details
+            below). To redeem, simply follow these instructions.
+
+          %ol
+            %li
+              1.
+              = link_to "Login", new_user_session_path
+              or
+              = link_to "Register", new_user_session_path
+              (Free)
+            %li
+              2. Print the official Deal of the Day
+            %li
+              3. Present the printed voucher along with your RelyLocal Rewards card to merchant.
+            %li
+              - if current_user && !current_user.user_territories.for_territory( @territory ).first.subscribe_daily_deal_email
+                4. To receive the Deal Of The Day via email,
+                = link_to "click here to subscribe!", toggle_subscription_territory_rewards_path( @territory )
+              - elsif current_user && current_user.user_territories.for_territory( @territory ).first.subscribe_daily_deal_email
+                4. (You are already subscribed to the Deal Of The Day email,
+                = link_to "click here to unsubscribe)", toggle_subscription_territory_rewards_path( @territory )
+              - else
+                4. To receive the Deal Of The Day via email, please
+                = link_to "Login or Register", new_user_session_path
+
+      .float_left_section.right
+        .daily_deal_graphic
+          - if current_user && @daily_deal
+            - url = "#{territory_business_listing_path(@territory, @daily_deal.business_listing)}#deal_of_the_day"
+          - elsif current_user && @daily_deal.nil?
+            - if !current_user.user_territories.for_territory( @territory ).first.subscribe_daily_deal_email
+              - url = toggle_subscription_territory_rewards_path( @territory )
+            - else
+              - url = "#"
+          - else
+            - url = new_user_session_path
+          %a(href="#{url}")
+            - if @daily_deal.nil?
+              = image_tag "deal_of_the_day_default.jpg"
+            - elsif !@daily_deal.deal_image.blank?
+              = image_tag @daily_deal.deal_image.url(:medium)
+            - elsif @daily_deal.business_listing
+              = image_tag(@daily_deal.business_listing.logo.url(:normal), :style => "width:140px; margin-left:150px")
+            - else
+              = @daily_deal.title
+          - if @daily_deal
+            .caption.daily_deal
+              %h3= @daily_deal.title
+              For the full details, visit
+              = link_to @daily_deal.business_listing.name, url
+              to print the official Deal of the Day voucher.
+          - else
+            .caption.daily_deal
+              %h3 Subscribe Today For Upcoming Deals!
+              No deal today, but more coming soon! Don't miss out! Subscribe today for FREE!
+
+  .rewards_section
+    %h1= "RelyLocal Rewards:"
+    %aside.actions
+      %ul
+        %li.share
+          %a.st_sharethis_custom(displayText="ShareThis" st_url="#{territory_rewards_url( @territory )}")
+
+    %br/
+    .custom-content
+      - unless params[:categories]
+        = @territory.rewards_text.html_safe
+    %div( style="float:right; padding: 6px 0;font-size: 14px;" )
+      %b
+        = link_to "Download a PDF Of All Local Rewards", territory_rewards_pdf_url( @territory, :format => :pdf )
+
+    %section#businesses.large_list
+      - unless @rewards.blank?
+        = render :partial => "rewards/reward", :collection => @rewards, :as => :reward
+      - else
+        .custom-content
+          %p No rewards found.
+
+      %footer
+        %div( style="float:right; padding: 6px 0;font-size: 14px;" )
+          %b
+            = link_to "Download a PDF Of All Local Rewards", territory_rewards_pdf_url( @territory, :format => :pdf )
+        %div( style="clear:both;")
+        = render "common/business_icon_legend"
+        = will_paginate(@rewards, :renderer => WillPaginate::ViewHelpers::CustomLinkRenderer)
+      / end businesses
+
+
+= render "common/share_this"

@@ -1,0 +1,23 @@
+<% results = santize_google_analytics(@territory.tracking_code) if @territory && @territory.has_tracking_code? %>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-10145428-1");
+pageTracker._trackPageview();
+
+<% if results && results[:success] == true %>
+var pageTracker2 = _gat._getTracker('<%=results[:code]%>');
+pageTracker2._trackPageview();
+<% end %>
+
+} catch(err) {}
+</script>
+
+<% if results && results[:success] == false %>
+<%= results[:code].html_safe unless results[:code].blank? %>
+<% end %>

@@ -1,0 +1,86 @@
+.custom-content
+  #page1
+
+    %h2
+      The $20 Shift Calculator
+
+    %p
+      Want to make a difference in your community? Use the calculator below to see how little changes in your daily routine can make a big difference in the community. Refocusing just $20 of your current spending toward local businesses (instead of online, national, or big-box merchants) can have a major impact in our community!
+
+    .p(style="text-align: center")
+      %h3(style="color: #A94C36;font-size:16px")
+        Enter your estimated population:
+
+      = text_field_tag "population", "", :style => "padding: 10px;font-size: 16px"
+      %br/
+      = button_to_function "Calculate Impact", "calculate()", :style => "padding: 3px 6px;margin-top:6px"
+
+  #page2(style="display:none;padding: 25px 50px")
+    %h2
+      Results of a $20 Shift
+
+    %p
+      If everyone in the community (over the age of 18) were to shift just $20 of their existing monthly spending to independent, locally owned businesses, it would generate at least:
+
+
+    .p(style="text-align: center")
+      #result(style="color: red;font-weight: bold;font-size: 20px;")
+      %span(style="font-style:italic")
+        back into the local economy
+
+    %br/
+
+    %p
+      Your Pledge: By pledging to shift at least $20 of your existing monthly spending back to locally owned businesses, you will be supporting our community by keeping more money in the local economy where it is needed to support our civic, social, and cultural infrastructures while fueling new economic growth through local job creation and business investments.
+
+    %p
+      %i
+        %small
+
+    %p(style="text-align: right")
+      = button_to_function "Start Over", "startOver()", :style => "padding: 3px 6px"
+
+    %p(style="color:grey;font-size:10px;line-height: 10px;margin-top: 50px;")
+      The calculation is based on 83% of the population being over 18, shifting $20/mo for 12 months, with 68% of the revenue remaining in the local economy. Based, in part, on the.
+      = link_to "Andersonville Study of Retail Economics.", "http://www.civiceconomics.com/Andersonville"
+
+- content_for :javascript do
+  :javascript
+    $( function() {
+      $( '#population' ).keyup( function() {
+          this.value = this.value.replace(/[^0-9\.]/g,'');
+      });
+
+      $('#population').keypress( function( e ) {
+        if ( e.which == 13 ) {
+          calculate();
+        }
+      });
+    } );
+
+    calculate = function() {
+      v = $( "#population" ).val();
+      number = formatCurrency( parseInt( v ) * 137.088 );
+      $( "#result" ).html( number );
+      $( "#page1" ).hide();
+      $( "#page2" ).show();
+    };
+
+    startOver = function() {
+      $( "#population" ).val( "" );
+      $( "#page2" ).hide();
+      $( "#page1" ).show();
+    };
+
+    formatCurrency = function( num ) {
+      num = num.toString().replace(/\$|\,/g, '');
+      if (isNaN(num)) num = '0';
+      sign = (num == (num = Math.abs(num)));
+      num = Math.floor(num * 100 + 0.50000000001);
+      cents = num % 100;
+      num = Math.floor(num / 100).toString();
+      if (cents < 10) cents = '0' + cents;
+      for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+      num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+      return (((sign) ? '' : '-') + '$' + num + '.' + cents);
+    };

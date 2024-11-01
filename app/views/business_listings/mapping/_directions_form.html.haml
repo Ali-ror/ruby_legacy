@@ -1,0 +1,28 @@
+%h2= @business_listing.name
+%br
+
+- if direction == "from_here"
+  %p
+    Directions:
+    = link_to "To here", "javascript:tohere();"
+    %span(style="font-weight:bold")== - From here
+- elsif direction == "to_here"
+  %p
+    Directions:
+    %span(style="font-weight:bold") To here -
+    = link_to "From here", "javascript:fromhere();"
+
+%br
+Start address:
+%form(id="mapform" action="javascript:getDirections();")
+  %input(type="text" size=40 maxlength=40 name="addr" id="addr" value="")
+  %input(type="hidden" name="direction" value="#{direction}")
+  %p
+    %input(value="Get Directions" type="submit")
+  %p
+    %input(type="checkbox" name="walk" id="walk" value="true")
+    &nbsp;
+    Walking Directions
+    %input(type="checkbox" name="highways" id="highways" value="true")
+    &nbsp;
+    Avoid Highways

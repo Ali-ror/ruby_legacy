@@ -1,0 +1,44 @@
+= simple_form_for [ :admin, @territory, @business_listing, @file_model ], :html => { :multipart => true } do |f|
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      - if f.object.new_record?
+        Add a File
+      - else
+        Edit File
+    .tip
+      %p
+        Please fill out the following form completely to
+        = f.object.new_record? ? "add a new" : "edit this"
+        file.
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = f.hidden_field :business_listing_id
+
+  .fieldset
+    %h3 File information
+    
+    - if !f.object.new_record? && f.object.updated_at < GenericUploader::CUTOFF
+      .tip
+        %b
+          Please note: If you want to change any details of your
+          File (title or file), you must change BOTH
+          the title AND upload a new file. Otherwise, your
+          file or title change may not save correctly, or could
+          cause an error. 
+        %br/
+        %br/
+
+    = f.input :title
+    - if !f.object.new_record? && !f.object.file_attachment.url.nil?
+      = link_to "Download existing File", f.object.file_attachment.url
+    = f.input :file_attachment, :as => :file, :label => "File"
+
+  .submit
+    .buttons
+      = f.submit submit_label( f )
+

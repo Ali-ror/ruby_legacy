@@ -1,0 +1,77 @@
+- display_inline ||= false
+- rewards ||= false
+
+%section#national_homepage
+  #national_search
+    .white_back
+      %h1 Choose your RelyLocal campaign...
+      = form_tag "javascript:gotoURL();" do
+        - if rewards
+          .tip
+            Local Rewards are currently available in the following areas:
+        - c = City.with_territory
+        - c = c.joins(:territory).where("territories.rewards_enabled = true") if rewards
+        = select_tag :state, options_for_select([["- Select a state -", ""]] + c.map(&:state).uniq.sort)
+        = select_tag :city, options_for_select([["- Select a city -", ""]])
+        %input.submit{:type => "submit", :value => "Go", :class => "fix"}
+      %p.view_all
+        = link_to "View all RelyLocal campaigns »", states_path, :target => "_parent" if !rewards
+
+      - unless display_inline
+        %h1(style="margin: 25px 0 0 0;")
+          What A $20 Shift Means To Your Community
+        %p.view_all(style="padding:8px 30px 0 0;")
+          = link_to "It's more than you think »", occupy_main_street_path
+
+      / end .white_back
+    / end #national_search
+  / end #national_homepage
+
+- unless display_inline
+  - content_for :javascript do
+    = render :partial => "pages/national_js.html.erb", :locals => { :rewards => rewards }
+- else
+  %style(type="text/css" media="screen")
+    :plain
+      body {
+        font-family: helvetica, arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.4em;
+      }
+      
+      #national_search {
+        padding: 45px 0;
+        margin: 0 auto;
+        text-align:center;
+        width:auto;
+      }
+      #national_search h1 {
+        font-size: 26px;
+        margin-bottom: 10px;
+      }
+      #national_search select {
+        font-size: 16px;
+      }
+      #national_search .submit {
+        border: 0;
+        background: #fff url(/images/red_go.png) no-repeat;
+        height: 31px;
+        width: 31px;
+        text-indent: -100000px;
+      }
+      
+      #national_search .submit:hover {
+        cursor: pointer;
+      }
+      
+      #national_search .view_all {
+        text-align: right;
+        padding: 5px 126px 0 0;
+      }
+      #national_search .view_all a {
+        color: #a13a22;
+        font-weight: bold;
+      }
+      
+  = javascript_include_tag "jquery.min"
+  = render :partial => "pages/national_js.html.erb", :locals => { :rewards => rewards }

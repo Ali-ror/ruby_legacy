@@ -1,0 +1,62 @@
+.index-page
+  .title
+    %h1
+      Events
+    .tip
+      %p
+        Use the "approve" link to accept an event and display it publicly. Or, use the "Private Email" to contact the organizer for more details.
+
+  .pagination
+    Page
+    = will_paginate( @events ) || link_to( "1", "##" )
+
+  %table.index-table
+    %thead
+      %tr
+        %th.first
+          What and Link
+        %th
+          Contact
+        %th
+          State
+        %th.last
+          Actions
+    %tbody
+      - @events.each do |e|
+        %tr{ :class => "#{cycle 'odd', 'even'}" }
+          %td.first
+            = e.name
+            %br/
+            = e.description
+            %br/
+            = e.when
+            %br/
+            = link_to e.url if e.url
+          %td
+            %table.inner
+              %tbody
+                %tr
+                  %td
+                    Public Email:
+                  %td
+                    = mail_to e.public_email, e.public_email
+                %tr
+                  %td
+                    Private Email:
+                  %td
+                    = mail_to e.private_email, e.private_email
+                -#%tr
+                  %td
+                    User:            
+                  %td
+                    = link_to e.user.to_label, edit_admin_territory_user_path( @territory, e.user )
+          %td.moderate
+            = render "admin/common/moderate", :object => e
+          %td.last
+            %ul.actions
+              %li= link_to "Edit", edit_admin_territory_event_path( @territory, e )
+              %li= link_to "Delete", admin_territory_event_path( @territory, e ), :confirm => 'Are you sure you wish to delete this Event?', :method => :delete
+
+  .pagination
+    Page
+    = will_paginate( @events ) || link_to( "1", "##" )

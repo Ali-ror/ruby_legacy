@@ -1,0 +1,7 @@
+.custom-content
+  - if request.query_string.include?("&action=post") ||  request.query_string.include?("&action=preview")
+    %iframe(src="#{iframe_rl_jobs_post.html_safe}" width="100%" height="1000px" scrolling="no")
+  - else
+    %iframe(src="#{iframe_rl_jobs_get.html_safe}" width="100%" height="2500px" scrolling="no")
+
+%br(style="clear:both")

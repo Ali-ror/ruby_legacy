@@ -1,0 +1,14 @@
+!!! XML
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %title Rely | Print Work Orders for "#{@contractor.try(:full_name) || @employee.try(:full_name)}"
+    %meta{:name => 'csrf-token', :content => form_authenticity_token}
+    %meta{:name => 'csrf-param', :content => 'authenticity_token'}
+    
+    = stylesheet_link_tag "print", :media => "all"
+    
+  %body  
+    = yield
+    
+    = yield :javascript

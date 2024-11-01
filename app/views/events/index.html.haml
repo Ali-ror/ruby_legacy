@@ -1,0 +1,66 @@
+.custom-content.standard-page
+  - unless @events.blank?
+    %h1== #{@territory.name} Events
+
+    = link_to "Submit Local Event", "#submit_event"
+
+    #events
+      - months_shown = []
+      - @event_months.sort.each do |month, events|
+        - if !months_shown.include?( month.strftime("%B") )
+          %h2= month.strftime("%B")
+          - months_shown << month.strftime("%B")
+        %ul.events
+          - for e in events.sort_by { |e| e.when } do
+            %li.event
+              %h3
+                = e.when.strftime("%A, %B, %e, %Y @ %l:%M %p")
+                - end_time = e.end_time
+                - if end_time
+                  \-
+                  = end_time.strftime("%l:%M %p")
+                %br
+                .name= e.name
+
+              - unless e.description.blank?
+                %span.description= e.description
+                %br
+
+              - unless e.url.blank?
+                %span.website
+                  == Website: #{link_to(e.url, e.url, :target => '_blank')}
+                %br
+
+              - unless e.public_email.blank?
+                %span.email
+                  == Email: #{link_to(e.public_email, 'mailto:' + e.public_email, :target => '_blank')}
+                %br
+
+              %br
+  - else
+    %h1== No Events for #{@territory.name} yet
+
+  %a(name='submit_event')
+  = simple_form_for @event, :url => territory_events_path(@territory), :id => "new_event" do |f|
+    %h2 Submit a Local Event
+    = f.input :name
+    = f.input :description, :as => :text, :input_html => { :rows => 5 }, :hint => "Limit of 255 characters"
+    = f.input :when, :start_year => Date.today.year, :end_year => Date.today.year + 1, :order => [:month, :day, :year], :prompt => true, :minute_step => 5, :twelve_hour => true
+    = f.input :duration, :label => "Duration (in minutes)", :input_html =>  { :size => 4 }, :hint => "How long is this event? (numeric field only please, in minutes - 90 minutes is an hour and a half)"
+    = f.input :url
+    = f.input :public_email
+    = f.input :private_email
+    %br= f.submit "Publish"
+
+- content_for :css do
+  = stylesheet_link_tag "/javascripts/jquery-inputlimiter/jquery.inputlimiter.1.0.css"
+
+- content_for :javascript_tags do
+
+  = javascript_include_tag "jquery-inputlimiter/jquery.inputlimiter.1.2.3.min"
+
+- content_for :javascript do
+  :javascript
+    $( function() {
+      $('#event_description').inputlimiter();
+    } );

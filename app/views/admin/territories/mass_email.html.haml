@@ -1,0 +1,28 @@
+= simple_form_for @mass_email, :url => { :action => "send_mass_email" } do |f|
+
+  = render "admin/common/errors", { :f => f }
+
+  .title
+    %h1
+      Send Mass Email
+
+    .tip
+      %p
+        Use this feature to automatically send an email to ALL of your business members. (Please note: Only business members (users) with active listings will be emailed, NOT your consumers, feeder listings, or non-members.)
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  .fieldset
+    %h3 Email Details
+    = f.input :subject, :hint => 'Please avoid using gimmicky words like "Free" or "Special Offer" that might land your message in a spam/junk filter.'
+    = f.input :reply_to, :hint => 'Enter an email address to which users would reply to this mass email.'
+    = f.input :body, :as => :text, :input_html => { :class =>  "wysiwyg" }, :hint => "Be careful not to make your emails too complex. HTML email can be very tricky and prone to problems depending on the recipient's email setup. We recommend playing it safe and getting your message out there with simple text, only using bold and italics to emphasize a point."
+
+  .submit
+    .buttons
+      = f.submit "Submit"
+      %br/
+      WARNING: Your message will be sent instantly to all of your active business members. Please proof-read your message and subject line very carefully before pressing Submit.

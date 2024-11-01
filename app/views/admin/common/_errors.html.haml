@@ -1,0 +1,10 @@
+- if f.object.errors.any?
+  .error_explanation
+    %h2
+      = image_tag "error-icon.png"
+      = pluralize( f.object.errors.count, "error" )
+      prohibited this from being saved!
+    %ul
+      - f.object.errors.each do |what, why|
+        - if what == :base
+          %li= why

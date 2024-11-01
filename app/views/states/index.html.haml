@@ -1,0 +1,6 @@
+.custom-content
+  %h1 States
+
+  %ul
+    - for state in City.with_territory.map(&:state).uniq.sort do
+      %li= link_to state, state_cities_path(state, :format => params[:format])

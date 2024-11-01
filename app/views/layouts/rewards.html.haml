@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title
+      = "Rewards for #{@territory.name}: RelyLocal"
+
+    = stylesheet_link_tag "reset-min"
+    = stylesheet_link_tag "fonts-min"
+    = stylesheet_link_tag "grids-min"
+
+    = stylesheet_link_tag "rewards", "compiled/ccontent", :media => "all"
+    = csrf_meta_tag
+
+  %body
+    = yield
+
+    = yield :javascript

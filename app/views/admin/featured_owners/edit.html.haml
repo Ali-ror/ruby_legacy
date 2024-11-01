@@ -1,0 +1,29 @@
+= form_tag( admin_territory_featured_owners_path( @territory ), :method => :put, :class => "simple_form" ) do |f|
+  .title
+    %h1
+      Featured Business Owners
+    .tip
+      %p
+        Please add up to 10 featured business owners. Only listings with owner bios can be selected.
+
+      Fields marked
+      %abbr(title="required")
+        *
+      required
+
+  = hidden_field_tag :territory_id, @territory.id
+
+  .fieldset
+    %h3
+      Featured Business Owners
+    - @featured_listings.each do |l|
+      = render :partial => "admin/common/listing", :locals => { :listing => l, :f => f }
+    = render :partial => "admin/common/listing", :locals => { :f => f } unless @featured_listings.length >= 10
+    - style = @featured_listings.length >= 10 ? "display:none" : ""
+    = add_link "Add Another Listing", "listing", "admin/common/listing", 10, { :style => style  }
+
+  .submit
+    .buttons
+      = submit_tag "Save"
+
+= render :partial => "admin/common/listing_javascript", :locals => { :owners => true }

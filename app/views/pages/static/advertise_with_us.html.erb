@@ -1,0 +1,24 @@
+<div class="custom-content">
+  <h1>Advertising With RelyLocal</h1> 
+  <p>Our job is to make your business everybody's business. Here are a few ways to get started...</p> 
+  <h3>RelyLocal Membership</h3> 
+  <p>If you own (or manage) a local business and are ready to become a partner in our campaign to strengthen the community, please <a href="contact-us">contact us</a> to set up a time to chat through all of the options. <em>(We'd love to meet face-to-face and get to know you, allowing us to make sure that we are a &quot;good fit&quot; for your specific needs.)</em></p> 
+  <p><em><strong>Price:</strong></em> $25 per month *<br /> 
+    <em><strong>Includes:</strong></em> Full web directory listing  in up to two categories of your choice and includes; your logo, short  description, long description, hours of operation, phone, fax, email,  address with interactive google map, printable coupons, photos,  downloadable documents, user reviews, inclusion in search engines and  links to facebook, twitter, blog, myspace, skype, indeed, youtube, and  your website. Also included: a local account manager and membership in  RelyLocal's community campaign to support local businesses. <br /> 
+  </p> 
+  <p><em><strong>*Additional Services:</strong></em> Additional  services may be available for an additional fee. Once you are an active member, we will keep you in the loop as new opportunties become available.</p> 
+  <h3>Local Banner Advertising</h3> 
+  <p>Are you looking for a truly local audience of visitors who have already  pre-qualified themselves as being interested in supporting local businesses? We have some of the most cost-effective banner ad packages in town (especially for our business members). To keep our site simple and clean, we limit our banner advertising to three banners per page, with this exclusive placement  giving  our advertisers an ever better value for their money. Please <a href="contact-us">contact us</a> today to discuss your needs.</p> 
+  <h3>Local Job Postings</h3> 
+  <p>Our job postings are part of the <a href="http://www.indeed.com/jobs?indpubnum=3041400695423329" target="_blank">Indeed.com</a> network. In addition to being displayed on RelyLocal, your  job posting will also be distributed to thousands of  other web          sites around the world! (Not bad, we know...)</p> 
+  <p> <em><strong>Price:</strong></em> $35 <br /> 
+    <em><strong>Duration: </strong></em>30 Days <br /> 
+    <strong><em>Payment:</em></strong> Upon Submission (billed directly by Indeed.com)<br /> 
+    <strong><em>Location:</em></strong> RellyLocal.com - Plus thousands of web sites across the globe! (We also regularly plug job openings through our SocialMedia outlets...)<br /> 
+    <strong><em>How to List:</em></strong>
+    <% if @territory.blank? -%>
+    Simply visit the Find Local Jobs section of a territory site, then click <u><strong>Post a Job</strong></u></p> 
+    <% else -%>
+    Simply visit the <a href="<%=territory_jobs_path(@territory)%>">Find Local Jobs</a> section of our site, then click <u><strong>Post a Job</strong></u></p> 
+    <% end -%>
+</div>
