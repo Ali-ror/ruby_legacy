@@ -50,7 +50,7 @@
               - count = category.business_listings.length
             = count
           %td
-            = category.territory_id.nil? ? "Global" : "Local - #{category.territory.name}"
+            = category.territory_id.nil? ? "Global" : "Local - #{category.territory ? category.territory.name : ''}"
           %td.last
             %ul
               - if can? :update, category
